@@ -1,0 +1,167 @@
+﻿@using EFClassLibrary
+@model PagedList<user_basic>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "发放券码";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    <div class="left">
+        @Html.Partial("LfetPartial")
+
+    </div>
+
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">会员列表</div>
+        <div class="lsec">
+            <div class="lsec1">
+
+            </div>
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li style="width:auto">
+                    <a>选择券码</a> ：
+                    <select id="pro_coupon"></select>
+
+                </li>
+                <li style="width:auto">
+                    <a>发放方式</a> ：
+                    <a id="setqy" href="javascript:;" style="font-weight:normal">全员发放</a>
+                    &nbsp;&nbsp; <a id="setxz" href="javascript:;" style="font-weight:normal">选择发放</a>
+                    @*&nbsp;&nbsp; <a id="stesr" href="javascript:;" style="font-weight:normal">生日券码</a>*@
+                </li>
+
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td><input type="checkbox" id="checkall" /></td>
+                <td>会员编号</td>
+                <td>会员名称</td>
+                <td>手机号码</td>
+                <td>拥有券码</td>
+                <td>会员状态</td>
+                <td>注册日期</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="checkname" value="@item.user_basic_id" /></td>
+                    <td>@item.user_basic_code</td>
+                    <td>@item.user_basic_login</td>
+                    <td>@item.user_basic_tel</td>
+                    <td>@item.user_basic_pwd</td>
+                    <td>@item.user_basic_status</td>
+                    <td>@item.user_basic_adddate</td>
+                </tr>
+
+            }
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+
+
+
+    $(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Admin/Users/GetCoupon",
+            success: function (data) {
+                var GoodsClass = " <option value='请选择'>请选择</option>";
+                $.each(data, function (k, v) {
+                    GoodsClass += "<option value='" + v.pro_coupon_id + "'>" + v.pro_coupon_name + "</option>";
+                });
+                $("#pro_coupon").html(GoodsClass);
+            }
+        });
+    });
+
+
+
+
+
+    var setqy = $("#setqy");
+    var setxz = $("#setxz");
+    var stesr = $("#stesr");
+    var selctval = "";
+
+    $("#pro_coupon").change(function () {
+
+        selctval = $("#pro_coupon").val();
+     
+    });
+
+
+    $("#checkall").click(
+     function () {
+         if (this.checked) {
+             $("input[name='checkname']").attr('checked', true)
+         } else {
+             $("input[name='checkname']").attr('checked', false)
+         }
+     }
+   );
+
+    setqy.click(function () {
+      
+        if (selctval == "请选择" || selctval=="") {
+            alert("请选择优惠券码！");
+        } else {
+            window.location.href = "/Admin/Users/UsersCouponFull?pro_coupon_id=" + selctval;
+        }
+    });
+
+    //stesr.click(function () {
+       
+    //    if (selctval == "请选择" || selctval=="") {
+    //        alert("请选择优惠券码！");
+    //    } else {
+    //        window.location.href = "/Admin/Users/UsersCouponFull?pro_coupon_id=" + selctval;
+    //    }
+    //});
+
+    setxz.click(function () {
+        if (selctval == "请选择" || selctval=="") {
+            alert("请选择优惠券码！");
+        } else {
+            var text = "";
+            $("input[name=checkname]").each(function () {
+                if ($(this).attr("checked")) {
+                    text += $(this).val() + ",";
+                }
+            });
+            if (text != "") {
+                var str = encodeURIComponent(text);
+                window.location.href = "/Admin/Users/UsersCouponSelect?pro_coupon_id=" + selctval + "&text=" + text;
+            } else {
+                alert("请选择会员");
+            }
+        }
+
+
+    });
+
+
+</script>

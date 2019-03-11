@@ -1,0 +1,69 @@
+﻿@model PagedList<EFClassLibrary.user_info>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "未读消息";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<style>
+    #tab01 .tdHead td {
+        width: auto;
+    }
+
+    #tab01 {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        #tab01 .tdHead td {
+            font-size: 12px;
+            color: #8f8f8f;
+            background: #eaeaea;
+        }
+
+        #tab01 tr td {
+            border: 1px solid #d7d7d7;
+            height: 32px;
+            text-indent: 15px;
+            font-size: 12px;
+            color: #555555;
+        }
+</style>
+<div class="container">
+
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">我的消息</p>
+        </div>
+        <div id="con">
+            <div id="inner_M">
+                <a href="@Url.Action("MessageCenter", "Personal")">全部消息 </a>
+                <a href="@Url.Action("UnreadMessages", "Personal")" class="cur-inner">未读消息<img src="/img/innerM.jpg" /></a>
+                <a href="@Url.Action("ReadMessages", "Personal")" >已读消息</a>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" id="tab01">
+                <tr class="tdHead"><td class="col01">消息标题</td><td class="col03">消息状态</td><td class="col03">消息来源</td><td>时间</td><td class="col01">操作</td></tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.user_info_title</td>
+                        <td>@item.user_info_sta</td>
+                        <td>@item.user_info_source</td>
+                        <td>@item.user_info_date</td>
+                        <td class="action03"><a href="@Url.Action("MessageCenterD", "Personal", new { user_info_id = item.user_info_id })">查看</a></td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+        <div class="pageState">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>

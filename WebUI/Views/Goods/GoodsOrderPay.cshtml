@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "订单支付";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="lay2">
+    <div class="container">
+        @*<img src="/img/logo.png" />*@
+        <div id="shop_steps" style="background:#e60012;">
+            <a href="" id="step01" class="stp_cur01"><span>&nbsp;</span>我的购物车</a>
+            <a href="" id="step02" class="stp_cur022"><span>&nbsp;</span>填写核对订单信息</a>
+            <a href="" id="step03" style=" color:#fff;"><span class="step03span">&nbsp;</span>成功提交订单</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="cart">
+        <img src="/img/tianxi_dd.jpg" style="display: block;float: left;margin-top:16px;margin-right:5px;"><p class="title03" style="font-weight: bold; color: #e60012; display: block; float: left; line-height:55px !important; margin-bottom: 15px;font-size:18px;">填写核对订单信息</p>
+    </div>
+    <div id="shoppingcar">
+        <p class="title02" style="text-align: center;margin-top: 20px;">订单已成功提交，请尽量在<span style="color: #e60012;">2小时</span>  内完成支付，我们将尽快为您送达！<span class="cont09-tip"></span></p>
+
+        <p class="cont09-tip" style="text-align: center;margin: 30px 0px 50px 0px;"><span style="color: #000000 !important;  ">订单金额：</span>@ViewBag.shop_order_totalmoeny <span style="color: #000000;margin-left:50px;"> 订单号：</span>@ViewBag.shop_order_code</p>
+        <div class="box02-a">
+            <div class="way" id="way1">
+                <a href="javascript:;" id="way_01"><img src="/img/way (1).png" /></a>
+            </div>
+            <div class="way" id="way2">
+                <a href="javascript:;" id="way_02"><img src="/img/way (2).png" /></a>
+            </div>
+
+            <div style="clear: both;height: 0;"></div>
+        </div>
+        @Html.Hidden("shop_order_code")
+        @Html.Hidden("shop_pay_id")
+        @Html.Hidden("stock")
+        <input id="pay-now" value="立即支付" type="submit" />
+    </div>
+</div>
+<style>
+    .borderpay{
+        border:2px solid red; height:46px
+    }
+</style>
+<script>
+    var way_01 = $("#way_01");
+    var way_02 = $("#way_02");
+    var submit = $("#pay-now");
+    var shop_pay_id = $("#shop_pay_id");
+    var shop_order_code = $("#shop_order_code");
+    var stock = $("#stock");
+    var flg = "";
+
+    way_01.click(function () {
+      
+        document.getElementById("way1").className = "way borderpay";
+        document.getElementById("way2").className = "way";
+        flg = "zfb";
+
+    });
+    way_02.click(function () {
+      
+        document.getElementById("way2").className = "way borderpay";
+        document.getElementById("way1").className = "way";
+        flg = "wx";
+
+    });
+
+    submit.click(function () {
+        if (stock.val() == "Y") {
+            if (flg == "zfb") {
+                window.location.href = "/Goods/GoodsPayImmediately?shop_order_code=" + shop_order_code.val();
+
+            } else {
+
+                window.location.href = "/Goods/WxPay?shop_order_code=" + shop_order_code.val();
+
+            }
+        } else {
+            alert("您的订单中有库存不足的商品，建议您重新组合订单在进行购买支付！谢谢合作！");
+        }
+    });
+
+</script>

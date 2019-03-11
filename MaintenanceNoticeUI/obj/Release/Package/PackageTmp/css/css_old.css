@@ -1,0 +1,163 @@
+﻿@font-face {
+    font-family: Aparajita_Italic; /*这里是说明调用来的字体名字*/
+    src: url(/font/Aparajita_Italic.ttf); /*这里是字体文件路径*/
+}
+
+@font-face {
+    font-family: kaiti_GB2312;
+    src: url(/font/kaiti_GB2312.ttf);
+}
+
+.Aparajita_Italic {
+    font-family: 'Aparajita_Italic';
+}
+
+.html {
+    font-family: 'Microsoft YaHei';
+    background-color: #f2efe8;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #f2efe8;
+}
+
+.cur {
+    background-color: #ceba9b;
+}
+
+img {
+    height: auto;
+    width: auto\9;
+    width: 100%;
+}
+/*建筑列表*/
+.Building_content {
+    width: 100%;
+    height: 100%;
+    background-color: #e7ddce;
+}
+
+.clear_floart {
+    clear: both;
+    height: 0;
+}
+
+.Building_leftmenu {
+    width: 30%;
+    height: 100%;
+    background-color: #e7ddce;
+    float: left;
+    position: fixed;
+    overflow-y: scroll;
+    scrollbar-highlight-color: red;
+}
+
+.Building_rightmenu {
+    width: 70%;
+    height: 100%;
+    background-color: #f2efe8;
+    float: right;
+}
+
+.Building_leftmenu_class {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #b28850;
+}
+
+    .Building_leftmenu_class p {
+        color: #50371f;
+        font-family: 'Microsoft YaHei';
+        font-weight: bold;
+    }
+
+.Building_search {
+    width: 100%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_btn {
+    width: 15%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_input {
+    width: 75%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_btn a {
+    display: block;
+    color: #503729;
+    padding: 5px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.Building_search_input input {
+    padding: 5px;
+    width: 110%;
+    border: 0;
+}
+
+.Building_rightmenu_list {
+    padding: 5px;
+}
+
+.Mask {
+    position: fixed;
+    top: 0px;
+    background-color: #503729;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    _position: absolute;
+    filter: alpha(opacity=60); /*IE滤镜，透明度50%*/
+    -moz-opacity: 0.60; /*Firefox私有，透明度50%*/
+    opacity: 0.60; /*其他，透明度50%*/
+}
+
+.ContactMask {
+    position: absolute;
+    top: 0px;
+    background-color: #fff;
+    width: 94%;
+    height: 260px;
+    z-index: 1;
+    _position: absolute;
+    filter: alpha(opacity=75); /*IE滤镜，透明度50%*/
+    -moz-opacity: 0.75; /*Firefox私有，透明度50%*/
+    opacity: 0.75; /*其他，透明度50%*/
+}
+/* 本例子css */
+/* 本例子css -------------------------------------- */
+
+
+
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #967f72;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.Feedback_input {
+    border: 0px;
+    background-color: #fff;
+    height: 30px;
+}
+
+.Feedback_inputs {
+    border: 0px;
+    background-color: #fff;
+}

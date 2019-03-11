@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "账户信息";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">账户信息</p>
+        </div>
+        <div id="con" style="padding: 40px;">
+            <div id="user_img">
+                @{
+                    EFClassLibrary.D8MallEntities db = new EFClassLibrary.D8MallEntities();
+                    var uname = TDESHelper.DecryptString(Request.Cookies["keys"].Value);
+                    var upwd = Request.Cookies["value"].Value;
+                    var user_basic = db.user_basic.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                    var user_basic_code = user_basic.user_basic_code.ToString();
+                    EFClassLibrary.com_img img = db.com_img.Where(i => i.com_img_fk == user_basic_code).SingleOrDefault();
+                    if (img != null)
+                    {
+                        var com_img_src = img.com_img_src;
+                        if (string.IsNullOrEmpty(com_img_src))
+                        {
+
+                        }
+                        else
+                        {
+                            <img src="@com_img_src" style="width:90px;height:90px" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="/img/userImg.png" />
+                    }
+                }
+            </div>
+            <div id="user_abs">
+                <p>
+                    <span class="username">@ViewBag.username</span> <span class="wh" id="wh">
+
+                    </span>
+                </p>
+                <div id="u_other">
+                    <span class="cont10">账户安全级别：</span><span class="sche"><span id="change" style="width:50%"></span></span><span id="changetxt" class="cont10">普通&nbsp;&nbsp;|</span><span class="cont10" style="margin-left: 20px;">  如何提高安全级别？</span>
+
+                </div>
+                <a href="@Url.Action("ModifyInformation", "Personal")" class="xgtx">修改头像</a>
+            </div>
+
+        </div>
+
+        <div style="clear: both;height: 30px;"></div>
+        <table border="0" cellspacing="0" cellpadding="0" id="table02">
+
+            <tr><td class="info_t">ID：</td><td class="info">@ViewBag.user_basic_code</td></tr>
+            <tr><td class="info_t">性别：</td><td class="info">@ViewBag.user_detail_gender</td></tr>
+            <tr><td class="info_t">生日：</td><td class="info">@ViewBag.user_detail_birthday </td></tr>
+            <tr>
+                <td class="info_t">邮箱：</td>
+                <td class="info">
+                    @ViewBag.user_basic_email<div style="width: 405px;float: right;">
+                        <p style="float:left;"><span class="none" id="mal">&nbsp;</span>@ViewBag.user_basic_emails </p><a href="@Url.Action("PersonalSafe", "Personal")" class="mail_a">修改绑定邮箱</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="info_t">手机：</td>
+                <td class="info">
+                    @ViewBag.user_basic_tel<div style="width: 405px;float: right;">
+                        <p style="float:left;">
+                            <span class="none" id="tels">&nbsp;</span>@ViewBag.user_basic_tels
+                        </p><a href="@Url.Action("PersonalSafe", "Personal")" class="mail_a">修改绑定手机</a>
+                        <input id="ema" value="@ViewBag.user_basic_emails" type="hidden" />
+                        <input id="tel" value="@ViewBag.user_basic_tels" type="hidden" />
+                    </div>
+                </td>
+            </tr>
+            <tr><td class="info_t">联系地址：</td><td class="info">@ViewBag.address</td></tr>
+            <tr><td class="info_t">邮编：</td><td class="info">@ViewBag.user_detail_zipcode</td></tr>
+        </table>
+        <a href="@Url.Action("ModifyInformation", "Personal")" id="xg"></a>
+    </div>
+    <div class="clear_float"></div>
+</div>
+
+<script>
+    $(function () {
+        var wh = $("#wh");
+        var ema = $("#ema");
+        var tel = $("#tel");
+        if (ema.val() == "已认证") {
+            $("#mal").removeClass().addClass("ok");
+            $("#change").width("75%");
+            $("#changetxt").text("中级");
+        }
+
+        if (tel.val() == "已认证") {
+            $("#tels").removeClass().addClass("ok");
+            $("#change").width("75%");
+            $("#changetxt").text("中级");
+        }
+        if (ema.val() == "已认证" && tel.val() == "已认证") {
+            $("#mal").removeClass().addClass("ok");
+            $("#tels").removeClass().addClass("ok");
+            $("#change").width("100%");
+            $("#changetxt").text("高级");
+        }
+        now = new Date(), hour = now.getHours()
+        if (hour < 6) { wh.text("凌晨好！"); }
+        else if (hour < 9) { wh.text("早上好！"); }
+        else if (hour < 12) { wh.text("上午好！"); }
+        else if (hour < 14) { wh.text("中午好！"); }
+        else if (hour < 17) { wh.text("下午好！"); }
+        else if (hour < 19) { wh.text("傍晚好！"); }
+        else if (hour < 22) { wh.text("晚上好！"); }
+        else { wh.text("夜里好"); }
+    });
+
+</script>

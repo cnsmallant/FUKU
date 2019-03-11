@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = ViewBag.tiname;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <div class="Building_content">
+            <div class="Building_leftmenu" id="Building_leftmenu">
+                @foreach (var item in ViewBag.listclass)
+                {
+                    <div class="Building_leftmenu_class">
+                        <a href="@Url.Action("Index", "Goods", new { GoodsClassId = item.pro_class_page })" style="text-decoration:none">
+                            <p>@item.pro_class_name</p>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="Building_rightmenu">
+                <div class="Building_rightmenu_list">
+                    <div id="container">
+                      
+                    </div>
+                    <div id="loading" style="width:100%; float:left; padding:30px;">
+                        <div style="margin-left:20%;"><img src="/img/loading.gif" class="img-responsive" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("TotalPages")
+    @Html.Hidden("GoodsClassId")
+</div>
+<script>
+    var search = $("#search");
+    var searchvalue = $("#searchvalue");
+    var container = $("#container");
+    var loading = $("#loading");
+
+    var containerstr = "";
+    var CurPage = 1;
+    var htmlstr = "";
+    var TotalPages = $("#TotalPages");
+    var GoodsClassId = $("#GoodsClassId");
+    var pageTotal = parseInt(parseInt(TotalPages.val()) % 20);
+    if (pageTotal == 0) {
+        pageTotal = parseInt(parseInt(TotalPages.val()) / 20);
+    } else {
+        pageTotal = (parseInt(parseInt(TotalPages.val()) / 20)) + 1;
+    }
+    var Loadnum = 0;
+    $(function () {
+        var myA = document.getElementById("Building_leftmenu").getElementsByTagName("a");
+        var myP = document.getElementById("Building_leftmenu").getElementsByTagName("p");
+        var myDiv = document.getElementById("Building_leftmenu").getElementsByTagName("div");
+        var myURL = document.location.href;
+        for (var i = 0; i < myA.length; i++) {
+            var links = myA[i].getAttribute("href");
+            if (myURL.indexOf(links) != -1) {
+                myDiv[i].setAttribute("class", "Building_leftmenu_class cur");
+                myP[i].setAttribute("style", "color: #ffffff");
+            }
+        }
+        if (GoodsClassId.val() == "" || GoodsClassId.val() == null) {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "/Goods/GoodsLists?CurPage=" + CurPage,
+                success: function (data) {
+                    $.each(data, function (k, v) {
+                        htmlstr += "<a href='/Goods/GoodsDetails/" + v.pro_sku_code + "'> <div class='col-xs-6 text-left content_div'> <p><img src='http://www.cuckooshop.cn/" + v.pro_sku_covimg + "' class='img-responsive' /></p><p style=' font-size:6px;'>" + v.pro_sku_title + "</p> <p><span style=' font-size:6px;'>" + v.pro_skuitem_price + "</span></p> </div></a>"
+
+
+                    });
+                    container.html(htmlstr);
+                    loading.hide();
+                }
+            });
+        } else {
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "/Goods/GoodsLists?CurPage=" + CurPage + "&GoodsClassId=" + GoodsClassId.val(),
+                success: function (data) {
+                    $.each(data, function (k, v) {
+                        htmlstr += "<a href='/Goods/GoodsDetails/" + v.pro_sku_code + "'> <div class='col-xs-6 text-left content_div'> <p><img src='http://www.cuckooshop.cn/" + v.pro_sku_covimg + "' class='img-responsive' /></p><p style=' font-size:6px;'>" + v.pro_sku_title + "</p> <p><span style=' font-size:6px;'>" + v.pro_skuitem_price + "</span></p> </div></a>"
+                    });
+                    container.html(htmlstr);
+                    loading.hide();
+                }
+            });
+        }
+
+    });
+
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                loading.show();
+                CurPage++;
+                if (CurPage <= pageTotal) {
+                    if (GoodsClassId.val() == "" || GoodsClassId.val() == null) {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "JSON",
+                            url: "/Goods/GoodsLists?CurPage=" + CurPage,
+                            success: function (data) {
+                                $.each(data, function (k, v) {
+                                    htmlstr += "<a href='/Goods/GoodsDetails/" + v.pro_sku_code + "'> <div class='col-xs-6 text-left content_div'> <p><img src='http://www.cuckooshop.cn/" + v.pro_sku_covimg + "' class='img-responsive' /></p><p style=' font-size:6px;'>" + v.pro_sku_title + "</p> <p><span style=' font-size:6px;'>" + v.pro_skuitem_price + "</span></p> </div></a>"
+                                });
+                                container.html(htmlstr);
+                                loading.hide();
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "JSON",
+                            url: "/Goods/GoodsLists?CurPage=" + CurPage + "&GoodsClassId=" + GoodsClassId.val(),
+                            success: function (data) {
+                                $.each(data, function (k, v) {
+                                    htmlstr += "<a href='/Goods/GoodsDetails/" + v.pro_sku_code + "'> <div class='col-xs-6 text-left content_div'> <p><img src='http://www.cuckooshop.cn/" + v.pro_sku_covimg + "' class='img-responsive' /></p><p style=' font-size:6px;'>" + v.pro_sku_title + "</p> <p><span style=' font-size:6px;'>" + v.pro_skuitem_price + "</span></p> </div></a>"
+                                });
+                                container.html(htmlstr);
+                                loading.hide();
+                            }
+                        });
+                    }
+                } else {
+                    loading.hide();
+                }
+            }
+        });
+    });
+
+
+
+</script>

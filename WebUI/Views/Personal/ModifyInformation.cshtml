@@ -1,0 +1,172 @@
+﻿@using EFClassLibrary
+@{
+    ViewBag.Title = "账户信息";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">账户信息</p>
+        </div>
+        <div id="con" style="padding:20px 40px;">
+            <div class="userd">
+                <div class="tx">
+                    @{
+                        D8MallEntities db = new D8MallEntities();
+                        var uname = TDESHelper.DecryptString(Request.Cookies["keys"].Value);
+                        var upwd = Request.Cookies["value"].Value;
+                        var user_basic = db.user_basic.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                        var user_basic_code = user_basic.user_basic_code.ToString();
+                        com_img img = db.com_img.Where(i => i.com_img_fk == user_basic_code).SingleOrDefault();
+                        if (img != null)
+                        {
+                            var com_img_src = img.com_img_src;
+                            if (string.IsNullOrEmpty(com_img_src))
+                            {
+
+                            }
+                            else
+                            {
+                                <img src="@com_img_src" style="width:90px;height:90px" />
+                            }
+                        }
+                        else
+                        {
+                            <img src="/img/userImg.png" />
+                        }
+                    }
+                </div>
+                <div class="gh">
+                    <p>更换头像</p>
+                    <input id="Text1" type="text" class="text1" />
+                    <div style="display:none">@Html.TextBox("com_img_src", null, new { @type = "file", @onchange = "document.getElementById('Text1').value=this.value" })</div>
+
+                    <div class="clear_float"></div>
+                    <a href="javascript:;" class="ll" id="llwj">浏览</a>
+                    <a id="submitimg" href="javascript:;" class="ll sc">上传</a><span>头像尺寸：90×90px</span>
+                </div>
+                <div class="tx_bj" id="tx_bj"></div>
+            </div>
+        </div>
+
+        <div style="clear: both;height: 30px; "></div>
+        @using (Html.BeginForm("EditModifyInformation", "Personal", FormMethod.Post))
+        {
+            <table border="0" cellspacing="0" cellpadding="0" id="table021">
+
+                <tr>
+                    <td class="info_t1">用户名：</td>
+                    <td class="info">
+                        @Html.TextBox("user_detail_firstname", null, new { @placeholder = "请输入姓氏", @style = "width:190px", @class = "text1" }) &nbsp;<span style="color:#ff0000;">*</span>
+                        @Html.TextBox("user_detail_lastname", null, new { @placeholder = "请输入名字", @style = "width:190px", @class = "text1" }) &nbsp;<span style="color:#ff0000;">*</span>
+                    </td>
+                </tr>
+                <tr><td class="info_t1">性别：</td><td class="info"><input id="Radio1" name="Radio" type="radio"  value="男"/>&nbsp;男&nbsp;&nbsp;&nbsp;<input id="Radio1" name="Radio" type="radio"  value="女"/>&nbsp;女</td></tr>
+                <tr><td class="info_t1">生日：</td><td class="info">@Html.TextBox("user_detail_birthday", null, new { @class = "text1", @onfocus = "WdatePicker({dateFmt:'yyyy年MM月dd日'})" })</td></tr>
+                <tr>
+                    <td class="info_t1">所在地：</td>
+                    <td class="info">
+                        <select id="Province" class="text1" style="width:130px">
+                            <option>省份</option>
+                        </select>
+                        <select id="City" class="text1" style="width:130px">
+                            <option>城市</option>
+                        </select>
+                        <select id="County" class="text1" style="width:130px">
+                            <option>区县</option>
+                        </select>&nbsp;<span style="color:#ff0000;">*</span>
+                    </td>
+                </tr>
+                <tr><td class="info_t1">详细地址：</td><td class="info">@Html.TextBox("user_detail_address", null, new { @placeholder = "请输入详细地址", @class = "text2" })&nbsp;<span style="color:#ff0000;">*</span></td></tr>
+                <tr><td class="info_t1">邮编：</td><td class="info">@Html.TextBox("user_detail_zipcode", null, new { @placeholder = "邮编", @class = "text3" })</td></tr>
+            </table>
+            <input type="submit" id="submit" class="userD_qd" value="确定" style="cursor:pointer" />
+            <a href="" class="userD_qd userD_qx">取消</a>
+            @Html.Hidden("user_detail_province")
+            @Html.Hidden("user_detail_city")
+            @Html.Hidden("user_detail_county")
+            @Html.Hidden("user_detail_gender")
+
+        }
+    </div>
+
+    <div class="clear_float"></div>
+</div>
+<script src="~/js/JavaScript_Cascade.js"></script>
+<script src="~/js/ajaxfileupload.js"></script>
+<script>
+    var llwj = $("#llwj");
+    var com_img_src = $("#com_img_src");
+    var Text1 = $("#Text1");
+    var submitimg = $("#submitimg");
+    var tx_bj = $("#tx_bj");
+    llwj.click(function () {
+
+        com_img_src.click();
+        Text1.val();
+        com_img_src.val("");
+        tx_bj.html("");
+
+    });
+    submitimg.click(function () {
+
+        $.ajaxFileUpload({
+            url: '/Personal/Uploadify',//后台处理的action
+            secureuri: false,
+            fileElementId: 'com_img_src',//上传的控件名
+            dataType: 'application/json',
+            success: function (data, status) {
+
+                data = jQuery.parseJSON(jQuery(data).text());
+                var htmlstr = "<img  src=" + data + " style='width:90px; height:90px'/>";
+                tx_bj.html(htmlstr);
+            },
+            error: function (data, status, e) {
+                alert(data);
+            }
+        })
+    });
+    var user_detail_province = $("#user_detail_province");
+    var user_detail_city = $("#user_detail_city");
+    var user_detail_county = $("#user_detail_county");
+    var user_detail_firstname = $("#user_detail_firstname");
+    var user_detail_lastname = $("#user_detail_lastname");
+    var user_detail_gender = $("#user_detail_gender");
+    var user_detail_address = $("#user_detail_address");
+    var submit = $("#submit");
+
+    $("#County").change(function () {
+        user_detail_province.val($("#Province").find("option:selected").val());
+        user_detail_city.val($("#City").find("option:selected").val());
+        user_detail_county.val($("#County").find("option:selected").val());
+    });
+
+    submit.click(function () {
+        var sex = $('input:radio:checked').val();
+
+        user_detail_gender.val(sex);
+        if (user_detail_firstname.val() == null || user_detail_firstname.val() == "") {
+            alert("请输入姓氏！");
+            return false;
+        }
+        if (user_detail_lastname.val() == null || user_detail_lastname.val() == "") {
+            alert("请输入名字！");
+            return false;
+        }
+
+        if ($("#Province").find("option:selected").text() == "省份" || $("#City").find("option:selected").text() == "城市" || $("#County").find("option:selected").text() == "县区") {
+            alert("请选地址");
+            return false;
+        }
+        if (user_address_detail.val() == null || user_address_detail.val() == "") {
+            alert("请输入详细地址");
+            return false;
+        }
+
+    });
+
+
+</script>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "订单操作";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<link href="/css/Vip.css" rel="stylesheet" />
+
+<div class="container wh_c" style="height: 458px;width:1030px ; background: #FFFFFF;margin-top: 11px;padding: 85px; margin-left:auto;margin-right:auto; text-align:center; ">
+    <div class="zhuce_cg" style="margin-top: 100px; margin-bottom:20px;line-height:35px; ">
+        <p>您好，此订单属于免邮范围之外</p>
+        <p>请您复制订单号：<font style="color:red">@ViewBag.shop_order_code</font>  </p>
+        <p>复制订单号后，请选择右侧客服菜单，联系客服修改订单价格（+运费）后再支付</p>
+    </div>
+</div>

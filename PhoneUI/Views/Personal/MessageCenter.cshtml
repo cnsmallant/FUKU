@@ -1,0 +1,75 @@
+﻿@model IList<EFClassLibrary.user_info>
+@{
+    ViewBag.Title = "我的消息";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px;">
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title" style="font-size:12px;">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#@item.user_info_id" aria-expanded="false" aria-controls="@item.user_info_id" style="text-decoration:none;" name="@item.user_info_id" onclick="upmsg(this.name)">
+                                        @if (item.user_info_sta == "未读")
+                                        {
+                                            <span class="fa fa-envelope-o" style="color:red" id="s@{@item.user_info_id}"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fa fa-envelope-open-o" style="color:green" id="s@{@item.user_info_id}"></span>
+                                        }
+                                        &nbsp; &nbsp;<span>@item.user_info_title</span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="@item.user_info_id" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    @item.user_info_content
+                                </div>
+                            </div>
+                        </div>
+
+
+                    }
+
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function upmsg(name) {
+        document.getElementById("s" + name).className = "fa fa-envelope-open-o";
+        document.getElementById("s" + name).style = "color:green";
+        $.ajax({
+            url: "/Personal/MessageCenterD",
+            type: 'POST',
+            data: JSON.stringify(
+                {
+                    user_info_id: name,
+
+                }),
+            dataType: "JSON",
+            success: function (data) {
+                if (data == "OK") {
+                    document.getElementById("s" + name).className = "fa fa-envelope-open-o";
+                    document.getElementById("s" + name).style = "color:green";
+                } else {
+                    document.getElementById("s" + name).className = "fa fa-envelope-open-o";
+                    document.getElementById("s" + name).style = "color:green";
+                }
+            }
+        });
+
+    }
+
+
+</script>

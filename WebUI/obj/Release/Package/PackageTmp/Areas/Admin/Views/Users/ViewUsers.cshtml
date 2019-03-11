@@ -1,0 +1,101 @@
+﻿@using EFClassLibrary
+@model PagedList<user_basic>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "查询会员";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="div_left">
+    <div class="left">
+        @Html.Partial("LfetPartial")
+
+    </div>
+
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">会员列表</div>
+        <div class="lsec">
+            <div class="lsec1">
+                <input type="text" placeholder="请输入会员名称" id="keys" />
+                <input type="button" class="btnsk" id="btnsk" />
+            </div>
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li style="width:auto">
+                    <a>状态查询</a> ：<a href="@Url.Action("ViewUsersStatus", "Users", new { user_basic_status =0})" style="font-weight:normal">正常</a>
+                    &nbsp;&nbsp; <a href="@Url.Action("ViewUsersStatus", "Users", new { user_basic_status = 1 })" style="font-weight:normal">注销</a>
+                </li>
+                <li style="float:right;width:auto">&nbsp;&nbsp;<a>所查会员<font style="color:red">@ViewBag.usertotal </font>位</a>&nbsp;&nbsp;<a>共有正常会员<font style="color:red">@ViewBag.usernormal</font>位</a>&nbsp;&nbsp;<a>共有注销会员<font style="color:red">@ViewBag.userillegal</font>位</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>会员编号</td>
+                <td>会员名称</td>
+                <td>手机号码</td>
+                <td>会员状态</td>
+                <td>注册日期</td>
+                <td>操作日期</td>
+                <td>会员操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.user_basic_code</td>
+                    <td>@item.user_basic_login</td>
+                    <td>@item.user_basic_tel</td>
+                    <td>@item.user_basic_status</td>
+                    <td>@item.user_basic_adddate</td>
+                    <td>@item.user_basic_editdate</td>
+                    <td>
+                        @{
+                if (item.user_basic_status == "注销")
+                {
+                    <a href="@Url.Action("UserStatus", "Users", new { userstasus = 0, user_basic_id=@item.user_basic_id })" style="color:green">启用</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("UserStatus", "Users", new { userstasus = 1, user_basic_id=@item.user_basic_id })" style="color:green">注销</a>
+                }
+
+                        }
+
+
+                    </td>
+                </tr>
+
+            }
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var keys = $("#keys");
+    var btnsk = $("#btnsk");
+    btnsk.click(function () {
+        if (keys.val() == "" || keys.val() == null) {
+            alert("请输入会员名称");
+        } else {
+            window.location.href = "/Admin/Users/ViewUsersLogin?keywords=" + keys.val();
+        }
+    });
+</script>

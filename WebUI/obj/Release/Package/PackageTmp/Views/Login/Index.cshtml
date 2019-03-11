@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "欢迎登录cuckoo福库商城";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container wh_c" style="height: 458px;width:1030px ; background: #FFFFFF;margin-top: 11px;padding: 85px;">
+    <div id="slideBox" class="slideBox_login">
+        <div class="hd">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <li>
+                    <img src="img/login_03.jpg" />
+                </li>
+                <li>
+                    <img src="img/login_03.jpg" />
+                </li>
+                <li>
+                    <img src="img/login_03.jpg" />
+                </li>
+                <li>
+                    <img src="img/login_03.jpg" />
+                </li>
+            </ul>
+        </div>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+    </div>
+    <script id="jsID" type="text/javascript">
+        var ary = location.href.split("&");
+        jQuery(".slideBox_login").slide({
+            mainCell: ".bd ul",
+            effect: "left",
+            autoPlay: true,
+            mouseOverStop: false,
+            interTime: 4000,
+        });
+    </script>
+
+    <div class="box03">
+        <p class="title_02">欢迎登录cuckoo福库商城</p>
+        <div id="err" class="errhide"></div>
+        <p>
+            @Html.TextBox("contaction", "", new { @class = "input_box", @type = "text", @title = "手机号/邮箱/用户名", @placeholder = "请输入用户名" })
+        </p><p>
+            @Html.TextBox("psw", "", new { @class = "input_box", @type = "password", @title = "用户密码", @placeholder = "请输入登录密码" })
+        </p>
+        <div id="atc_yz" style="width:235px; text-align:center; margin-left:0px;">
+            <div id="captcha" style="width:100%"></div>
+        </div>
+        <div class="clear_float"></div>
+        <div style="height: 34px;line-height: 34px;font-size: 12px;color: #B3B3B3;">
+            <input type="checkbox" name="and" id="and" value=""><span style="display: inline-block;">下次自动登录</span><a href="" id="forget">忘记密码？</a>
+        </div>
+        <input type="submit" id="login_u" value="登录">
+        <div class="line01"></div>
+
+        <div id="u_box">
+            <p class="hot" style="text-align: center; color: #a1a1a1 !important;">
+                <span class="line_s01">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>还没有账户？ <a href="@Url.Action("Index", "Register")">立即注册！</a><span class="line_s01" style="margin-left: 12px;margin-right: 0;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="clear_float">
+    </div>
+</div>
+
+<script src="~/js/gt.js"></script>
+<script src="~/js/JavaScript_Login.js"></script>

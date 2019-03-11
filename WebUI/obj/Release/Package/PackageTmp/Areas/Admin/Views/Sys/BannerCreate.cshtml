@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "新建Banner图";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">新建Banner图</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("AddBanner", "Sys", FormMethod.Post))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">类别：</td>
+                        <td width="270">
+                            <select id="com_banner_classes">
+                                <option value="请选择">请选择</option>
+                                <option value="首页">首页</option>
+                                <option value="首页超高压2.0电饭煲系列">首页超高压2.0电饭煲系列</option>
+                                <option value="首页原装进口IH高压电饭煲系列">首页原装进口IH高压电饭煲系列</option>
+                                <option value="首页安心空气净化器系列">首页安心空气净化器系列</option>
+                                <option value="首页净化器广告">首页净化器广告</option>
+                                <option value="首页原汁机广告">首页原汁机广告</option>
+                                <option value="首页原汁机1">首页原汁机1</option>
+                                <option value="首页原汁机">首页原汁机</option>
+                                <option value="首页重汤机广告">首页重汤机广告</option>
+                                <option value="首页重汤机1">首页重汤机1</option>
+                                <option value="首页重汤机">首页重汤机</option>
+                                <option value="首页电烤盘广告">首页电烤盘广告</option>
+                                <option value="首页电烤盘1">首页电烤盘1</option>
+                                <option value="首页电烤盘">首页电烤盘</option>
+                                <option value="首页电水壶广告">首页电水壶广告</option>
+                                <option value="首页电水壶1">首页电水壶1</option>
+                                <option value="首页电水壶">首页电水壶</option>
+                                <option value="登录Banner">登录Banner</option>
+                                <option value="注册Banner">注册Banner</option>
+                                <option value="新品">新品</option>
+                                <option value="新品广告">新品广告</option>
+                                <option value="促销">促销</option>
+                                <option value="促销广告">促销广告</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" height="40" align="right">序号：</td>
+                        <td width="270">
+                            @Html.TextBox("com_banner_order", null, new { onkeyup = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" height="40" align="right">链接：</td>
+                        <td width="270">
+                            @Html.TextBox("com_banner_url")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="上传图片" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                @Html.Hidden("com_banner_class")
+                @Html.Hidden("returnurl")
+            </div>}
+    </div>
+</div>
+<script>
+    var com_banner_classes = $("#com_banner_classes");
+    var com_banner_class = $("#com_banner_class");
+    var com_banner_order = $("#com_banner_order");
+    var com_banner_url = $("#com_banner_url");
+    var flg = false;
+    var submit = $("#submit");
+    com_banner_classes.change(function () {
+
+        if (com_banner_classes.find("option:selected").text() == "请选择") {
+            alert("请选择类别！");
+            flg = false;
+        } else {
+            var cl = com_banner_classes.find("option:selected").val();
+            com_banner_class.val(cl);
+            flg = true;
+        }
+    });
+    com_banner_order.blur(function () {
+        if (com_banner_order.val() == null || com_banner_order.val() == "") {
+            alert("请输入序号");
+            flg = false;
+        } else {
+            flg = true;
+        }
+    });
+    com_banner_url.blur(function () {
+        if (com_banner_url.val() == null || com_banner_url.val() == "") {
+            alert("请输入链接");
+            flg = false;
+        } else {
+            flg = true;
+        }
+    });
+    submit.click(function () {
+
+        if (flg == true) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+</script>

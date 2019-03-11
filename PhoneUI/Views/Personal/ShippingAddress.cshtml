@@ -1,0 +1,52 @@
+﻿@using EFClassLibrary;
+@model List<user_address>
+@{
+    ViewBag.Title = "地址管理";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px;">
+    <div class="row">
+
+        @{
+
+            foreach (var item in Model)
+            {
+                <div class="thumbnail divthumbnail">
+                    <div class="list-group" style="margin-top:0px; margin-bottom:0px;">
+                        <a href="@Url.Action("ShippingAddressEdit", "Personal", new { user_address_id = @item.user_address_id })" class="list-group-item">
+                            <p>
+                                <span class="fa  fa-address-book" style="color:#bea624"></span>&nbsp;&nbsp;<span>@item.user_address_name</span>
+                                <span class="fa fa-edit pull-right" style="color:#acacac"></span>
+                            </p>
+                            <p><span class="fa  fa-phone-square" style="color:#bea624"></span>&nbsp;&nbsp;<span>@item.user_address_tel</span></p>
+                            <p>
+                                <span class="fa  fa-map-marker" style="color:#bea624"></span>&nbsp;&nbsp;<span>
+                                    @{
+                D8MallEntities db = new D8MallEntities();
+                int user_address_province = Convert.ToInt32(item.user_address_province);
+                int user_address_city = Convert.ToInt32(item.user_address_city);
+                int user_address_county = Convert.ToInt32(item.user_address_county);
+                var province = db.com_area.Where(u => u.com_area_id == user_address_province).SingleOrDefault().com_area_name;
+                var city = db.com_area.Where(u => u.com_area_id == user_address_city).SingleOrDefault().com_area_name;
+                var county = db.com_area.Where(u => u.com_area_id == user_address_county).SingleOrDefault().com_area_name;
+                ViewBag.adress = province + city + county;
+
+                                    }
+                                    @ViewBag.adress@item.user_address_detail（@item.user_address_ZipCode）
+                                </span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        }
+
+
+        <div class="col-xs-12">
+            <a class="btn btn-default btn-block btn-success" href="@Url.Action("ShippingAddressAdd", "Personal")"><span class="fa fa-plus"></span> 新建</a>
+        </div>
+    </div>
+
+</div>

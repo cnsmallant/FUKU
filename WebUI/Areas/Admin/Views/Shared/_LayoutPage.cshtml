@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+@using EFClassLibrary
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title-东八区品牌设计-网站管理系统</title>
+    <link href="/Areas/Admin/css/com.css" rel="stylesheet" />
+    <link href="/Areas/Admin/css/style.css" rel="stylesheet" />
+    <script src="/Areas/Admin/js/jquery.min.js"></script>
+    <script src="/My97DatePicker/WdatePicker.js"></script>
+    <script src="/My97DatePicker/lang/zh-cn.js"></script>
+</head>
+<body>
+    <div>
+        <div class="div_body">
+            <div class="div_head">
+                <div class="top">
+                    <div class="topt">
+                        <div class="yd">
+                            <div class="ind"><a href="/" target="_blank">网站首页</a></div>
+                            <div class="help"><a href="http://www.dongbaqu.com/contact.html" target="_blank">帮助中心</a></div>
+                            <div class="shuxian"></div>
+                            <div class="user">
+                                @{D8MallEntities db = new D8MallEntities();
+
+                                var uname = TDESHelper.DecryptString(HttpContext.Current.Request.Cookies["uname"].Value);
+                                var upwd = HttpContext.Current.Request.Cookies["upwd"].Value;
+                                var sys_admin = db.sys_admin.Where(u => u.sys_admin_name == uname & u.sys_admin_pwd == upwd).SingleOrDefault();
+                                ViewBag.uname = uname;
+
+                                }
+                                <a href="@Url.Action("AdminPassword", "Sys")" title="点击修改密码">@ViewBag.uname</a>
+
+                            </div>
+                            <div><a href="@Url.Action("ExitSystem","Sys")">退出</a></div>
+                        </div>
+                    </div>
+                    <div class="tdh" id="tdh">
+                        <ul>
+                            <li class="li1xz"><a href="@Url.Action("Index","Home")">后台首页</a></li>
+                            <li><a href="@Url.Action("Index","Goods")">商品管理</a></li>
+                            <li><a href="@Url.Action("Index", "Order")">订单管理</a></li>
+                            <li><a href="@Url.Action("Index","Users")">会员管理</a></li>
+                            <li><a href="@Url.Action("Index", "Article")">文章管理</a></li>
+                            <li><a href="@Url.Action("Index", "Sys")">系统管理</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="div_content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    var myA = document.getElementById("tdh").getElementsByTagName("a");
+    var myLi = document.getElementById("tdh").getElementsByTagName("li");
+    var myURL = document.location.href;
+    for (var i = 1; i < myA.length; i++) {
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+        if (myURL.indexOf(links) != -1) {
+            myLi[i].className = "xz";
+            myLi[0].className = "";
+        }
+    }
+
+
+</script>

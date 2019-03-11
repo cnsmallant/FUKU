@@ -1,0 +1,41 @@
+﻿
+@model PagedList<EFClassLibrary.pro_sku>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "浏览记录";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">浏览记录</p>
+        </div>
+        <div id="con">
+            <div class="lljl_con">
+
+                @foreach (var item in Model)
+                {<a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                    <div class="lljl_kk">
+                        <img src="@item.pro_sku_covimg" />
+                        <p>
+                            @item.pro_item_id<br />
+                            <span>&yen;@item.pro_sku_arrspe</span>
+                        </p>
+                    </div>
+                </a>
+                }
+                
+           
+                <div class="clear_float"></div>
+            </div>
+        </div>
+        <div class="pageState">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 5, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>
+

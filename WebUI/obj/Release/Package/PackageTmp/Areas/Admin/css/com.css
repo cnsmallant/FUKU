@@ -1,0 +1,35 @@
+﻿.div_body {
+    font-family: 'Microsoft YaHei';
+    width: 100%;
+    height: auto;
+    float: left;
+    overflow: hidden;
+}
+
+.div_head {
+    float: left;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.div_content {
+    float: left;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.div_left {
+    width:10%;
+    float: left;
+    height: auto;
+    overflow: hidden;
+}
+
+.div_right {
+    width:90%;
+    float: left;
+    height: auto;
+    overflow: hidden;
+}

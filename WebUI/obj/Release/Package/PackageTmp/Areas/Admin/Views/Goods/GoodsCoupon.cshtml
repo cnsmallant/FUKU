@@ -1,0 +1,99 @@
+﻿@using EFClassLibrary
+@model PagedList<pro_coupon>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "优惠券码";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">优惠券码</div>
+        <div class="lsec">
+          
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li><a href="@Url.Action("GoodsCouponCreate", "Goods")">新建</a></li>
+                <li style="width:auto">
+                    <a>查询</a> ：<a href="@Url.Action("GoodsCouponClass", "Goods", new { pro_coupon_class = "优惠券" })" style="font-weight:normal">优惠券</a>
+                    &nbsp;&nbsp; <a href="@Url.Action("GoodsCouponClass", "Goods", new { pro_coupon_class = "优惠码" })" style="font-weight:normal">优惠码</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>券码名称</td>
+                <td>券码类型</td>
+                <td>券码编号</td>
+                <td>券码状态</td>
+                <td>券码折扣</td>
+                <td>券码数量</td>
+                <td>开始日期</td>
+                <td>截止日期</td>
+                <td>录入日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.pro_coupon_name</td>
+                    <td>@item.pro_coupon_class</td>
+                    <td>@item.pro_coupon_code</td>
+                    @{
+                if (item.pro_coupon_stastus == "0")
+                {
+                    <td>未启用</td>
+                }
+                else
+                {
+                    <td>已启用</td>
+                }
+                    }
+
+                    <td>@item.pro_coupon_discount</td>
+                    <td>@item.pro_coupon_num</td>
+                    <td>@Convert.ToDateTime(item.pro_coupon_stadate).ToString("yyyy-MM-dd")</td>
+                    <td>@Convert.ToDateTime(item.pro_coupon_enddate.ToString()).ToString("yyyy-MM-dd")</td>
+                    <td>@item.pro_coupon_date</td>
+                    <td>
+                        <a href="@Url.Action("GoodsCouponEdit", "Goods", new { pro_coupon_id = item.pro_coupon_id })" style="color:green">修改</a>
+                        @{
+                if (item.pro_coupon_stastus == "0")
+                {
+                    <a href="@Url.Action("GoodsCouponStastus", "Goods", new { pro_coupon_id = item.pro_coupon_id, pro_coupon_stastus = 1 })" style="color:green">启用</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("GoodsCouponStastus", "Goods", new { pro_coupon_id = item.pro_coupon_id, pro_coupon_stastus = 0 })" style="color:green">禁用</a>
+                }
+                        }
+                    </td>
+                </tr>
+
+            }
+
+
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

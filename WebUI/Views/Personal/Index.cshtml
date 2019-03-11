@@ -1,0 +1,340 @@
+﻿@using EFClassLibrary
+
+@{
+    ViewBag.Title = "会员中心";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    .tab {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .tab .tdHead td {
+            font-size: 12px;
+            color: #8f8f8f;
+            background: #eaeaea;
+        }
+
+        .tab tr td {
+            border: 1px solid #d7d7d7;
+            height: 32px;
+            text-indent: 15px;
+            font-size: 12px;
+            color: #555555;
+        }
+
+    .acur {
+        background-color: #e60012;
+        color: #fff;
+    }
+
+    .anewcur {
+        background-color: transparent;
+        color: #fff;
+    }
+
+        .anewcur:hover {
+            background-color: transparent;
+            color: #fff;
+        }
+    #save_wrap ul li {
+    height:350px;position:relative;
+    }
+        #save_wrap ul li .gwc a {
+      width:60px;border:none;}
+        #save_wrap ul li .gwc {
+        position:absolute;bottom:5px;}
+</style>
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con" style="background: none;">
+        <div id="user_wrap">
+            <div class="user_img">
+                @{
+                    D8MallEntities db = new D8MallEntities();
+                    var uname = TDESHelper.DecryptString(Request.Cookies["keys"].Value);
+                    var upwd = Request.Cookies["value"].Value;
+                    var user_basic = db.user_basic.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                    var user_basic_code = user_basic.user_basic_code.ToString();
+                    com_img img = db.com_img.Where(i => i.com_img_fk == user_basic_code).SingleOrDefault();
+                    if (img != null)
+                    {
+                        var com_img_src = img.com_img_src;
+                        if (string.IsNullOrEmpty(com_img_src))
+                        {
+                            <img src="/img/userImg.png" />
+                        }
+                        else
+                        {
+                            <img src="@com_img_src" style="width:90px;height:90px" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="/img/userImg.png" />
+                    }
+                }
+
+            </div>
+            <div class="user_about">
+
+                <a href="@Url.Action("AccountInformation", "Personal")">
+                    <p class="name">@ViewBag.username</p>
+                </a>
+                <p style="font-weight:bold">ID:@ViewBag.userid</p>
+                <p style="font-weight: bold;font-size: 12px;color: #555555;margin-top: 10px;">账户安全：</p>
+                <div id="sliderbar_g">
+                    <div id="sliderbar_r">
+
+                    </div>
+                </div>
+                <a href="@Url.Action("PersonalSafe", "Personal")" id="up_grade">提升</a>
+                <div class="clear_float"></div>
+                <p id="grade">低<span>中</span>高</p>
+            </div>
+            <div class="line_y01">
+
+            </div>
+            <div style="width: 146px;float: left;">
+                <div class="box13">
+                    <img src="/img/font.png" />
+                    <p>待付款<span>@ViewBag.PendingPay</span></p>
+                </div>
+                <div class="box13">
+                    <img src="/img/mailbox.png" />
+                    <p> 待收货<span>@ViewBag.Inbound</span></p>
+                </div>
+                <div class="box13">
+                    <img src="/img/favourites.png" />
+                    <p> 我的收藏<span>@ViewBag.Collect</span></p>
+                </div>
+                <div class="box13">
+                    <img src="/img/pencil63.png" />
+                    <p> 我的消息<span>@ViewBag.ms</span></p>
+                </div>
+            </div>
+            <div style="float: left;margin-top: 30px;margin-left: 60px;">
+                <p style="font-size: 16px;color: #000000;font-weight: bold;">我的资产</p>
+                <p class="font01">优惠券：<span>@ViewBag.coupon 张</span></p>
+                <p class="font01">优惠码：<span>@ViewBag.PromoCode 个</span></p>
+            </div>
+        </div>
+        <div style="background: #FFFFFF;padding:22px;margin-top: 10px;">
+            <p class="name">我的订单</p>
+            <p class="inner_menu">
+                <span><a href="javascript:;" id="tab1" class="anewcur">最近的订单<i>&nbsp;</i></a></span>
+                <a href="javascript:;" id="tab2">未支付订单<i>&nbsp;</i></a>
+                <a href="javascript:;" id="tab3">已支付订单<i>&nbsp;</i></a>
+                <a href="javascript:;" id="tab4">已发货订单<i>&nbsp;</i></a>
+                <a href="javascript:;" id="tab5">已签收订单<i>&nbsp;</i></a>
+            </p>
+            <table class="tab" border="0" cellspacing="0" cellpadding="0" id="tab01">
+                <tr class="tdHead"><td class="col01">订单号</td><td class="col01">订单金额</td><td class="col01">下单时间</td><td class="col03">订单状态</td><td class="col01">操作</td></tr>
+                @foreach (var item in ViewBag.list01)
+                {
+                    <tr>
+                        <td>@item.shop_order_code</td>
+                        <td>￥@item.shop_order_totalmoeny</td>
+                        <td>@item.shop_order_buydate</td>
+                        <td>@item.shop_order_status</td>
+                        <td class="action03"><a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })">查看</a></td>
+                    </tr>
+                }
+
+
+
+            </table>
+            <table class="tab" border="0" cellspacing="0" cellpadding="0" id="tab02">
+                <tr class="tdHead"><td class="col01">订单号</td><td class="col01">订单金额</td><td class="col03">下单时间</td><td class="col03">订单状态</td><td class="col01">操作</td></tr>
+                @foreach (var item in ViewBag.list02)
+                {
+                    <tr>
+                        <td>@item.shop_order_code</td>
+                        <td>￥@item.shop_order_totalmoeny</td>
+                        <td>@item.shop_order_buydate</td>
+                        <td>@item.shop_order_status</td>
+                        <td class="action03"><a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })">查看</a></td>
+                    </tr>
+                }
+
+            </table>
+            <table class="tab" border="0" cellspacing="0" cellpadding="0" id="tab03">
+
+                <tr class="tdHead"><td class="col01">订单号</td><td class="col01">订单金额</td><td class="col03">下单时间</td><td class="col03">订单状态</td><td class="col01">操作</td></tr>
+                @foreach (var item in ViewBag.list03)
+                {
+                    <tr>
+                        <td>@item.shop_order_code</td>
+                        <td>￥@item.shop_order_totalmoeny</td>
+                        <td>@item.shop_order_buydate</td>
+                        <td>@item.shop_order_status</td>
+                        <td class="action03"><a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })">查看</a></td>
+                    </tr>
+                }
+            </table>
+            <table class="tab" border="0" cellspacing="0" cellpadding="0" id="tab04">
+                <tr class="tdHead"><td class="col01">订单号</td><td class="col01">订单金额</td><td class="col03">下单时间</td><td class="col03">订单状态</td><td class="col01">操作</td></tr>
+                @foreach (var item in ViewBag.list04)
+                {
+                    <tr>
+                        <td>@item.shop_order_code</td>
+                        <td>￥@item.shop_order_totalmoeny</td>
+                        <td>@item.shop_order_buydate</td>
+                        <td>@item.shop_order_status</td>
+                        <td class="action03"><a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })">查看</a></td>
+                    </tr>
+                }
+
+            </table>
+            <table class="tab" border="0" cellspacing="0" cellpadding="0" id="tab05">
+                <tr class="tdHead"><td class="col01">订单号</td><td class="col01">订单金额</td><td class="col03">下单时间</td><td class="col03">订单状态</td><td class="col01">操作</td></tr>
+                @foreach (var item in ViewBag.list05)
+                {
+                    <tr>
+                        <td>@item.shop_order_code</td>
+                        <td>￥@item.shop_order_totalmoeny</td>
+                        <td>@item.shop_order_buydate</td>
+                        <td>@item.shop_order_status</td>
+                        <td class="action03"><a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })">查看</a></td>
+                    </tr>
+                }
+
+            </table>
+            <p class="name" style="margin:20px 0 5px 0;">我的收藏</p>
+            <p class="inner_menu" style="margin-bottom: 20px;"><a href="">全部<i>&nbsp;</i> </a><a href="">促销商品<i>&nbsp;</i></a><a href="">普通商品<i>&nbsp;</i></a></p>
+
+            <div id="save_wrap">
+                <div class="hd_zs">
+                    <a class="prev_zs" style="margin-left:-20px;"></a>
+
+                </div>
+                <a class="next_zs" style="margin-right: -20px;"></a>
+                <div class="bd_zs" style="width: 878px;margin: 0 auto;float: left;  margin-left: 8px;">
+                    <ul>
+                        @foreach (var item in ViewBag.user_collect_list)
+                        {
+                            <li>
+                                <img src="@item.pro_sku_covimg"  style="height:210px;width:210px;"/>
+                                <div class="pro_abs">
+                                    <p>@item.pro_skuitem_id</p>
+                                    <span>价格：￥@item.pro_skuitem_price</span>
+                                </div>
+                                <div class="gwc"><a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">购物车</a><a href="@Url.Action("PersonalCollectDel", "Personal", new { user_collect_id = @item.user_collect_id })" class="a1">删除</a></div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                @Html.Hidden("user_basic_tels")
+                @Html.Hidden("user_basic_emails")
+                <div class="clear_float"></div>
+                <script>
+                    jQuery("#save_wrap").slide({
+                        titCell: ".hd_zs ul",
+                        mainCell: ".bd_zs ul",
+                        effect: "left",
+                        autoPlay: true,
+                        interTime: 4000,
+                        vis: 4,
+                        prevCell: ".prev_zs",
+                        nextCell: ".next_zs"
+                    });
+                    var user_basic_tels = $("#user_basic_tels");
+                    var user_basic_emails = $("#user_basic_emails");
+                    var sliderbar_r = $("#sliderbar_r");
+                    $(function () {
+                        if (user_basic_tels.val() == "已认证") {
+                            sliderbar_r.width("75%");
+                        }
+                        if (user_basic_tels.val() == "已认证" && user_basic_emails.val() == "已认证") {
+                            sliderbar_r.width("100%");
+                        }
+                    });
+                    //订单信息开始
+                    //A标签
+                    var tab1 = $("#tab1");
+                    var tab2 = $("#tab2");
+                    var tab3 = $("#tab3");
+                    var tab4 = $("#tab4");
+                    var tab5 = $("#tab5");
+                    //表格
+                    var tab01 = $("#tab01");
+                    var tab02 = $("#tab02");
+                    var tab03 = $("#tab03");
+                    var tab04 = $("#tab04");
+                    var tab05 = $("#tab05");
+                    //初始化
+                    tab01.show();
+                    tab02.hide();
+                    tab03.hide();
+                    tab04.hide();
+                    tab05.hide();
+                    tab1.click(function () {
+                        $("#tab2").attr("class", "");
+                        $("#tab3").attr("class", "");
+                        $("#tab4").attr("class", "");
+                        $("#tab5").attr("class", "");
+                        tab01.show();
+                        tab02.hide();
+                        tab03.hide();
+                        tab04.hide();
+                        tab05.hide();
+                    });
+                    tab2.click(function () {
+
+                        $("#tab2").attr("class", "acur");
+                        $("#tab3").attr("class", "");
+                        $("#tab4").attr("class", "");
+                        $("#tab5").attr("class", "");
+                        tab02.show();
+                        tab01.hide();
+                        tab03.hide();
+                        tab04.hide();
+                        tab05.hide();
+                    });
+                    tab3.click(function () {
+                        $("#tab3").attr("class", "acur");
+                        $("#tab2").attr("class", "");
+                        $("#tab4").attr("class", "");
+                        $("#tab5").attr("class", "");
+                        tab03.show();
+                        tab02.hide();
+                        tab01.hide();
+                        tab04.hide();
+                        tab05.hide();
+                    });
+                    tab4.click(function () {
+                        $("#tab4").attr("class", "acur");
+                        $("#tab2").attr("class", "");
+                        $("#tab3").attr("class", "");
+                        $("#tab5").attr("class", "");
+                        tab04.show();
+                        tab02.hide();
+                        tab03.hide();
+                        tab01.hide();
+                        tab05.hide();
+                    });
+                    tab5.click(function () {
+                        $("#tab5").attr("class", "acur");
+                        $("#tab3").attr("class", "");
+                        $("#tab4").attr("class", "");
+                        $("#tab2").attr("class", "");
+                        tab05.show();
+                        tab02.hide();
+                        tab03.hide();
+                        tab04.hide();
+                        tab01.hide();
+                    });
+
+                    //订单信息结束
+
+
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>

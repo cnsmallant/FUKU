@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "添加地址";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px;">
+    <div class="row">
+        <ul class="list-group list_group">
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">姓名</span>
+                    <input id="user_address_name" type="text" class="form-control" placeholder="请输入收货人姓名">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">手机</span>
+                    <input id="user_address_tel" type="tel" class="form-control" placeholder="请输入手机号码">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">省份</span>
+                    <select class="form-control" id="Province">
+                        <option>省份</option>
+
+                    </select>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">城市</span>
+                    <select class="form-control" id="City">
+                        <option>城市</option>
+                    </select>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">县区</span>
+                    <select class="form-control" id="County">
+                        <option>县区</option>
+                    </select>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">地址</span>
+                    <input id="user_address_detail" type="text" class="form-control" placeholder="请输入详细地址">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <button id="submit" type="button" class="btn  btn-block btn-default btn-success">提交</button>
+            </li>
+        </ul>
+    </div>
+</div>
+@Html.Hidden("user_address_province")
+@Html.Hidden("user_address_city")
+@Html.Hidden("user_address_county")
+<script src="/js/JavaScript_Cascade.js"></script>
+<script>
+
+    var user_address_name = $("#user_address_name");
+    var user_address_tel = $("#user_address_tel");
+    var user_address_detail = $("#user_address_detail");
+    var user_address_province = $("#user_address_province");
+    var user_address_city = $("#user_address_city");
+    var user_address_county = $("#user_address_county");
+
+    var regphone = /^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/;
+    var regzipcode = /^\d{6}$/;
+    var submit = $("#submit");
+
+    $("#County").change(function () {
+        user_address_province.val($("#Province").find("option:selected").val());
+        user_address_city.val($("#City").find("option:selected").val());
+        user_address_county.val($("#County").find("option:selected").val());
+    });
+    submit.click(function () {
+        if (user_address_name.val() == null || user_address_name.val() == "") {
+            alert("请输入收件人姓名！");
+
+        }
+        else if (user_address_tel.val() == null || user_address_tel.val() == "") {
+            alert("请输入手机号码！");
+
+        }
+        else if (!user_address_tel.val().match(regphone)) {
+            alert("手机号码格式不正确！");
+
+        }
+        else if ($("#Province").find("option:selected").text() == "省份" || $("#City").find("option:selected").text() == "城市" || $("#County").find("option:selected").text() == "县区") {
+            alert("请选地址");
+        }
+        else if (user_address_detail.val() == null || user_address_detail.val() == "") {
+            alert("请输入详细地址");
+        } else {
+            $("#submit").attr("disabled", "disabled");
+            $("#submit").text("提交中");
+            $.ajax({
+                url: "/Personal/AddShippingAddress",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        user_address_name: user_address_name.val(),
+                        user_address_tel: user_address_tel.val(),
+                        user_address_detail: user_address_detail.val(),
+                        user_address_province: user_address_province.val(),
+                        user_address_city: user_address_city.val(),
+                        user_address_county: user_address_county.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("操作失败");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("提交");
+                    } else {
+                        window.location.href = "/Personal/ShippingAddress";
+                    }
+                }
+            });
+        }
+    });
+
+</script>

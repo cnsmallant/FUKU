@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "查看管理人员操作日志";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">权限列表</div>
+      
+
+        <div class="lpaixu">
+            <ul>
+       
+                <li><a href="@Url.Action("DelLog", "Sys")">清空日志</a></li>
+                <li><a href="@Url.Action("ExportExcel","Sys")">导出日志</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>日志编码</td>
+                <td>操作IP</td>
+                <td>日志内容</td>
+                <td>操作日期</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in ViewBag.list)
+            {
+                <tr>
+                    <td>@item.sys_log_name</td>
+                    <td>
+                        @item.sys_log_ip
+                    </td>
+                    <td>
+                        @item.sys_log_content
+                    </td>
+                    <td>@item.sys_log_adddate</td>
+
+                </tr>
+
+            }
+
+
+
+            <tr class="tfoot"></tr>
+
+        </table>
+    </div>
+</div>

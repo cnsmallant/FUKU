@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "商品评价";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<script src="/js/jquery.raty.min.js"></script>
+<link href="/demo/css/application.css" rel="stylesheet" />
+<style>
+    .click-demo img {
+        float: left;
+    }
+</style>
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+
+    @Html.Partial("LfetPartial")
+
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">商品评价</p>
+        </div>
+        <div id="con">
+            <div class="access_dd">
+                <div class="ddh">
+                    订单号：@ViewBag.shop_order_code
+                </div>
+                <div class="pinglun">
+                    <div class="pro">
+                        <div class="tit">购买产品</div>
+                        <img src="@ViewBag.pro_sku_covimg" />
+                        <div class="tit1">@ViewBag.pro_sku_title</div>
+                    </div>
+                    <div class="pl">
+                        <div class="tit">评论 <span>已有 @ViewBag.reviewscount 人评论</span></div>
+                        <div class="con">
+                            <div class="px" style="width:100%">
+                                <p>评星：</p>
+                                <div class="demo" style="float:left">
+                                    <div id="click-demo" style="margin-top:20px;"></div>
+                                </div>
+                            </div><div class="clear_float"></div>
+                            <div class="pll">
+                                <p>评论：</p>
+                                <textarea id="Text1" class="int"></textarea>
+                            </div>
+                            <div class="clear_float"></div>
+                            <div class="st">
+                                <p>晒图：</p>
+                                <a id="uploadimg" href="javascript:;"><img id="img" src="/img/shaitu.jpg" /></a><font id="font"></font>
+                                <div style="display:none">@Html.TextBox("com_img_src", null, new { @type = "file", @onchange = "document.getElementById('font').innerText=this.value" })</div>
+
+                            </div>
+                        </div>
+                        <div class="tit2"><a href="javascript:;" id="submit">确定</a></div>
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+    @Html.Hidden("pro_sku_code")
+</div>
+<script src="/js/ajaxfileupload.js"></script>
+<script>
+    var Text1 = $("#Text1");
+    var submit = $("#submit");
+    var uploadimg = $("#uploadimg");
+    var com_img_src = $("#com_img_src");
+    var font = $("#font");
+    var pro_sku_code = $("#pro_sku_code");
+    var star = "";
+    $.fn.raty.defaults.path = "/lib/img/";
+    $.fn.raty.defaults.cancel = false;
+    $('#click-demo').raty({
+        click: function (score, evt) {
+            star = score;
+        }
+    });
+
+    uploadimg.click(function () {
+        com_img_src.click();
+        font.text();
+        com_img_src.val("");
+    });
+
+    submit.click(function () {
+        if (star == "") {
+            alert("请选择评星");
+        }
+        else if (Text1.val() == "" || Text1.val() == null) {
+            alert("请填写评价");
+        } else {
+            $.ajax({
+                url: "/Personal/Assess",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        pro_comment_star: star,
+                        pro_comment_content: Text1.val(),
+                        pro_sku_code: pro_sku_code.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("操作失败");
+                    } else {
+                        if (font != "") {
+                            $.ajaxFileUpload({
+                                url: '/Personal/Blueprint?com_img_fk=' + data,//后台处理的action
+                                secureuri: false,
+                                fileElementId: 'com_img_src',//上传的控件名
+                                dataType: 'application/json',
+                                success: function (datas, status) {
+                                    //datas = jQuery.parseJSON(jQuery(datas).text());
+                                    //alert(datas);
+                                    window.location.href = "/Personal/BeenEvaluated";
+                                },
+                                error: function (datas, status, e) {
+                                    alert(datas);
+                                }
+                            });
+                        } else {
+                            window.location.href = "/Personal/BeenEvaluated";
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>

@@ -1,0 +1,202 @@
+﻿@model PagedList<WebUI.Areas.Admin.Controllers.GoodsController.pro_skus>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "促销商品";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<script src="~/My97DatePicker/WdatePicker.js"></script>
+<script src="~/My97DatePicker/lang/zh-cn.js"></script>
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">促销商品</div>
+        <div class="lsec">
+
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+               
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>商品封面</td>
+                <td>商品编号</td>
+                <td>商品标题</td>
+                <td>起止时间</td>
+                <td>促销价格</td>
+                <td>商品库存</td>
+                <td>商品状态</td>
+                <td>排序号码</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="15"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="@item.pro_sku_covimg" style="width:100px;height:100px" /></td>
+                    <td>@item.pro_sku_code</td>
+                    <td>@item.pro_sku_title</td>
+                    <td>
+                        <a href="javascript:;" style=" color:green;" name="@item.pro_sku_id" onclick="updatedate(this)" title="点击修改">@item.date</a>
+                    </td>
+                    <td>
+                        <a href="javascript:;" style=" color:green;" name="@item.pro_sku_id" onclick="updatepri(this)" title="点击修改">@item.pro_skuitem_price</a>
+                    </td>
+                    <td>@item.pro_skuitem_stock</td>
+                    <td>@item.pro_sku_status</td>
+                    <td>
+                        <a href="javascript:;" style=" color:green;" name="@item.pro_sku_id" onclick="updateorderby(this)" title="点击修改">@item.pro_sku_order</a>
+                    </td>
+                    <td>
+                        @{
+                if (item.pro_sku_status == "未启用")
+                {
+                    <a href="@Url.Action("GoodsIsEnable", "Goods", new { pro_sales_id = item.pro_sku_id, sta = 1 })" style="color:green">启用促销</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("GoodsIsEnable", "Goods", new { pro_sales_id = item.pro_sku_id, sta = 0 })" style="color:green">禁用促销</a>
+                }
+
+                        }
+                        <a href="@Url.Action("GoodsSalesDel", "Goods", new { pro_sales_id = item.pro_sku_id })" style="color:green">删除促销</a>
+                    </td>
+                </tr>
+            }
+            <tr class="txf">
+                <td colspan="15">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="updateor" style="width:200px; height:150px; position:absolute;left:45%; top:35%; text-align:center; border:1px solid gray; background-color:wheat">
+    <div style="margin:30px">
+        <p>修改序号</p>
+        <p>
+            <input type="text" id="txt" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" />
+        </p>
+        <p>
+            <input type="submit" value="修改" id="submit" /><input type="submit" value="关闭" id="close" />
+        </p>
+    </div>
+</div>
+
+
+<div id="updateda" style="width:350px; height:150px; position:absolute;left:45%; top:35%; text-align:center; border:1px solid gray; background-color:wheat">
+    <div style="margin:30px">
+        <p>修改起止时间</p>
+        <p>
+            <input type="text" id="txtstadate" readonly="readonly" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />-<input type="text" id="txtenddate" readonly="readonly" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+        </p>
+        <p>
+            <input type="submit" value="修改" id="submitdate" /><input type="submit" value="关闭" id="closedate" />
+        </p>
+    </div>
+</div>
+
+
+<div id="updateprice" style="width:200px; height:150px; position:absolute;left:45%; top:35%; text-align:center; border:1px solid gray; background-color:wheat">
+    <div style="margin:30px">
+        <p>修改促销价格</p>
+        <p>
+            <input type="text" id="txtprice" onkeyup="value=value.replace(/[^\d.]/g,'')" />
+        </p>
+        <p>
+            <input type="submit" value="修改" id="submitprice" /><input type="submit" value="关闭" id="closeprice" />
+        </p>
+    </div>
+</div>
+
+<script>
+    var updateor = $("#updateor");
+    var txt = $("#txt");
+    var submit = $("#submit");
+    var close = $("#close");
+    var id = "";
+    updateor.hide();
+    function updateorderby(a) {
+        txt.val(a.innerHTML);
+        updateor.show();
+        id = a.name;
+    }
+
+
+    submit.click(function () {
+        if (txt.val() == null || txt.val() == "") {
+            alert("请输入序号");
+        } else {
+            window.location.href = "/Admin/Goods/GoodsIsEnable?pro_sku_id=" + id + "&ord=" + txt.val();
+        }
+    });
+    close.click(function () {
+        updateor.hide();
+    });
+
+
+    var updateda = $("#updateda");
+    updateda.hide();
+    var submitdate = $("#submitdate");
+    var closedate = $("#closedate");
+    var txtstadate = $("#txtstadate");
+    var txtenddate = $("#txtenddate");
+    function updatedate(a) {
+        updateda.show();
+        id = a.name;
+    }
+
+    submitdate.click(function () {
+        if (txtstadate.val() == null || txtstadate.val() == "") {
+            alert("请选择开始时间");
+        } else if (txtenddate.val() == null || txtenddate.val() == "") {
+            alert("请选择结束时间");
+        }
+        else {
+            var str = encodeURIComponent(txtstadate.val() + "," + txtenddate.val());
+            window.location.href = "/Admin/Goods/GoodsSalesDate?pro_sales_id=" + id + "&datetxt=" + str;
+        }
+    });
+    closedate.click(function () {
+        updateda.hide();
+    });
+
+
+    var updateprice = $("#updateprice");
+    updateprice.hide();
+    var submitprice = $("#submitprice");
+    var closeprice = $("#closeprice");
+    var txtprice = $("#txtprice");
+
+    function updatepri(a) {
+        updateprice.show();
+        id = a.name;
+    }
+
+    submitprice.click(function () {
+        if (txtprice.val() == null || txtprice.val() == "") {
+            alert("请输入促销价格");
+        } 
+        else {
+            var str = txtprice.val();
+            window.location.href = "/Admin/Goods/GoodsSalesPrice?pro_sales_id=" + id + "&price=" + str;
+        }
+    });
+    closeprice.click(function () {
+        updateprice.hide();
+    });
+
+</script>

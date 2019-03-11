@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "编辑收货地址";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">收货地址</p>
+        </div>
+        <div id="con" style="padding: 40px;position: relative; margin:0px auto;width:300px">
+            @using (Html.BeginForm("EditShippingAddress", "Personal", FormMethod.Post))
+            {
+                <div id="add_dr">
+                    @Html.TextBox("user_address_name", null, new { @class = "text-in", @placeholder = "收件人姓名" })
+                    @Html.TextBox("user_address_tel", null, new { @class = "text-in", @placeholder = "11位手机号码" })
+                    <div class="text-in list">
+                        @Html.DropDownList("Province", null, new { style = "width:99%" })
+                    </div>
+                    <div class="text-in list" style="float: right;">
+                        @Html.DropDownList("City", null, new { style = "width:99%" })
+                    </div>
+                    <div class="text-in list01" style="float: right;">
+                        @Html.DropDownList("County", null, new { style = "width:99%" })
+                    </div>
+                    @Html.TextArea("user_address_detail", new { @placeholder = "路名或街道地址，门牌号", @class = "text-in area" })
+                    @Html.TextBox("user_address_ZipCode", null, new { @class = "text-in", @placeholder = "邮政编码" })
+                    @Html.TextBox("user_address_tags", null, new { @class = "text-in", @placeholder = "地址标签：如'家'、'公司' 限5个字内" })
+                    <a href="@Url.Action("ShippingAddress", "Personal")" id="cancel">取消</a>
+                    <input id="submit" type="submit" style="float: right;" value="保存" class="save" />
+                    @Html.Hidden("user_address_province")
+                    @Html.Hidden("user_address_city")
+                    @Html.Hidden("user_address_county")
+                    @Html.Hidden("user_address_id")
+                </div>
+            }
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+
+</div>
+
+<script>
+    $("#Province").change(function () {
+        var parentid = $("#Province").val();
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Area/Cascade?parentid=" + parentid,
+            success: function (data) {
+                var City = " <option value='value'>城市</option>";
+                var County = "<option value='value'>区县</option>";
+                $.each(data, function (k, v) {
+                    City += "<option value='" + v.com_area_id + "'>" + v.com_area_name + "</option>";
+                });
+                $("#City").html(City);
+                $("#County").html(County);
+            }
+        });
+    })
+    $("#City").change(function () {
+        var parentid = $("#City").val();
+        $("#County").html("");
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Area/Cascade?parentid=" + parentid,
+            success: function (data) {
+                var County = " <option value='value'>区县</option>";
+                $.each(data, function (k, v) {
+                    County += "<option value='" + v.com_area_id + "'>" + v.com_area_name + "</option>";
+                });
+                $("#County").html(County);
+            }
+        });
+    })
+
+
+
+
+
+    var add_dr = $("#add_dr");
+    var add = $("#add");
+    var cancel = $("#cancel");
+    var user_address_province = $("#user_address_province");
+    var user_address_city = $("#user_address_city");
+    var user_address_county = $("#user_address_county");
+    var user_address_name = $("#user_address_name");
+    var user_address_tel = $("#user_address_tel");
+    var user_address_detail = $("#user_address_detail");
+    var user_address_ZipCode = $("#user_address_ZipCode");
+    var user_address_tags = $("#user_address_tags");
+    var regphone = /^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/;
+    var regzipcode = /^\d{6}$/;
+    var submit = $("#submit");
+
+
+    $("#County").change(function () {
+        user_address_province.val($("#Province").find("option:selected").val());
+        user_address_city.val($("#City").find("option:selected").val());
+        user_address_county.val($("#County").find("option:selected").val());
+    });
+    submit.click(function () {
+        if (user_address_name.val() == null || user_address_name.val() == "") {
+            alert("请输入收件人姓名！");
+            return false;
+        }
+        if (user_address_tel.val() == null || user_address_tel.val() == "") {
+            alert("请输入手机号码！");
+            return false;
+        }
+        if (!user_address_tel.val().match(regphone)) {
+            alert("手机号码格式不正确！");
+            return false;
+        }
+        if ($("#Province").find("option:selected").text() == "省份" || $("#City").find("option:selected").text() == "城市" || $("#County").find("option:selected").text() == "县区") {
+            alert("请选地址");
+            return false;
+        }
+        if (user_address_detail.val() == null || user_address_detail.val() == "") {
+            alert("请输入详细地址");
+            return false;
+        }
+        if (user_address_ZipCode.val() == null || user_address_ZipCode.val() == "") {
+            alert("请输入邮编！");
+            return false;
+        }
+        if (user_address_ZipCode.val() == null || user_address_ZipCode.val() == "") {
+            alert("请输入邮编！");
+            return false;
+        }
+        //if (!user_address_ZipCode.val().match(regzipcode)) {
+        //    alert("邮编格式不正确！");
+        //    return false;
+        //}
+        //if (user_address_tags.val() == null || user_address_tags.val() == "") {
+        //    alert("请输入地址标签！");
+        //    return false;
+        //}
+
+    });
+
+</script>

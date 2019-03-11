@@ -1,0 +1,534 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    .tal {
+        width: 650px;
+        border-top: 1px solid red;
+        border-right: 1px solid red;
+        float: left;
+        overflow: hidden;
+    }
+
+    .th {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid red;
+        float: left;
+        overflow: hidden;
+    }
+
+    .td {
+        width: 100px;
+        height: auto;
+        float: left;
+        border-left: 1px solid red;
+    }
+</style>
+<div id="slideBox" class="slideBox">
+    <div class="container">
+        <dl id="pro_nav">
+            <dt><span>&nbsp;</span>全部商品分类</dt>
+            @foreach (var item in ViewBag.list)
+            {
+                <dd><a href="@Url.Action("Index", "Goods", new { GoodsClassId = @item.pro_class_page })"><span>&nbsp;</span>@item.pro_class_name<i>&nbsp;</i></a></dd>
+            }
+        </dl>
+    </div>
+    <div class="hd">
+        <ul>
+            @foreach (var item in ViewBag.bannerlist)
+            {
+                <li></li>
+            }
+        </ul>
+    </div>
+    <div class="bd">
+        <ul>
+            @foreach (var item in ViewBag.bannerlist)
+            {
+
+                <li><a href="@item.com_banner_url" target="_blank"><div style="background: url(@item.com_img_src) no-repeat center;"></div> </a></li>
+
+            }
+
+        </ul>
+    </div>
+    <a class="prev" href="javascript:void(0)"></a>
+    <a class="next" href="javascript:void(0)"></a>
+</div>
+<script id="jsID" type="text/javascript">
+    var ary = location.href.split("&");
+    jQuery(".slideBox").slide({
+        mainCell: ".bd ul",
+        effect: "left",
+        autoPlay: true,
+        mouseOverStop: false,
+        interTime: 4000,
+    });
+</script>
+
+<div id="recom">
+    <div class="container">
+
+
+        @foreach (var item in ViewBag.recommend)
+        {
+            <div class="recom_box">
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                    <img src="@item.com_img_src" />
+                    <div class="proInfo">
+                        <p class="f18">@item.pro_brand_id</p>
+                        <p class="f13">&yen;@item.pro_skuitem_price</p>
+                    </div>
+                    <span>荐</span>
+                </a>
+            </div>
+        }
+
+        <div class="fix_just">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="ind_t">
+        <span>&nbsp;</span> 2.0倍高压电饭煲系列 <a href="@Url.Action("Index", "Goods", new { GoodsClassId = "RiceCooker"})" class="more">&nbsp;</a>
+    </div>
+    <div class="pro01">
+
+        @foreach (var item in ViewBag.list2)
+        {
+            <div class="pro_box">
+                <a href="@item.com_banner_url">
+                    <img src="@item.com_img_src" style="width:180px;height:180px;margin-left:28px;" />
+                    <div class="proInfo">
+                        <p class="f18">@item.pro_brand_id</p>
+                        <p class="f13">@item.pro_skuitem_price</p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="ind_t">
+        <span>&nbsp;</span>原装进口IH高压电饭煲系列 <a href="@Url.Action("Index", "Goods", new { GoodsClassId = "RiceCooker"})" class="more">&nbsp;</a>
+    </div>
+    <div id="pro02">
+
+        @{
+            int i = 0;
+            foreach (var item in ViewBag.list3)
+            {
+
+                if (i == 0)
+                {
+                    <div class="proHav">
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" style="width:479px;height:478px" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="pro_box">
+
+
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" style="width:180px;height:180px;margin-left:28px;" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>}
+                i++;
+            }
+        }
+
+        <div class="fix_just">
+        </div>
+    </div>
+    <div class="ind_t">
+        <span>&nbsp;</span>安心空气净化器系列<a href="@Url.Action("Index", "Goods", new { GoodsClassId = "HomeAppliances" })" class="more">&nbsp;</a>
+    </div>
+    <div id="pro03">
+        <div class="pro_group01 group">
+            @foreach (var item in ViewBag.list4_1)
+            {
+                <div class="pro_box01">
+                    <a href="@item.com_banner_url">
+                        <img src="@item.com_img_src" style="width:206px;height:206px;margin-left:16px;" />
+                        <div class="proInfo">
+                            <p class="f18">@item.pro_brand_id</p>
+                            <p class="f13">@item.pro_skuitem_price</p>
+                        </div>
+                    </a>
+                </div>
+            }
+
+        </div>
+        <div class="pro_group02 group">
+            <div class="pro_box02">
+                <a href="@ViewBag.jhqadurl">
+                    <img src="@ViewBag.jhqimg" style="width:718px;height:510px" />
+                </a>
+            </div>
+        </div>
+        <div class="pro_group01 group">
+
+            @foreach (var item in ViewBag.list4_2)
+            {
+                <div class="pro_box01">
+                    <a href="@item.com_banner_url">
+                        <img src="@item.com_img_src" style="width: 206px; height: 206px; margin-left: 16px;" />
+                        <div class="proInfo">
+                            <p class="f18">@item.pro_brand_id</p>
+                            <p class="f13">@item.pro_skuitem_price</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="clear_float">
+        </div>
+    </div>
+    <div class="ind_t">
+        <span>&nbsp;</span>厨房家电系列<a href="@Url.Action("Index", "Goods", new { GoodsClassId = "KitchenAppliances" })" class="more">&nbsp;</a>
+    </div>
+    <div id="pro04">
+        <div class="pro_group01 group">
+            <div class="pro_class">
+                <ul>
+                    <li><a href="javascript:;" id="ayzj"><span>原汁机</span></a></li>
+                    <li><a href="javascript:;" id="aztj"><span>重汤机</span></a></li>
+                    <li><a href="javascript:;" id="adkp"><span>电烤盘</span></a></li>
+                    <li><a href="javascript:;" id="adsh"><span>电水壶</span></a></li>
+                </ul>
+            </div>
+            <div class="pro_box01 kitc" id="yzj1">
+                <a href="@ViewBag.yzj1">
+                    <img src="@ViewBag.yzjimg1" style="width:180px;height:180px;margin-left:28px;" />
+                    <div class="proInfo">
+                        <p class="f18">@ViewBag.pro_brand_id_yzj</p>
+                        <p class="f13">@ViewBag.pro_skuitem_price_yzj</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="pro_box01 kitc" id="ztj1">
+                <a href="@ViewBag.ztj1">
+                    <img src="@ViewBag.ztjimg1" style="width: 180px; height: 180px; margin-left: 28px;" />
+                    <div class="proInfo">
+                        <p class="f18">@ViewBag.pro_brand_id_ztj</p>
+                        <p class="f13">@ViewBag.pro_skuitem_price_ztj</p>
+                    </div>
+                </a>
+            </div>
+            <div class="pro_box01 kitc" id="dkp1">
+                <a href="@ViewBag.dkp1">
+                    <img src="@ViewBag.dkpimg1" style="width: 180px; height: 180px; margin-left: 28px;" />
+                    <div class="proInfo">
+                        <p class="f18">@ViewBag.pro_brand_id_dkp</p>
+                        <p class="f13">@ViewBag.pro_skuitem_price_dkp</p>
+                    </div>
+                </a>
+            </div>
+            <div class="pro_box01 kitc" id="dsh1">
+                <a href="@ViewBag.dsh1">
+                    <img src="@ViewBag.dshimg1" style="width: 180px; height: 180px; margin-left: 28px;" />
+                    <div class="proInfo">
+                        <p class="f18">@ViewBag.pro_brand_id_dsh</p>
+                        <p class="f13">@ViewBag.pro_skuitem_price_dsh</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="yzj">
+
+            <div class="group pro_group03">
+                <a href="@ViewBag.yzjadurl"><img src="@ViewBag.yzjimg" style="width:477px;height:478px" /></a>
+            </div>
+            <div class="group pro_group04">
+
+                @foreach (var item in ViewBag.list5)
+                {
+                    <div class="pro_box01 kitc">
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" style="width: 180px; height: 180px; margin-left: 28px;" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+        <div id="ztj">
+
+            <div class="group pro_group03">
+                <a href="@ViewBag.ztjadurl"><img src="@ViewBag.ztjimg" style="width:477px;height:478px" /></a>
+            </div>
+            <div class="group pro_group04">
+                @foreach (var item in ViewBag.list6)
+                {
+                    <div class="pro_box01 kitc">
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" style="width: 180px; height: 180px; margin-left: 28px;" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div id="dkp">
+
+            <div class="group pro_group03">
+                <a href="@ViewBag.dkpadurl"><img src="@ViewBag.dkpimg" style="width:477px;height:478px" /></a>
+            </div>
+            <div class="group pro_group04">
+                @foreach (var item in ViewBag.list7)
+                {
+                    <div class="pro_box01 kitc">
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div id="dsh">
+
+            <div class="group pro_group03">
+                <a href="@ViewBag.dshadurl"><img src="@ViewBag.dshimg" style="width:477px;height:478px" /></a>
+            </div>
+            <div class="group pro_group04">
+                @foreach (var item in ViewBag.list8)
+                {
+                    <div class="pro_box01 kitc">
+                        <a href="@item.com_banner_url">
+                            <img src="@item.com_img_src" style="width: 180px; height: 180px; margin-left: 28px;" />
+                            <div class="proInfo">
+                                <p class="f18">@item.pro_brand_id</p>
+                                <p class="f13">@item.pro_skuitem_price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="picScroll-left_itm">
+        <div class="ind_t" style="width: 50%;float: left;padding: 0;">
+            <span>&nbsp;</span>特价商品
+        </div>
+        <div class="hd_itm">
+            <a class="next_itm"></a>
+            <a class="prev_itm"></a>
+        </div>
+        <div class="bd_itm">
+            <ul class="picList">
+
+                @foreach (var item in ViewBag.goodes)
+                {
+                    <li style="float: left; ">
+                        <div class="pro_box">
+                            <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                                <img src="@item.pro_sku_covimg" style="width:180px;height:180px;margin-left:28px;" />
+                                <div class="proInfo">
+                                    <p class="f18">@item.pro_brand_id</p>
+                                    <p class="f13">&yen;@item.pro_skuitem_price<span>@item.pro_skuitem_mprice</span></p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    .Mask {
+        position: fixed;
+        top: 0px;
+        background-color: #000000;
+        width: 100%;
+        height: 100%;
+        z-index: 1999;
+        _position: absolute;
+        filter: alpha(opacity=75); /*IE滤镜，透明度50%*/
+        -moz-opacity: 0.75; /*Firefox私有，透明度50%*/
+        opacity: 0.75; /*其他，透明度50%*/
+    }
+
+    .ad {
+        width: 1200px;
+        height: 710px;
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        margin-top: -355px;
+        margin-left: -600px;
+    }
+</style>
+<div class="Mask" id="Mask" style="display:none">
+
+</div>
+
+<div id="ad" class="ad" style="display:none">
+
+    <div style="position:absolute; right:5px; top:5px; z-index:9999; color:red; border:1px solid red;float:left">
+        <div style="float:left;margin:5px;">关闭</div><a href="javascript:;" title="关闭" id="gb">
+            <div style="float:left; background-color: red; height:27px; width:32px;text-align:center; padding-top:5px;">
+                <span style="color:#ffffff;">X</span>
+            </div>
+        </a>
+
+    </div>
+    <a id="Aid">
+        <img id="imgA" style="width:100%;height:100%" />
+    </a>
+</div>
+
+<script src="~/js/JavaScript_Banner.js"></script>
+
+
+<script>
+    var Mask = $("#Mask");
+    var ad = $("#ad");
+    var ms = $("#ms");
+    var gb = $("#gb");
+    var si = 5;
+    Mask.hide();
+    ad.hide();
+    gb.click(function () {
+        Mask.fadeOut(1000);
+        ad.fadeOut(1000);
+    });
+
+    Mask.click(function () {
+        Mask.fadeOut(1000);
+        ad.fadeOut(1000);
+    });
+    $(function () {
+        $.ajax(
+            {
+                url: "/Home/Ad",
+                type: 'POST',
+                success: function (data) {
+
+                    if (data == "NO") {
+                        Mask.hide();
+                        ad.hide();
+                    } else {
+                        Mask.fadeIn(1000);
+                        ad.fadeIn(1000);
+                        var com_img_src = eval(data).com_img_src;
+                        var ad_title = eval(data).ad_title;
+                        var ad_img = eval(data).ad_img;
+                        $('#Aid').attr('href', ad_img);
+                        $('#imgA').attr('src', com_img_src);
+                    }
+                }
+            });
+    });
+
+    function settime(val) {
+        if (si == 0) {
+            Mask.fadeOut(1000);
+            ad.fadeOut(1000);
+        } else {
+            val.text(si);
+            si--;
+            setTimeout(function () {
+                settime(val)
+            }, 1000)
+        }
+    }
+    var yzj = $("#yzj");
+    var ztj = $("#ztj");
+    var dkp = $("#dkp");
+    var dsh = $("#dsh");
+    var yzj1 = $("#yzj1");
+    var ztj1 = $("#ztj1");
+    var dkp1 = $("#dkp1");
+    var dsh1 = $("#dsh1");
+    yzj.show();
+    ztj.hide();
+    dkp.hide();
+    dsh.hide();
+    yzj1.show();
+    ztj1.hide();
+    dkp1.hide();
+    dsh1.hide();
+    var ayzj = $("#ayzj");
+    var aztj = $("#aztj");
+    var adkp = $("#adkp");
+    var adsh = $("#adsh");
+    ayzj.click(function () {
+
+        yzj.show();
+        ztj.hide();
+        dkp.hide();
+        dsh.hide();
+        yzj1.show();
+        ztj1.hide();
+        dkp1.hide();
+        dsh1.hide();
+    });
+    aztj.click(function () {
+
+        yzj.hide();
+        ztj.show();
+        dkp.hide();
+        dsh.hide();
+        yzj1.hide();
+        ztj1.show();
+        dkp1.hide();
+        dsh1.hide();
+    });
+    adkp.click(function () {
+
+        yzj.hide();
+        ztj.hide();
+        dkp.show();
+        dsh.hide();
+        yzj1.hide();
+        ztj1.hide();
+        dkp1.show();
+        dsh1.hide();
+    });
+    adsh.click(function () {
+
+        yzj.hide();
+        ztj.hide();
+        dkp.hide();
+        dsh.show();
+        yzj1.hide();
+        ztj1.hide();
+        dkp1.hide();
+        dsh1.show();
+    });
+</script>

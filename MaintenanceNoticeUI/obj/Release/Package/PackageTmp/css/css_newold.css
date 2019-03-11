@@ -1,0 +1,183 @@
+﻿html {
+    font-family: 'Microsoft YaHei';
+    color: #445d6f;
+}
+
+body {
+    font-family: 'Microsoft YaHei';
+}
+
+ul li a {
+    color: #445d6f;
+}
+
+a {
+    color: #445d6f;
+    text-decoration: none;
+}
+
+.nav_nva {
+    height: 120px;
+    background-color: transparent;
+    border: 0px;
+    overflow: hidden;
+}
+
+    .nav_nva img {
+        margin-top: 30px;
+    }
+
+.nav_nva_ul {
+    margin: 60px;
+}
+
+.nva_div_border {
+    width: 100%;
+    border-bottom: 10px solid #445d6f;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    background-color: transparent;
+    color: #555;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #445d6f;
+}
+
+.btn_border {
+    border: 0px solid transparent;
+}
+
+.btn {
+    border-radius: 0px;
+    height: 30px;
+    background-color: #445d6f;
+    color: #fff;
+}
+
+.divbanner {
+    width: 100%;
+    height: 520px;
+}
+
+.div_banner {
+    width: 100%;
+    height: 520px;
+    background: url('/images/banner.png');
+    background-position-x: center;
+    filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+    -webkit-filter: blur(3px); /* Chrome, Opera */
+    -moz-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3, MakeShadow=false); /* IE6~IE9 */
+    overflow: hidden;
+    text-align: center;
+}
+
+.div_banner_img {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 600px;
+    line-height: 600px;
+    text-align: center;
+}
+.div_5 {
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+    .div_5 > p {
+        color: #445d6f;
+        text-align: center;
+        font-size: 16px;
+    }
+.index_01 {
+    background: url('/images/index_01.png');
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+}
+
+.index_02 {
+    background: url('/images/index_02.png');
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+}
+
+.index_03 {
+    background: url('/images/index_03.png');
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+}
+
+.index_04 {
+    background: url('/images/index_04.png');
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+}
+
+.index_05 {
+    background: url('/images/index_05.png');
+    margin-top: 20px;
+    margin-left: 70px;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+}
+
+
+
+    .div_5 a:hover .index_01 {
+        background: url('/images/index_1.png');
+    }
+
+    .div_5 a:hover .index_02 {
+        background: url('/images/index_2.png');
+    }
+
+    .div_5 a:hover .index_03 {
+        background: url('/images/index_3.png');
+    }
+
+    .div_5 a:hover .index_04 {
+        background: url('/images/index_4.png');
+    }
+
+    .div_5 a:hover .index_05 {
+        background: url('/images/index_5.png');
+    }
+
+
+
+.div_banner_content {
+    background: url('/images/banner_content.png');
+    height: 530px;
+    overflow:hidden;
+}
+.div_content_left{
+    height:325px;
+    border:3px solid #748693;
+}
+.div_content_void_01{
+    margin-top:35px;
+}
+.div_content_void_02{
+    margin-top:105px;
+}
+.p_border{
+    border-bottom:1px solid #6bb8d4;
+}

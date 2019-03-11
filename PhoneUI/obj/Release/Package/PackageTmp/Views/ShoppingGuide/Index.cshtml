@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "购物指南";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="col-xs-3 thumbnail div_bar_title">
+                <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "process" })">
+                    <p>购物流程</p>
+                </a>
+            </div>
+            <div class=" col-xs-3 thumbnail div_bar_title">
+                <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "returns" })">
+                    <p>关于售后</p>
+                </a>
+            </div>
+            <div class="col-xs-3 thumbnail div_bar_title">
+                <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "invoice" })">
+                    <p>关于发票</p>
+                </a>
+            </div>
+            <div class="col-xs-3 thumbnail div_bar_title">
+                <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "express" })">
+                    <p>关于快递</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="thumbnail divthumbnail">
+                @Html.Raw(ViewBag.com_article_content)
+            </div>
+        </div>
+    </div>
+</div>
+

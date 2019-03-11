@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "我的订单";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px;">
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="list-group" style="margin-top:0px; margin-bottom:0px;">
+                <a href="@Url.Action("Unpaid", "Personal")" class="list-group-item"><span class="fa  fa-shopping-cart" style="color:#bea624"></span>&nbsp;&nbsp;<span>未支付订单</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="@Url.Action("OrderPaid", "Personal")" class="list-group-item"><span class="fa fa-money" style="color:#ff0000"></span>&nbsp;&nbsp;<span>已支付订单</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="@Url.Action("Shipped", "Personal")" class="list-group-item"><span class="fa fa-truck" style="color:#0cb723"></span>&nbsp;&nbsp;<span>已发货订单</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="@Url.Action("ClosedOrders", "Personal")" class="list-group-item"><span class="fa fa-edit" style="color:#c70f0f"></span>&nbsp;&nbsp;<span>已签收订单</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+

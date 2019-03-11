@@ -1,0 +1,132 @@
+﻿
+@model PagedList<WebUI.Controllers.PersonalController.pro_coupons>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "我的优惠码";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">我的优惠券</p>
+        </div>
+        <div id="con">
+            <div id="inner_M">
+                <a href="@Url.Action("PersonalPromoCode", "Personal")">可使用</a>
+                <a href="@Url.Action("PersonalPromoCodeExpired", "Personal")">已过期</a>
+                <a href="@Url.Action("PersonalPromoCodeUsed", "Personal")">已使用</a>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" class="order" style="width: 885px;">
+
+                <tr id="tab_head">
+                    <td class="orderState">优惠码</td>
+                    <td class="buyPro">使用条件</td>
+                    <td>优惠码号</td>
+                    <td>数量</td>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="orderState" style="vertical-align: top; text-indent:2px;">
+
+                            <div class="stamp1">
+                                @{
+
+                    var discount = Convert.ToDouble(item.pro_coupon_discount);
+                    if (discount >= 0.85)
+                    {
+                        <div class="stamp_bj1">
+                            <p class="yhq_n">
+                                @{
+                        ViewBag.cou = Convert.ToDouble(item.pro_coupon_discount) * 10;
+                                }  @ViewBag.cou
+                            </p><p class="yhq_z">折</p>
+                            <p class="yhq_xq"><span>优惠码</span><br />全店通用，<br />不可与优惠券<br />同时使用</p>
+                        </div>
+                    }
+                    if (discount >= 0.75 && discount < 0.85)
+                    {
+                        <div class="stamp_bj2">
+                            <p class="yhq_n">
+                                @{
+                        ViewBag.cou = Convert.ToDouble(item.pro_coupon_discount) * 10;
+                                }  @ViewBag.cou
+                            </p><p class="yhq_z">折</p>
+                            <p class="yhq_xq"><span>优惠码</span><br />全店通用，<br />不可与优惠券<br />同时使用</p>
+                        </div>
+                    }
+                    if (discount >= 0.65 && discount < 0.75)
+                    {
+                        <div class="stamp_bj3">
+                            <p class="yhq_n">
+                                @{
+                        ViewBag.cou = Convert.ToDouble(item.pro_coupon_discount) * 10;
+                                }  @ViewBag.cou
+                            </p><p class="yhq_z">折</p>
+                            <p class="yhq_xq"><span>优惠码</span><br />全店通用，<br />不可与优惠券<br />同时使用</p>
+                        </div>
+                    }
+                    if (discount < 0.65)
+                    {
+                        <div class="stamp_bj4">
+                            <p class="yhq_n">
+                                @{
+                        ViewBag.cou = Convert.ToDouble(item.pro_coupon_discount) * 10;
+                                }  @ViewBag.cou
+                            </p><p class="yhq_z">折</p>
+                            <p class="yhq_xq"><span>优惠码</span><br />全店通用，<br />不可与优惠券<br />同时使用</p>
+                        </div>
+                    }
+
+
+                                }
+
+                            </div>
+                        </td>
+                        <td style="width:277px;">
+                            <div class="yhq">
+                                <span>时间：</span><div class="time">
+                                    <p>开始：@Convert.ToDateTime(item.pro_coupon_stadate.ToString()).ToString("yyyy-MM-dd")</p>
+                                    <p> 结束：@Convert.ToDateTime(item.pro_coupon_enddate.ToString()).ToString("yyyy-MM-dd")</p>
+                                </div><div class="clear_float"></div>
+                                <span>条件：</span><p>全店通用，不可以与优惠券同时使用。</p><div class="clear_float"></div>
+                            </div>
+
+                        </td>
+                        <td class="proNums mianz" style="vertical-align: top;width:106px;"><span class="mz">@item.pro_coupon_code</span></td>
+                        <td class="buyTime" style="vertical-align: top;width:58px;">
+                            <span>@item.pro_coupon_num</span>
+                        </td>
+                    </tr>
+
+
+                }
+
+
+
+
+            </table>
+        </div>
+        <div class="pageState">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>
+<script>
+    var myA = document.getElementById("inner_M").getElementsByTagName("a");
+
+    var myURL = document.location.href;
+    for (var i = 1; i < myA.length; i++) {
+
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+
+        if (myURL.indexOf(links) != -1) {
+            myA[i].className = "cur-inner";
+        }
+    }
+</script>

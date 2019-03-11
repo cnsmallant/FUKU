@@ -1,0 +1,141 @@
+﻿@model PagedList<WebUI.Areas.Admin.Controllers.GoodsController.pro_skus>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "商品新品";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">商品新品</div>
+        <div class="lsec">
+
+
+        </div>
+
+        <div class="lpaixu">
+            <ul></ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>商品封面</td>
+                <td>推荐封面</td>
+                <td>商品编号</td>
+                <td>商品标题</td>
+                <td>市场价格</td>
+                <td>商城价格</td>
+                <td>商品库存</td>
+                <td>商品状态</td>
+                <td>排序号码</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="15"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="@item.pro_sku_covimg" style="width:100px;height:100px" /></td>
+                    <td>
+                        @{
+
+                if (item.com_img_src != "/file/img/default.jpg")
+                {
+                    <a href="@Url.Action("Edit", "Images", new { com_img_fk = @item.pro_newsgoods_id, returnurl = Server.UrlEncode(Request.Url.ToString()) })" title="点击修改图片"><img src="@item.com_img_src" width="150" height="65" /></a>
+                }
+                else
+                {
+                    <a><img src="@item.com_img_src" width="150" height="65" /></a>
+                }
+                        }
+
+                    </td>
+                    <td>@item.pro_sku_code</td>
+                    <td>@item.pro_sku_title</td>
+                    <td>@item.pro_skuitem_mprice</td>
+                    <td>@item.pro_skuitem_price</td>
+                    <td>@item.pro_skuitem_stock</td>
+                    <td>@item.pro_sku_status</td>
+                    <td>
+
+                        <a href="javascript:;" style=" color:green;" name="@item.pro_sku_id" onclick="updateorderby(this)">@item.pro_sku_order</a>
+
+                    </td>
+                    <td>@item.pro_sku_adduser</td>
+                    <td>@item.pro_sku_adddate</td>
+                    <td>@item.pro_sku_edituser</td>
+                    <td>@item.pro_sku_editdate</td>
+                    <td>
+                        @{
+                if (item.pro_sku_status == "未推荐")
+                {
+                    <a href="@Url.Action("GoodsRecommend", "Goods", new { pro_newsgoods_id = item.pro_sku_id,sta=0 })" style="color:green">首页推荐</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("GoodsRecommend", "Goods", new { pro_newsgoods_id = item.pro_sku_id, sta = 1 })" style="color:green">取消推荐</a>
+                }
+
+                        }
+                        <a href="@Url.Action("Create", "Images", new { com_img_fk = item.pro_newsgoods_id, returnurl = Server.UrlEncode(Request.Url.ToString()) })" style="color:green">上传推荐封面</a>
+                        <a href="@Url.Action("GoodsNewsDel", "Goods", new { pro_newsgoods_id = item.pro_sku_id })" style="color:green">删除新品</a>
+                    </td>
+                </tr>
+            }
+            <tr class="txf">
+                <td colspan="15">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="updateor" style="width:200px; height:150px; position:absolute;left:45%; top:35%; text-align:center; border:1px solid gray; background-color:wheat">
+    <div style="margin:30px">
+        <p>修改序号</p>
+        <p>
+            <input type="text" id="txt" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" />
+        </p>
+        <p>
+            <input type="submit" value="修改" id="submit" /><input type="submit" value="关闭" id="close" />
+        </p>
+    </div>
+
+
+</div>
+<script>
+    var updateor = $("#updateor");
+    var txt = $("#txt");
+    var submit = $("#submit");
+    var close = $("#close");
+    var id = "";
+    updateor.hide();
+    function updateorderby(a) {
+        txt.val(a.innerHTML);
+        updateor.show();
+        id = a.name;
+    }
+    submit.click(function () {
+        if (txt.val() == null || txt.val() == "") {
+            alert("请输入序号");
+        } else {
+            window.location.href = "/Admin/Goods/GoodsNewOrd?pro_newsgoods_id=" + id + "&ord=" + txt.val();
+        }
+    });
+    close.click(function () {
+        updateor.hide();
+    });
+</script>

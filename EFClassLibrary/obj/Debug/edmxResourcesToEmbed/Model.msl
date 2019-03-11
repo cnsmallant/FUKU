@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="D8Mall_dbModelStoreContainer" CdmEntityContainer="D8MallEntities">
+    <EntitySetMapping Name="com_area">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.com_area">
+        <MappingFragment StoreEntitySet="com_area">
+          <ScalarProperty Name="com_area_sort" ColumnName="com_area_sort" />
+          <ScalarProperty Name="com_area_position" ColumnName="com_area_position" />
+          <ScalarProperty Name="com_area_lev" ColumnName="com_area_lev" />
+          <ScalarProperty Name="com_area_lat" ColumnName="com_area_lat" />
+          <ScalarProperty Name="com_area_lng" ColumnName="com_area_lng" />
+          <ScalarProperty Name="com_area_shortname" ColumnName="com_area_shortname" />
+          <ScalarProperty Name="com_area_parentid" ColumnName="com_area_parentid" />
+          <ScalarProperty Name="com_area_name" ColumnName="com_area_name" />
+          <ScalarProperty Name="com_area_id" ColumnName="com_area_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="com_article">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.com_article">
+        <MappingFragment StoreEntitySet="com_article">
+          <ScalarProperty Name="com_article_date" ColumnName="com_article_date" />
+          <ScalarProperty Name="com_article_userid" ColumnName="com_article_userid" />
+          <ScalarProperty Name="com_article_class" ColumnName="com_article_class" />
+          <ScalarProperty Name="com_article_content" ColumnName="com_article_content" />
+          <ScalarProperty Name="com_article_title" ColumnName="com_article_title" />
+          <ScalarProperty Name="com_article_id" ColumnName="com_article_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="com_banner">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.com_banner">
+        <MappingFragment StoreEntitySet="com_banner">
+          <ScalarProperty Name="com_banner_editdate" ColumnName="com_banner_editdate" />
+          <ScalarProperty Name="com_banner_edituser" ColumnName="com_banner_edituser" />
+          <ScalarProperty Name="com_banner_adddate" ColumnName="com_banner_adddate" />
+          <ScalarProperty Name="com_banner_adduser" ColumnName="com_banner_adduser" />
+          <ScalarProperty Name="com_banner_url" ColumnName="com_banner_url" />
+          <ScalarProperty Name="com_banner_order" ColumnName="com_banner_order" />
+          <ScalarProperty Name="com_banner_class" ColumnName="com_banner_class" />
+          <ScalarProperty Name="com_banner_id" ColumnName="com_banner_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="com_img">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.com_img">
+        <MappingFragment StoreEntitySet="com_img">
+          <ScalarProperty Name="com_img_editdate" ColumnName="com_img_editdate" />
+          <ScalarProperty Name="com_img_edituser" ColumnName="com_img_edituser" />
+          <ScalarProperty Name="com_img_adddate" ColumnName="com_img_adddate" />
+          <ScalarProperty Name="com_img_adduser" ColumnName="com_img_adduser" />
+          <ScalarProperty Name="com_img_fk" ColumnName="com_img_fk" />
+          <ScalarProperty Name="com_img_src" ColumnName="com_img_src" />
+          <ScalarProperty Name="com_img_alt" ColumnName="com_img_alt" />
+          <ScalarProperty Name="com_img_title" ColumnName="com_img_title" />
+          <ScalarProperty Name="com_img_id" ColumnName="com_img_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_brand">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_brand">
+        <MappingFragment StoreEntitySet="pro_brand">
+          <ScalarProperty Name="pro_brand_order" ColumnName="pro_brand_order" />
+          <ScalarProperty Name="pro_brand_editdate" ColumnName="pro_brand_editdate" />
+          <ScalarProperty Name="pro_brand_edituser" ColumnName="pro_brand_edituser" />
+          <ScalarProperty Name="pro_brand_adddate" ColumnName="pro_brand_adddate" />
+          <ScalarProperty Name="pro_brand_adduser" ColumnName="pro_brand_adduser" />
+          <ScalarProperty Name="pro_brand_status" ColumnName="pro_brand_status" />
+          <ScalarProperty Name="pro_brand_name" ColumnName="pro_brand_name" />
+          <ScalarProperty Name="pro_subclass_id" ColumnName="pro_subclass_id" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_brand_id" ColumnName="pro_brand_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_class">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_class">
+        <MappingFragment StoreEntitySet="pro_class">
+          <ScalarProperty Name="pro_class_editdate" ColumnName="pro_class_editdate" />
+          <ScalarProperty Name="pro_class_edituser" ColumnName="pro_class_edituser" />
+          <ScalarProperty Name="pro_class_adddate" ColumnName="pro_class_adddate" />
+          <ScalarProperty Name="pro_class_adduser" ColumnName="pro_class_adduser" />
+          <ScalarProperty Name="pro_class_status" ColumnName="pro_class_status" />
+          <ScalarProperty Name="pro_class_img" ColumnName="pro_class_img" />
+          <ScalarProperty Name="pro_class_page" ColumnName="pro_class_page" />
+          <ScalarProperty Name="pro_parent" ColumnName="pro_parent" />
+          <ScalarProperty Name="pro_class_name" ColumnName="pro_class_name" />
+          <ScalarProperty Name="pro_class_order" ColumnName="pro_class_order" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_classsub">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_classsub">
+        <MappingFragment StoreEntitySet="pro_classsub">
+          <ScalarProperty Name="pro_classsub_order" ColumnName="pro_classsub_order" />
+          <ScalarProperty Name="pro_classsub_eidtdate" ColumnName="pro_classsub_eidtdate" />
+          <ScalarProperty Name="pro_classsub_edituser" ColumnName="pro_classsub_edituser" />
+          <ScalarProperty Name="pro_classsub_adddate" ColumnName="pro_classsub_adddate" />
+          <ScalarProperty Name="pro_classsub_adduser" ColumnName="pro_classsub_adduser" />
+          <ScalarProperty Name="pro_classsub_status" ColumnName="pro_classsub_status" />
+          <ScalarProperty Name="pro_classsub_name" ColumnName="pro_classsub_name" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_classsub_id" ColumnName="pro_classsub_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_comment">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_comment">
+        <MappingFragment StoreEntitySet="pro_comment">
+          <ScalarProperty Name="pro_comment_date" ColumnName="pro_comment_date" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="pro_sku_code" ColumnName="pro_sku_code" />
+          <ScalarProperty Name="pro_comment_content" ColumnName="pro_comment_content" />
+          <ScalarProperty Name="pro_comment_star" ColumnName="pro_comment_star" />
+          <ScalarProperty Name="pro_comment_id" ColumnName="pro_comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_coupon">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_coupon">
+        <MappingFragment StoreEntitySet="pro_coupon">
+          <ScalarProperty Name="pro_coupon_stadate" ColumnName="pro_coupon_stadate" />
+          <ScalarProperty Name="pro_coupon_code" ColumnName="pro_coupon_code" />
+          <ScalarProperty Name="pro_coupon_date" ColumnName="pro_coupon_date" />
+          <ScalarProperty Name="pro_coupon_num" ColumnName="pro_coupon_num" />
+          <ScalarProperty Name="pro_coupon_credit" ColumnName="pro_coupon_credit" />
+          <ScalarProperty Name="pro_coupon_derating" ColumnName="pro_coupon_derating" />
+          <ScalarProperty Name="pro_coupon_fuliprice" ColumnName="pro_coupon_fuliprice" />
+          <ScalarProperty Name="pro_coupon_discount" ColumnName="pro_coupon_discount" />
+          <ScalarProperty Name="pro_coupon_stastus" ColumnName="pro_coupon_stastus" />
+          <ScalarProperty Name="pro_coupon_class" ColumnName="pro_coupon_class" />
+          <ScalarProperty Name="pro_coupon_enddate" ColumnName="pro_coupon_enddate" />
+          <ScalarProperty Name="pro_coupon_name" ColumnName="pro_coupon_name" />
+          <ScalarProperty Name="pro_coupon_id" ColumnName="pro_coupon_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_express">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_express">
+        <MappingFragment StoreEntitySet="pro_express">
+          <ScalarProperty Name="pro_express_editdate" ColumnName="pro_express_editdate" />
+          <ScalarProperty Name="pro_express_edituser" ColumnName="pro_express_edituser" />
+          <ScalarProperty Name="pro_express_adddate" ColumnName="pro_express_adddate" />
+          <ScalarProperty Name="pro_express_adduser" ColumnName="pro_express_adduser" />
+          <ScalarProperty Name="pro_express_name" ColumnName="pro_express_name" />
+          <ScalarProperty Name="pro_express_id" ColumnName="pro_express_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_item">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_item">
+        <MappingFragment StoreEntitySet="pro_item">
+          <ScalarProperty Name="pro_item_order" ColumnName="pro_item_order" />
+          <ScalarProperty Name="pro_item_status" ColumnName="pro_item_status" />
+          <ScalarProperty Name="pro_item_editdate" ColumnName="pro_item_editdate" />
+          <ScalarProperty Name="pro_item_edituser" ColumnName="pro_item_edituser" />
+          <ScalarProperty Name="pro_item_adddate" ColumnName="pro_item_adddate" />
+          <ScalarProperty Name="pro_item_adduser" ColumnName="pro_item_adduser" />
+          <ScalarProperty Name="pro_item_content" ColumnName="pro_item_content" />
+          <ScalarProperty Name="pro_item_arrimg" ColumnName="pro_item_arrimg" />
+          <ScalarProperty Name="pro_item_covimg" ColumnName="pro_item_covimg" />
+          <ScalarProperty Name="pro_item_subtitle" ColumnName="pro_item_subtitle" />
+          <ScalarProperty Name="pro_item_title" ColumnName="pro_item_title" />
+          <ScalarProperty Name="pro_brand_id" ColumnName="pro_brand_id" />
+          <ScalarProperty Name="pro_subclass_id" ColumnName="pro_subclass_id" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_item_id" ColumnName="pro_item_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_newsgoods">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_newsgoods">
+        <MappingFragment StoreEntitySet="pro_newsgoods">
+          <ScalarProperty Name="pro_newsgoods_status" ColumnName="pro_newsgoods_status" />
+          <ScalarProperty Name="pro_newsgoods_order" ColumnName="pro_newsgoods_order" />
+          <ScalarProperty Name="pro_sku_code" ColumnName="pro_sku_code" />
+          <ScalarProperty Name="pro_newsgoods_id" ColumnName="pro_newsgoods_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_sales">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_sales">
+        <MappingFragment StoreEntitySet="pro_sales">
+          <ScalarProperty Name="pro_sales_price" ColumnName="pro_sales_price" />
+          <ScalarProperty Name="pro_sales_order" ColumnName="pro_sales_order" />
+          <ScalarProperty Name="pro_sales_stastus" ColumnName="pro_sales_stastus" />
+          <ScalarProperty Name="pro_sales_enddate" ColumnName="pro_sales_enddate" />
+          <ScalarProperty Name="pro_sales_stadate" ColumnName="pro_sales_stadate" />
+          <ScalarProperty Name="pro_sku_code" ColumnName="pro_sku_code" />
+          <ScalarProperty Name="pro_sales_id" ColumnName="pro_sales_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_shipment">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_shipment">
+        <MappingFragment StoreEntitySet="pro_shipment">
+          <ScalarProperty Name="pro_shipment_editdate" ColumnName="pro_shipment_editdate" />
+          <ScalarProperty Name="pro_shipment_edituser" ColumnName="pro_shipment_edituser" />
+          <ScalarProperty Name="pro_shipment_adddate" ColumnName="pro_shipment_adddate" />
+          <ScalarProperty Name="pro_shipment_adduser" ColumnName="pro_shipment_adduser" />
+          <ScalarProperty Name="pro_shipment_price" ColumnName="pro_shipment_price" />
+          <ScalarProperty Name="pro_shipment_county" ColumnName="pro_shipment_county" />
+          <ScalarProperty Name="pro_shipment_city" ColumnName="pro_shipment_city" />
+          <ScalarProperty Name="pro_shipment_province" ColumnName="pro_shipment_province" />
+          <ScalarProperty Name="pro_shipment_starcity" ColumnName="pro_shipment_starcity" />
+          <ScalarProperty Name="pro_express_id" ColumnName="pro_express_id" />
+          <ScalarProperty Name="pro_shipment_id" ColumnName="pro_shipment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_sku">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_sku">
+        <MappingFragment StoreEntitySet="pro_sku">
+          <ScalarProperty Name="pro_sku_order" ColumnName="pro_sku_order" />
+          <ScalarProperty Name="pro_sku_editdate" ColumnName="pro_sku_editdate" />
+          <ScalarProperty Name="pro_sku_edituser" ColumnName="pro_sku_edituser" />
+          <ScalarProperty Name="pro_sku_adddate" ColumnName="pro_sku_adddate" />
+          <ScalarProperty Name="pro_sku_adduser" ColumnName="pro_sku_adduser" />
+          <ScalarProperty Name="pro_sku_arrspe" ColumnName="pro_sku_arrspe" />
+          <ScalarProperty Name="pro_sku_status" ColumnName="pro_sku_status" />
+          <ScalarProperty Name="pro_sku_description" ColumnName="pro_sku_description" />
+          <ScalarProperty Name="pro_sku_keywords" ColumnName="pro_sku_keywords" />
+          <ScalarProperty Name="pro_sku_covimg" ColumnName="pro_sku_covimg" />
+          <ScalarProperty Name="pro_sku_title" ColumnName="pro_sku_title" />
+          <ScalarProperty Name="pro_sku_code" ColumnName="pro_sku_code" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_item_id" ColumnName="pro_item_id" />
+          <ScalarProperty Name="pro_sku_id" ColumnName="pro_sku_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_skuitem">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_skuitem">
+        <MappingFragment StoreEntitySet="pro_skuitem">
+          <ScalarProperty Name="pro_skuitem_order" ColumnName="pro_skuitem_order" />
+          <ScalarProperty Name="pro_skuitem_editdate" ColumnName="pro_skuitem_editdate" />
+          <ScalarProperty Name="pro_skuitem_edituser" ColumnName="pro_skuitem_edituser" />
+          <ScalarProperty Name="pro_skuitem_adddate" ColumnName="pro_skuitem_adddate" />
+          <ScalarProperty Name="pro_skuitem_adduser" ColumnName="pro_skuitem_adduser" />
+          <ScalarProperty Name="pro_skuitem_status" ColumnName="pro_skuitem_status" />
+          <ScalarProperty Name="pro_skuitem_img" ColumnName="pro_skuitem_img" />
+          <ScalarProperty Name="pro_skuitem_stock" ColumnName="pro_skuitem_stock" />
+          <ScalarProperty Name="pro_skuitem_pprice" ColumnName="pro_skuitem_pprice" />
+          <ScalarProperty Name="pro_skuitem_mprice" ColumnName="pro_skuitem_mprice" />
+          <ScalarProperty Name="pro_skuitem_price" ColumnName="pro_skuitem_price" />
+          <ScalarProperty Name="pro_skuitem_title" ColumnName="pro_skuitem_title" />
+          <ScalarProperty Name="pro_skuitem_name" ColumnName="pro_skuitem_name" />
+          <ScalarProperty Name="pro_brand_id" ColumnName="pro_brand_id" />
+          <ScalarProperty Name="pro_subclass_id" ColumnName="pro_subclass_id" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_item_id" ColumnName="pro_item_id" />
+          <ScalarProperty Name="pro_skuitem_code" ColumnName="pro_skuitem_code" />
+          <ScalarProperty Name="pro_sku_id" ColumnName="pro_sku_id" />
+          <ScalarProperty Name="pro_skuitem_id" ColumnName="pro_skuitem_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_spe">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_spe">
+        <MappingFragment StoreEntitySet="pro_spe">
+          <ScalarProperty Name="pro_spe_page" ColumnName="pro_spe_page" />
+          <ScalarProperty Name="pro_spe_order" ColumnName="pro_spe_order" />
+          <ScalarProperty Name="pro_spe_editdate" ColumnName="pro_spe_editdate" />
+          <ScalarProperty Name="pro_spe_edituser" ColumnName="pro_spe_edituser" />
+          <ScalarProperty Name="pro_spe_adddate" ColumnName="pro_spe_adddate" />
+          <ScalarProperty Name="pro_spe_adduser" ColumnName="pro_spe_adduser" />
+          <ScalarProperty Name="pro_spe_status" ColumnName="pro_spe_status" />
+          <ScalarProperty Name="pro_spe_name" ColumnName="pro_spe_name" />
+          <ScalarProperty Name="pro_subclass_id" ColumnName="pro_subclass_id" />
+          <ScalarProperty Name="pro_spe_parent" ColumnName="pro_spe_parent" />
+          <ScalarProperty Name="pro_class_id" ColumnName="pro_class_id" />
+          <ScalarProperty Name="pro_spe_id" ColumnName="pro_spe_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pro_spesub">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.pro_spesub">
+        <MappingFragment StoreEntitySet="pro_spesub">
+          <ScalarProperty Name="pro_spesub_order" ColumnName="pro_spesub_order" />
+          <ScalarProperty Name="pro_spesub_editdate" ColumnName="pro_spesub_editdate" />
+          <ScalarProperty Name="pro_spesub_edituser" ColumnName="pro_spesub_edituser" />
+          <ScalarProperty Name="pro_spesub_adddate" ColumnName="pro_spesub_adddate" />
+          <ScalarProperty Name="pro_spesub_adduser" ColumnName="pro_spesub_adduser" />
+          <ScalarProperty Name="pro_spesub_status" ColumnName="pro_spesub_status" />
+          <ScalarProperty Name="pro_spesub_value" ColumnName="pro_spesub_value" />
+          <ScalarProperty Name="pro_spesub_name" ColumnName="pro_spesub_name" />
+          <ScalarProperty Name="pro_spe_id" ColumnName="pro_spe_id" />
+          <ScalarProperty Name="pro_spesub_id" ColumnName="pro_spesub_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_car">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_car">
+        <MappingFragment StoreEntitySet="shop_car">
+          <ScalarProperty Name="shop_car_editdate" ColumnName="shop_car_editdate" />
+          <ScalarProperty Name="shop_car_adddate" ColumnName="shop_car_adddate" />
+          <ScalarProperty Name="shop_car_price" ColumnName="shop_car_price" />
+          <ScalarProperty Name="shop_car_num" ColumnName="shop_car_num" />
+          <ScalarProperty Name="shop_car_spe" ColumnName="shop_car_spe" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="pro_skuitem_id" ColumnName="pro_skuitem_id" />
+          <ScalarProperty Name="shop_car_id" ColumnName="shop_car_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_choose">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_choose">
+        <MappingFragment StoreEntitySet="shop_choose">
+          <ScalarProperty Name="user_bank_address" ColumnName="user_bank_address" />
+          <ScalarProperty Name="user_bank_code" ColumnName="user_bank_code" />
+          <ScalarProperty Name="user_bank_name" ColumnName="user_bank_name" />
+          <ScalarProperty Name="user_bank_username" ColumnName="user_bank_username" />
+          <ScalarProperty Name="shop_express_code" ColumnName="shop_express_code" />
+          <ScalarProperty Name="shop_express_name" ColumnName="shop_express_name" />
+          <ScalarProperty Name="user_address_id" ColumnName="user_address_id" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="shop_choose_isget" ColumnName="shop_choose_isget" />
+          <ScalarProperty Name="shop_choose_service" ColumnName="shop_choose_service" />
+          <ScalarProperty Name="shop_choose_status" ColumnName="shop_choose_status" />
+          <ScalarProperty Name="shop_orderdetail_id" ColumnName="shop_orderdetail_id" />
+          <ScalarProperty Name="shop_choose_des" ColumnName="shop_choose_des" />
+          <ScalarProperty Name="shop_choose_date" ColumnName="shop_choose_date" />
+          <ScalarProperty Name="shop_choose_code" ColumnName="shop_choose_code" />
+          <ScalarProperty Name="shop_order_id" ColumnName="shop_order_id" />
+          <ScalarProperty Name="shop_choose_id" ColumnName="shop_choose_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_invoice">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_invoice">
+        <MappingFragment StoreEntitySet="shop_invoice">
+          <ScalarProperty Name="shop_order_id" ColumnName="shop_order_id" />
+          <ScalarProperty Name="shop_invoice_company" ColumnName="shop_invoice_company" />
+          <ScalarProperty Name="shop_invoice_usercode" ColumnName="shop_invoice_usercode" />
+          <ScalarProperty Name="shop_invoice_username" ColumnName="shop_invoice_username" />
+          <ScalarProperty Name="shop_invoice_class" ColumnName="shop_invoice_class" />
+          <ScalarProperty Name="shop_invoice_id" ColumnName="shop_invoice_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_order">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_order">
+        <MappingFragment StoreEntitySet="shop_order">
+          <ScalarProperty Name="shop_order_shipmentnumber" ColumnName="shop_order_shipmentnumber" />
+          <ScalarProperty Name="shop_order_waynum" ColumnName="shop_order_waynum" />
+          <ScalarProperty Name="shop_order_status" ColumnName="shop_order_status" />
+          <ScalarProperty Name="shop_order_editdate" ColumnName="shop_order_editdate" />
+          <ScalarProperty Name="shop_order_adddate" ColumnName="shop_order_adddate" />
+          <ScalarProperty Name="shop_order_buydate" ColumnName="shop_order_buydate" />
+          <ScalarProperty Name="shop_order_remark" ColumnName="shop_order_remark" />
+          <ScalarProperty Name="shop_shipping_id" ColumnName="shop_shipping_id" />
+          <ScalarProperty Name="shop_order_totalmoeny" ColumnName="shop_order_totalmoeny" />
+          <ScalarProperty Name="shop_pay_id" ColumnName="shop_pay_id" />
+          <ScalarProperty Name="pro_coupon_id" ColumnName="pro_coupon_id" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="user_address_id" ColumnName="user_address_id" />
+          <ScalarProperty Name="shop_order_code" ColumnName="shop_order_code" />
+          <ScalarProperty Name="shop_order_id" ColumnName="shop_order_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_orderdetail">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_orderdetail">
+        <MappingFragment StoreEntitySet="shop_orderdetail">
+          <ScalarProperty Name="shop_orderdetail_total" ColumnName="shop_orderdetail_total" />
+          <ScalarProperty Name="shop_orderdetail_price" ColumnName="shop_orderdetail_price" />
+          <ScalarProperty Name="shop_orderdetail_num" ColumnName="shop_orderdetail_num" />
+          <ScalarProperty Name="pro_skuitem_id" ColumnName="pro_skuitem_id" />
+          <ScalarProperty Name="shop_order_id" ColumnName="shop_order_id" />
+          <ScalarProperty Name="shop_orderdetail_id" ColumnName="shop_orderdetail_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_pay">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_pay">
+        <MappingFragment StoreEntitySet="shop_pay">
+          <ScalarProperty Name="shop_pay_editdate" ColumnName="shop_pay_editdate" />
+          <ScalarProperty Name="shop_pay_edituser" ColumnName="shop_pay_edituser" />
+          <ScalarProperty Name="shop_pay_adddate" ColumnName="shop_pay_adddate" />
+          <ScalarProperty Name="shop_pay_adduser" ColumnName="shop_pay_adduser" />
+          <ScalarProperty Name="shop_pay_name" ColumnName="shop_pay_name" />
+          <ScalarProperty Name="shop_pay_id" ColumnName="shop_pay_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shop_shipping">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.shop_shipping">
+        <MappingFragment StoreEntitySet="shop_shipping">
+          <ScalarProperty Name="shop_shipping_editdate" ColumnName="shop_shipping_editdate" />
+          <ScalarProperty Name="shop_shipping_edituser" ColumnName="shop_shipping_edituser" />
+          <ScalarProperty Name="shop_shipping_adddate" ColumnName="shop_shipping_adddate" />
+          <ScalarProperty Name="shop_shipping_adduser" ColumnName="shop_shipping_adduser" />
+          <ScalarProperty Name="shop_shipping_name" ColumnName="shop_shipping_name" />
+          <ScalarProperty Name="shop_shipping_id" ColumnName="shop_shipping_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sms">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.Sms">
+        <MappingFragment StoreEntitySet="Sms">
+          <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+          <ScalarProperty Name="SendContent" ColumnName="SendContent" />
+          <ScalarProperty Name="SendStatus" ColumnName="SendStatus" />
+          <ScalarProperty Name="SendToPhone" ColumnName="SendToPhone" />
+          <ScalarProperty Name="SendID" ColumnName="SendID" />
+          <ScalarProperty Name="smsid" ColumnName="smsid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sys_admin">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.sys_admin">
+        <MappingFragment StoreEntitySet="sys_admin">
+          <ScalarProperty Name="sys_admin_editdate" ColumnName="sys_admin_editdate" />
+          <ScalarProperty Name="sys_admin_edituser" ColumnName="sys_admin_edituser" />
+          <ScalarProperty Name="sys_admin_adddate" ColumnName="sys_admin_adddate" />
+          <ScalarProperty Name="sys_admin_addadduser" ColumnName="sys_admin_addadduser" />
+          <ScalarProperty Name="sys_admin_satatus" ColumnName="sys_admin_satatus" />
+          <ScalarProperty Name="sys_admin_role" ColumnName="sys_admin_role" />
+          <ScalarProperty Name="sys_admin_pwd" ColumnName="sys_admin_pwd" />
+          <ScalarProperty Name="sys_admin_name" ColumnName="sys_admin_name" />
+          <ScalarProperty Name="sys_admin_id" ColumnName="sys_admin_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sys_log">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.sys_log">
+        <MappingFragment StoreEntitySet="sys_log">
+          <ScalarProperty Name="sys_log_adddate" ColumnName="sys_log_adddate" />
+          <ScalarProperty Name="sys_admin_id" ColumnName="sys_admin_id" />
+          <ScalarProperty Name="sys_log_content" ColumnName="sys_log_content" />
+          <ScalarProperty Name="sys_log_ip" ColumnName="sys_log_ip" />
+          <ScalarProperty Name="sys_log_name" ColumnName="sys_log_name" />
+          <ScalarProperty Name="sys_log_id" ColumnName="sys_log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sys_purview">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.sys_purview">
+        <MappingFragment StoreEntitySet="sys_purview">
+          <ScalarProperty Name="sys_purview_editdate" ColumnName="sys_purview_editdate" />
+          <ScalarProperty Name="sys_purview_edituser" ColumnName="sys_purview_edituser" />
+          <ScalarProperty Name="sys_purview_adddate" ColumnName="sys_purview_adddate" />
+          <ScalarProperty Name="sys_purview_adduser" ColumnName="sys_purview_adduser" />
+          <ScalarProperty Name="sys_purview_page" ColumnName="sys_purview_page" />
+          <ScalarProperty Name="sys_purview_name" ColumnName="sys_purview_name" />
+          <ScalarProperty Name="sys_purview_id" ColumnName="sys_purview_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sys_role">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.sys_role">
+        <MappingFragment StoreEntitySet="sys_role">
+          <ScalarProperty Name="sys_role_editdate" ColumnName="sys_role_editdate" />
+          <ScalarProperty Name="sys_role_edituser" ColumnName="sys_role_edituser" />
+          <ScalarProperty Name="sys_role_addate" ColumnName="sys_role_addate" />
+          <ScalarProperty Name="sys_role_adduser" ColumnName="sys_role_adduser" />
+          <ScalarProperty Name="sys_role_purview" ColumnName="sys_role_purview" />
+          <ScalarProperty Name="sys_role_name" ColumnName="sys_role_name" />
+          <ScalarProperty Name="sys_role_id" ColumnName="sys_role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_address">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_address">
+        <MappingFragment StoreEntitySet="user_address">
+          <ScalarProperty Name="user_address_tags" ColumnName="user_address_tags" />
+          <ScalarProperty Name="user_address_ZipCode" ColumnName="user_address_ZipCode" />
+          <ScalarProperty Name="user_address_editdate" ColumnName="user_address_editdate" />
+          <ScalarProperty Name="user_address_adddate" ColumnName="user_address_adddate" />
+          <ScalarProperty Name="user_address_detail" ColumnName="user_address_detail" />
+          <ScalarProperty Name="user_address_county" ColumnName="user_address_county" />
+          <ScalarProperty Name="user_address_city" ColumnName="user_address_city" />
+          <ScalarProperty Name="user_address_province" ColumnName="user_address_province" />
+          <ScalarProperty Name="user_address_tel" ColumnName="user_address_tel" />
+          <ScalarProperty Name="user_address_name" ColumnName="user_address_name" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="user_address_id" ColumnName="user_address_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_bank">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_bank">
+        <MappingFragment StoreEntitySet="user_bank">
+          <ScalarProperty Name="user_bank_editdate" ColumnName="user_bank_editdate" />
+          <ScalarProperty Name="user_bank_adddate" ColumnName="user_bank_adddate" />
+          <ScalarProperty Name="user_bank_card" ColumnName="user_bank_card" />
+          <ScalarProperty Name="user_bank_name" ColumnName="user_bank_name" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="user_bank_id" ColumnName="user_bank_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_basic">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_basic">
+        <MappingFragment StoreEntitySet="user_basic">
+          <ScalarProperty Name="user_basic_emails" ColumnName="user_basic_emails" />
+          <ScalarProperty Name="user_basic_tels" ColumnName="user_basic_tels" />
+          <ScalarProperty Name="user_basic_editdate" ColumnName="user_basic_editdate" />
+          <ScalarProperty Name="user_basic_adddate" ColumnName="user_basic_adddate" />
+          <ScalarProperty Name="user_basic_status" ColumnName="user_basic_status" />
+          <ScalarProperty Name="user_basic_pwd" ColumnName="user_basic_pwd" />
+          <ScalarProperty Name="user_basic_email" ColumnName="user_basic_email" />
+          <ScalarProperty Name="user_basic_tel" ColumnName="user_basic_tel" />
+          <ScalarProperty Name="user_basic_login" ColumnName="user_basic_login" />
+          <ScalarProperty Name="user_basic_code" ColumnName="user_basic_code" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_collect">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_collect">
+        <MappingFragment StoreEntitySet="user_collect">
+          <ScalarProperty Name="user_collect_editdate" ColumnName="user_collect_editdate" />
+          <ScalarProperty Name="user_collect_adddate" ColumnName="user_collect_adddate" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="pro_skuitem_id" ColumnName="pro_skuitem_id" />
+          <ScalarProperty Name="user_collect_id" ColumnName="user_collect_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_coupon">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_coupon">
+        <MappingFragment StoreEntitySet="user_coupon">
+          <ScalarProperty Name="pro_coupon_class" ColumnName="pro_coupon_class" />
+          <ScalarProperty Name="user_coupon_stastus" ColumnName="user_coupon_stastus" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="pro_coupon_id" ColumnName="pro_coupon_id" />
+          <ScalarProperty Name="user_coupon_id" ColumnName="user_coupon_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_detail">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_detail">
+        <MappingFragment StoreEntitySet="user_detail">
+          <ScalarProperty Name="user_detail_editdate" ColumnName="user_detail_editdate" />
+          <ScalarProperty Name="user_detail_adddate" ColumnName="user_detail_adddate" />
+          <ScalarProperty Name="user_detail_Bcard" ColumnName="user_detail_Bcard" />
+          <ScalarProperty Name="user_detail_Fcard" ColumnName="user_detail_Fcard" />
+          <ScalarProperty Name="user_detail_address" ColumnName="user_detail_address" />
+          <ScalarProperty Name="user_detail_county" ColumnName="user_detail_county" />
+          <ScalarProperty Name="user_detail_city" ColumnName="user_detail_city" />
+          <ScalarProperty Name="user_detail_province" ColumnName="user_detail_province" />
+          <ScalarProperty Name="user_detail_phone" ColumnName="user_detail_phone" />
+          <ScalarProperty Name="user_detail_zipcode" ColumnName="user_detail_zipcode" />
+          <ScalarProperty Name="user_detail_tel" ColumnName="user_detail_tel" />
+          <ScalarProperty Name="user_detail_gender" ColumnName="user_detail_gender" />
+          <ScalarProperty Name="user_detail_photo" ColumnName="user_detail_photo" />
+          <ScalarProperty Name="user_detail_birthday" ColumnName="user_detail_birthday" />
+          <ScalarProperty Name="user_detail_lastname" ColumnName="user_detail_lastname" />
+          <ScalarProperty Name="user_detail_firstname" ColumnName="user_detail_firstname" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="user_detail_id" ColumnName="user_detail_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_info">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.user_info">
+        <MappingFragment StoreEntitySet="user_info">
+          <ScalarProperty Name="user_info_sta" ColumnName="user_info_sta" />
+          <ScalarProperty Name="user_info_date" ColumnName="user_info_date" />
+          <ScalarProperty Name="user_basic_id" ColumnName="user_basic_id" />
+          <ScalarProperty Name="user_info_source" ColumnName="user_info_source" />
+          <ScalarProperty Name="user_info_content" ColumnName="user_info_content" />
+          <ScalarProperty Name="user_info_title" ColumnName="user_info_title" />
+          <ScalarProperty Name="user_info_id" ColumnName="user_info_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ad_info">
+      <EntityTypeMapping TypeName="D8Mall_dbModel.ad_info">
+        <MappingFragment StoreEntitySet="ad_info">
+          <ScalarProperty Name="ad_date" ColumnName="ad_date" />
+          <ScalarProperty Name="ad_edate" ColumnName="ad_edate" />
+          <ScalarProperty Name="ad_sdate" ColumnName="ad_sdate" />
+          <ScalarProperty Name="ad_type" ColumnName="ad_type" />
+          <ScalarProperty Name="ad_img" ColumnName="ad_img" />
+          <ScalarProperty Name="ad_title" ColumnName="ad_title" />
+          <ScalarProperty Name="ad_id" ColumnName="ad_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

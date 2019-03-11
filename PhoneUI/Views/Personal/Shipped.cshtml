@@ -1,0 +1,79 @@
+﻿@using EFClassLibrary
+@model IList<EFClassLibrary.shop_order>
+@{
+    ViewBag.Title = "已发货订单";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px;">
+    <div class="row">
+
+        @{
+            if (Model.Count == 0)
+            {
+                <div class="thumbnail content_thumbnail text-center" style="padding:50px; font-size:18px;">
+                    <span class="text-center">您暂时还没有订单呢<br /><br /><a href="@Url.Action("Index","Goods")" style="color:#e60012">快来逛逛吧</a> </span>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <div class="thumbnail divthumbnail">
+                        <div class="list-group" style="margin-top:0px; margin-bottom:0px;">
+                            <div class="list-group-item">
+                                <p>
+                                    <span class="fa  fa-list-ul" style="color:#bea624"></span>&nbsp;&nbsp;<span>@item.shop_order_code</span>
+
+                                </p>
+                                <p>
+
+                                    @{
+                    D8MallEntities db = new D8MallEntities();
+                    var list = db.shop_orderdetail.Where(so => so.shop_order_id == item.shop_order_id).ToList();
+                    foreach (var items in list)
+                    {
+                        pro_sku sku = db.pro_sku.Where(p => p.pro_sku_code == items.pro_skuitem_id).SingleOrDefault();
+                        <a href="@Url.Action("GoodsDetails", "Goods", new { id =sku.pro_sku_code  })">
+                            <span>@sku.pro_sku_title</span>
+                        </a><br />
+                    }
+                                    }
+
+
+                                </p>
+                                <p>
+                                    <span class="fa  fa-truck" style="color:#bea624"></span>&nbsp;&nbsp;<span>
+                                        @item.user_address_id
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="fa  fa-clock-o" style="color:#bea624"></span>&nbsp;&nbsp;<span>
+                                        @item.shop_order_buydate
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="fa  fa-hourglass-o" style="color:#bea624"></span>&nbsp;&nbsp;<span>
+                                        @item.shop_order_waynum （件）&yen;@item.shop_order_totalmoeny（含运费：&yen;@item.shop_order_remark）
+                                    </span>
+                                </p>
+                                <p class="text-right" style="color:#db0c0c">
+                                    <a href="@Url.Action("ConfirmationReceipt", "Personal", new { shop_order_id = @item.shop_order_id })">
+                                        <span class="fa  fa-edit"></span>&nbsp;&nbsp;<span>
+                                            去签收
+                                        </span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }}
+
+
+
+    </div>
+
+</div>

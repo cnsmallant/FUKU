@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "购物车";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<link href="~/css/style_shopcart.css" rel="stylesheet" />
+<div class="lay2">
+    <div class="container">
+        @*<img src="/img/logo.png" />*@
+        <div id="shop_steps">
+            <a href="" id="step01" class="stp_cur01"><span>&nbsp;</span>我的购物车</a>
+            <a href="" id="step02" class="stp_cur02"><span>&nbsp;</span>填写核对订单信息</a>
+            <a href="" id="step03"><span>&nbsp;</span>成功提交订单</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="cart">
+        <img src="/img/cart.png" style="display: block;float: left;margin-top:16px;margin-right:5px;"><p class="title03" style="font-weight: bold; color: #e60012; display: block; float: left; line-height:55px !important; margin-bottom: 15px;font-size:18px;">我的购物车</p>
+    </div>
+    <div class="catbox">
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>
+                        <label>
+                            <input class="check-all check" type="checkbox" />&nbsp;&nbsp;全选
+                        </label>
+                    </th>
+                    <th>商品名称</th>
+                    <th>原价格</th>
+                    <th>优惠价格</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in ViewBag.list)
+                {
+                    <tr>
+                        <td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+                        <td class="goods">
+                            <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                                <img src="@item.pro_sku_covimg" />
+                                <span>@item.pro_sku_title</span>
+                            </a>
+                        </td>
+                        <td>@item.pro_skuitem_mprice</td>
+                        <td class="price">@item.pro_skuitem_price</td>
+                        <td class="count">
+                            <span class="reduce"></span>
+                            <input class="count-input" type="text" value="@item.shop_car_num" />
+                            <span class="shopadds">+</span>
+                            <input type="hidden" value="@item.pro_skuitem_tmprice" />
+                            <input type="hidden" value="@item.pro_sku_code" />
+                        </td>
+                        <td class="subtotal">@item.pro_skuitem_tprice</td>
+                        <td class="operation">
+                            <p>
+                                <span class="delete">
+                                    <a href="@Url.Action("GoodsCartDel", "Goods", new { item = item.item })" style="color:blue;font-size:14px">删除</a>
+                                </span>
+                            </p>
+                            <p><a href="@Url.Action("PersonalCollectCreate", "Personal", new { item = item.item })" style="color:blue;font-size:14px">移入收藏夹</a></p>
+
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+
+        <div style="text-indent: 20px;font-size: 14px;color: #DC1E52;">
+            <input type="checkbox" name="" id="" value="" style="margin:5px 0 0 15px;" class="check-all check" />全选
+            <a href="javascript:;" class="delete" style="color: #31a5ea;font-size: 14px;" id="deleteAll"><span>&nbsp;</span>删除选择商品</a>
+        </div>
+        <div id="count">
+            <p class="cont04" id="selected">商品数量：<span id="selectedTotal">0</span></p>
+            <p class="cont04">商品总价：<span id="proTotal">0.00</span></p>
+            <p class="cont04">为您节省：<span id="saveTotal">0.00</span></p>
+            <p class="cont04">商品金额：<span class="title01" id="priceTotal">0.00</span></p>
+
+            <p>
+                <a href="javascript:;" id="accounts" >立即结算</a><a href="@ViewBag.UrlReferrer" id="buy">继续购物</a>
+            </p>
+            @Html.Hidden("datastr")
+        </div>
+        <input type="hidden" id="cartTotalPrice" />
+        <div style="clear: both;"></div>
+    </div>
+</div>
+<script src="~/js/JavaScript_ShopCart.js"></script>
+

@@ -1,0 +1,221 @@
+﻿html {
+    background-color: #f1f0f0;
+    font-family: 'Microsoft YaHei';
+}
+
+body {
+    background-color: #f1f0f0;
+    font-size: 8px;
+    font-family: 'Microsoft YaHei';
+}
+
+a {
+    color: #717171;
+    text-decoration: none;
+}
+
+p {
+    color: #717171;
+    font-size: 8px;
+}
+
+.bg {
+    background-color: #ffffff;
+}
+
+.bar {
+    border: 0px;
+    background-color: #ffffff;
+    color: #e60012;
+}
+
+.listui {
+    margin-top: 10px;
+    font-size: 25px;
+    color: #e60012;
+}
+
+.list-text {
+    margin-top: -10px;
+    font-size: 8px;
+    color: #e60012;
+}
+
+.divthumbnail {
+    margin-top: -5px;
+    border: 0px;
+    background-color: transparent;
+}
+
+.list-text a {
+    text-decoration: none;
+}
+
+.content_thumbnail {
+    border: 0px;
+    background-color: #ffffff;
+    font-size: 8px;
+    padding-bottom: 0px;
+    overflow: hidden;
+}
+
+.span_tags {
+    font-size: 16px;
+    color: #e60012;
+    font-weight: bold;
+}
+
+.title_text {
+    font-size: 16px;
+}
+
+.content_div {
+    padding-left: 1px;
+    padding-right: 1px;
+    border: 1px solid #f1f0f0;
+    background-color: #ffffff;
+    line-height: 5px;
+}
+
+.span_plus {
+    font-size: 20px;
+    color: #c5c5c5;
+}
+
+.div_pager {
+    background-color: transparent;
+    margin-top: -20px;
+    margin-bottom: -25px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.content_thumbnail_footer {
+    border: 0px;
+    background-color: #313131;
+    font-size: 8px;
+    color: #ffffff;
+    padding-bottom: 0px;
+    margin-top: 20px;
+    padding: 5px;
+    overflow: hidden;
+}
+
+    .content_thumbnail_footer a {
+        color: #ffffff;
+    }
+
+/*#region 商品列表 */
+
+.Building_content {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f0f0;
+}
+
+.clear_floart {
+    clear: both;
+    height: 0;
+}
+
+.Building_leftmenu {
+    width: 15%;
+    height: 100%;
+    background-color: #ffffff;
+    float: left;
+    position: fixed;
+    overflow-y: scroll;
+    scrollbar-highlight-color: red;
+}
+
+.Building_rightmenu {
+    width: 85%;
+    height: 100%;
+    background-color: #f1f0f0;
+    float: right;
+}
+
+.Building_leftmenu_class {
+    text-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #f1f0f0;
+}
+
+    .Building_leftmenu_class p {
+        color: #9f9d9d;
+        font-family: 'Microsoft YaHei';
+    }
+
+.cur {
+    background-color: #e60012;
+    color: #ffffff !important;
+}
+
+    .cur .Building_leftmenu_class p {
+        color: #ffffff !important;
+    }
+
+
+
+.Building_search {
+    width: 100%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_btn {
+    width: 15%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_input {
+    width: 75%;
+    background-color: #fff;
+    float: left;
+}
+
+.Building_search_btn a {
+    display: block;
+    color: #503729;
+    padding: 5px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.Building_search_input input {
+    padding: 5px;
+    width: 110%;
+    border: 0;
+}
+
+.Building_rightmenu_list {
+    padding: 5px;
+}
+
+.div_bar_title {
+    margin-top: 10px;
+    background-color: #e60012;
+    color: #ffffff;
+    text-align: center;
+}
+
+    .div_bar_title > a > p {
+        margin-top: 10px;
+        color: #ffffff;
+    }
+
+.list_group {
+
+    border-radius: 0px;
+}
+
+.login_title {
+    background-color: #e60012;
+    color:#ffffff;
+}
+.btn_bg{
+     background-color: #e60012;
+     border-color:#e60012;
+}
+/*#endregion */

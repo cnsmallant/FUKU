@@ -1,0 +1,112 @@
+﻿@using EFClassLibrary
+@model PagedList<WebUI.Areas.Admin.Controllers.SysController.com_banners>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "广告图片";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    <div class="left">
+        @Html.Partial("LfetPartial")
+
+    </div>
+
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">广告图片</div>
+        <div class="lsec">
+            <select id="com_banner_classes">
+                <option value="请选择">请选择</option>
+                <option value="首页">首页</option>
+                <option value="手机首页">手机首页</option>
+                <option value="首页超高压2.0电饭煲系列">首页超高压2.0电饭煲系列</option>
+                <option value="首页原装进口IH高压电饭煲系列">首页原装进口IH高压电饭煲系列</option>
+                <option value="首页安心空气净化器系列">首页安心空气净化器系列</option>
+                <option value="首页净化器广告">首页净化器广告</option>
+                <option value="首页原汁机广告">首页原汁机广告</option>
+                <option value="首页原汁机1">首页原汁机1</option>
+                <option value="首页原汁机">首页原汁机</option>
+                <option value="首页重汤机广告">首页重汤机广告</option>
+                <option value="首页重汤机1">首页重汤机1</option>
+                <option value="首页重汤机">首页重汤机</option>
+                <option value="首页电烤盘广告">首页电烤盘广告</option>
+                <option value="首页电烤盘1">首页电烤盘1</option>
+                <option value="首页电烤盘">首页电烤盘</option>
+                <option value="首页电水壶广告">首页电水壶广告</option>
+                <option value="首页电水壶1">首页电水壶1</option>
+                <option value="首页电水壶">首页电水壶</option>
+                <option value="登录Banner">登录Banner</option>
+                <option value="注册Banner">注册Banner</option>
+                <option value="新品">新品</option>
+                <option value="新品广告">新品广告</option>
+                <option value="促销">促销</option>
+                <option value="促销广告">促销广告</option>
+            </select>
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li style="width:auto">
+                    <a href="@Url.Action("BannerCreate","Sys")">新建</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>缩略图</td>
+                <td>所属类别</td>
+                <td>序号</td>
+                <td>链接</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> <a href="@Url.Action("Edit", "Images", new { com_img_fk = @item.com_banner_id, returnurl = Server.UrlEncode(Request.Url.ToString()) })" title="点击修改图片"><img src="@item.com_img_src" width="150" /></a> </td>
+                    <td>@item.com_banner_class</td>
+                    <td>@item.com_banner_order</td>
+                    <td>@item.com_banner_url</td>
+                    <td>@item.com_banner_adduser</td>
+                    <td>@item.com_banner_adddate</td>
+                    <td>@item.com_banner_edituser</td>
+                    <td>@item.com_banner_editdate</td>
+                    <td>
+                        <a href="@Url.Action("BannerEdit", "Sys", new { com_banner_id = @item.com_banner_id })" s style="color:green">编辑</a>&nbsp;&nbsp;
+                        <a href="@Url.Action("BannerDel", "Sys", new { com_banner_id = @item.com_banner_id })" st style="color:red" onclick="return window.confirm('确认删除?')">删除</a>
+                    </td>
+                </tr>
+
+            }
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $("#com_banner_classes").change(function () {
+
+        var com_banner_classes = $("#com_banner_classes").find("option:selected").val();
+        window.location.href = "/Admin/Sys/BannerClass?com_banner_class=" + encodeURIComponent(com_banner_classes);
+    });
+
+</script>

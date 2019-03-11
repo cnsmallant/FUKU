@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "登录";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <ul class="list-group list_group">
+            <li class="list-group-item login_title text-center" style="font-size:16px;"><strong>欢迎登录cuckoo福库商城</strong> </li>
+            <li class="list-group-item">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            for (int i = 0; i < ViewBag.bannerlist.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="item active">
+                                        <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                            <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                            <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon fa fa-user"></span>
+                    <input id="user_basic_login" type="text" class="form-control" placeholder="请输入登录名称">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon fa fa-lock"></span>
+                    <input id="user_basic_pwd" type="password" class="form-control" placeholder="请输入登录密码">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <button id="submit" type="button" class="btn  btn-block btn-default btn-success">立即登录</button>
+            </li>
+            <li class="list-group-item" style="overflow:hidden">
+                <span class="pull-left">忘记密码了？来这里<a href="javascript:;" style="color:#ff0000" data-toggle="modal" data-target="#RetrievePassword">找回</a> </span>
+                <span class="pull-right">还没有账号，来这里<a href="@Url.Action("Index", "Register")" style="color:#ff0000">注册</a> </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="modal fade" id="RetrievePassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">系统提示</h4>
+            </div>
+            <div class="modal-body">
+              <p style="word-break:break-all;">尊敬的用户，密码找回请用电脑打开
+                <code>  http//www.cuckooshop.cn/Login/RetrievePassword</code>
+                进行密码找回操作！</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var user_basic_login = $("#user_basic_login");
+    var user_basic_pwd = $("#user_basic_pwd");
+    var submit = $("#submit");
+    submit.click(function () {
+        if (user_basic_login.val() == null || user_basic_login.val() == "") {
+            alert("请输入登录名称");
+        }
+        else if (user_basic_pwd.val() == null || user_basic_pwd.val() == "") {
+            alert("请输入登录密码");
+        } else {
+            $("#submit").attr("disabled", "disabled");
+            $("#submit").text("正在登录");
+            $.ajax({
+                url: "/Login/UserLogin",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        user_basic_login: user_basic_login.val(),
+                        user_basic_pwd: user_basic_pwd.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("登录失败");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("立即登录");
+                    } else {
+                        window.location.href = "/Personal/Index";
+                    }
+                }
+            });
+        }
+    });
+
+    $('#RetrievePassword').modal(options);
+</script>

@@ -1,0 +1,149 @@
+﻿@using EFClassLibrary
+@model PagedList<pro_spe>
+@using Webdiyer.WebControls.Mvc;
+
+
+@{
+    ViewBag.Title = "规格管理";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">商品规格列表</div>
+        <div class="lsec">
+            <div class="lsec1">
+                <input type="text" placeholder="请输入规则名称" id="keys" />
+                <input type="button" class="btnsk" id="btnsk" />
+            </div>
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li style="width:200px;">
+                    商品类别查询
+                    <select id="GoodsClass">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li style="width:200px;">
+                    规格父类查询
+                    <select id="speClass">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li><a href="@Url.Action("SpeCreate", "Goods")">新建父级规格</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>规格名称</td>
+                <td>所属父级</td>
+                <td>规格页面</td>
+                <td>规格状态</td>
+                <td>排序号码</td>
+                <td>所属商品类别</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.pro_spe_name</td>
+                    <td>@item.pro_spe_parent</td>
+                    <td>@item.pro_spe_page</td>
+                    <td>@item.pro_spe_status</td>
+                    <td>@item.pro_spe_order</td>
+                    <td>@item.pro_class_id</td>
+                    <td>@item.pro_spe_adduser</td>
+                    <td>@item.pro_spe_adddate</td>
+                    <td>@item.pro_spe_edituser</td>
+                    <td>@item.pro_spe_editdate</td>
+                    <td>
+                        <a href="@Url.Action("SubSpeCreate", "Goods", new { pro_spe_id = item.pro_spe_id })" style="color:green">子类</a>
+                        <a href="@Url.Action("SpeEdit", "Goods", new { pro_spe_id = item.pro_spe_id })" style="color:green">修改</a>
+                        <a href="@Url.Action("SpeStatus", "Goods", new { pro_spe_id = item.pro_spe_id, pro_spe_status = 1 })" style="color:green">禁用</a>
+                        <a href="@Url.Action("SpeStatus", "Goods", new { pro_spe_id = item.pro_spe_id, pro_spe_status = 0 })" style="color:green">恢复</a>
+                    </td>
+                </tr>
+
+            }
+
+
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Admin/Goods/GetGoodsClass",
+            success: function (data) {
+                var GoodsClass = " <option value='value'>请选择</option>";
+                $.each(data, function (k, v) {
+                    GoodsClass += "<option value='" + v.pro_class_id + "'>" + v.pro_class_name + "</option>";
+                });
+                $("#GoodsClass").html(GoodsClass);
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Admin/Goods/GetSpeClass",
+            success: function (data) {
+                var speClass = " <option value='value'>请选择</option>";
+                $.each(data, function (k, v) {
+                    speClass += "<option value='" + v.pro_spe_id + "'>" + v.pro_spe_name + "</option>";
+                });
+                $("#speClass").html(speClass);
+            }
+        });
+    });
+    $("#GoodsClass").change(function () {
+
+        var pro_parent = $("#GoodsClass").val();
+        if (pro_parent != "请选择") {
+            window.location.href = "/Admin/Goods/GetSpe?pro_class_id=" + pro_parent;
+        }
+    });
+
+    $("#speClass").change(function () {
+
+        var pro_parent = $("#speClass").val();
+        if (pro_parent != "请选择") {
+            window.location.href = "/Admin/Goods/GetSpes?pro_spe_id=" + pro_parent;
+        }
+    });
+
+    var keys = $("#keys");
+    var btnsk = $("#btnsk");
+    btnsk.click(function () {
+        if (keys.val() == "" || keys.val() == null) {
+            alert("请输入类别名称");
+        } else {
+            window.location.href = "/Admin/Goods/SpeKeyword?keywords=" + keys.val();
+        }
+    });
+</script>

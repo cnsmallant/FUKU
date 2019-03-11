@@ -1,0 +1,23 @@
+﻿@using EFClassLibrary;
+@model IList<PhoneUI.Controllers.PersonalController.user_collects>
+@{
+    ViewBag.Title = "我的收藏";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="thumbnail divthumbnail" style="margin-top:60px;margin-bottom:60px; background-color:#ffffff; overflow:hidden">
+    @{
+        foreach (var item in Model)
+        {
+            <a href="@Url.Action("GoodsDetails", "Goods", new { id = item.pro_sku_code })">
+                <div class='col-xs-4 text-left content_div'>
+                    <p><img src='http://www.cuckooshop.cn/@item.pro_sku_covimg' class='img-responsive' /></p>
+                    <p style="font-size:12px;"> @item.pro_skuitem_id  </p>
+                    <p><span style=' font-size:12px;'>&yen; @item.pro_skuitem_price</span></p>
+                </div>
+            </a>
+        }
+    }
+</div>
+
+

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "新建权限";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">新建权限</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("AddPurview", "Sys", FormMethod.Post))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">权限名称：</td>
+                        <td width="270">
+                            @Html.TextBox("purviewname")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">页面名称：</td>
+                        <td width="270">
+                            @Html.TextBox("purviewpage")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保　存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+
+            </div>}
+    </div>
+</div>
+<script src="~/Areas/Admin/js/JavaScript_Purview.js"></script>

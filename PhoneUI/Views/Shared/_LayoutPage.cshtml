@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- 适应移动端end -->
+    <title>
+
+        @{
+
+            if (string.IsNullOrEmpty(ViewBag.Title))
+            {
+                ViewBag.Title = "CUCKOO福库官方商城-来自韩国的乐趣！";
+            }
+            else
+            {
+                ViewBag.Title = ViewBag.Title + "-CUCKOO福库官方商城-来自韩国的乐趣！";
+            }
+            @ViewBag.Title
+
+        }
+    </title>
+
+    <meta name="Author" content="dongbaqu.com" />
+    <meta name="Keywords" content="CUCKOO福库官方商城,CUCKOO福库,福库中国,福库中国官网,福库,CUCKOO,福库电饭煲,电饭煲,韩国福库,韩国,贵族家电,小家电,高压力电饭煲,高压力,高品质,家电,CPR,CCK,CG,CCPR,青岛福库电子有限公司" />
+    <meta name="Description" content="CUCKOO福库始终致力于高压力电饭煲的研究与创新，被誉为韩国的贵族家电品牌，小家电领域的杰出者！高压力高品质，米饭当然好味道。来自韩国的乐趣！" />
+    <link href="/img/favicon.ico" rel="icon" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="/css/css.css" rel="stylesheet" />
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/npm.js"></script>
+</head>
+<body>
+    <div>
+        <div class="container-fluid">
+            <div class="row text-center">
+                <nav class="navbar navbar-default navbar-fixed-top bg" role="navigation">
+                    <div class="col-xs-2">
+                        <a href="@Url.Action("Index", "Goods")"><span class="fa fa-navicon listui"></span></a>
+                    </div>
+                    <div class="col-xs-8">
+                        <a class="navbar-brand" href="/">
+                            <div class="thumbnail divthumbnail"><img src="/img/logo.png" class="img-responsive" /></div>
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <span class="fa fa-search listui" id="goodss"></span>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+
+        @RenderBody()
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-bottom bg text-center" role="navigation">
+                    <div class="col-xs-3 text-center">
+                        <a href="/">
+                            <p class="fa fa-home listui"></p>
+                            <p class="list-text">首页</p>
+                        </a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <a href="@Url.Action("Index", "Goods")">
+                            <p class="fa fa-th-large listui"></p>
+                            <p class="list-text">所有</p>
+                        </a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <a href="@Url.Action("Index", "Personal")">
+                            <p class="fa fa-user listui"></p>
+                            <p class="list-text">我的</p>
+                        </a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <a href="javascript:history.go(-1)">
+                            <p class="fa fa-mail-reply listui"></p>
+                            <p class="list-text">返回</p>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div style="display:none">
+                <script src="https://s11.cnzz.com/z_stat.php?id=1260348956&web_id=1260348956" language="JavaScript"></script>
+            </div>
+        </div>
+
+    </div>
+    <div id="topdiv" style="position:fixed; right:1px; bottom:60px; text-align:center; background-color:#e60012; line-height:5px; color:#ffffff; padding:1px; border-top-left-radius:20px; border-top-right-radius:20px;">
+        <p style="color:#ffffff; font-size:12px;"><span class="glyphicon glyphicon-chevron-up"></span></p>
+        <p style="color:#ffffff; font-size:12px; "><span style="border-top:1px solid #ffffff">TOP</span></p>
+    </div>
+    <div id="GoodsSearch" style="position:fixed; top:50px;z-index:9;">
+        <div class="well well-sm" style="border-radius:0px;">
+            <div class="input-group">
+                <input id="searchval" type="text" class="form-control">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search" id="searchbtn"></span></span>
+            </div>
+        </div>
+    </div>
+    @{
+        var url = Request.CurrentExecutionFilePath;
+        ViewBag.url = url;
+    }
+    @Html.Hidden("url")
+</body>
+</html>
+<script>
+    var url = $("#url");
+    function browserRedirect() {
+
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+           
+        } else {
+            window.location.href = "http://www.cuckooshop.cn" + url.val();
+        }
+    }
+
+    browserRedirect();
+
+
+    var goodss = $("#goodss");//搜索按钮
+    var GoodsSearch = $("#GoodsSearch");//悬浮搜索框
+    var searchval = $("#searchval");//搜索文本框
+    var searchbtn = $("#searchbtn");//搜索按钮
+    GoodsSearch.hide();
+    goodss.click(function () {
+        GoodsSearch.fadeIn(1000);
+        searchbtn.click(function () {
+            window.location.href = "/Goods/GoodsSearch?words=" + encodeURIComponent(searchval.val());
+        });
+    });
+
+    var topdiv = $("#topdiv");
+    topdiv.hide();
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 0) {
+                topdiv.fadeIn(3000);
+
+            } else {
+                topdiv.fadeOut(3000);
+            }
+        });
+    }
+);
+    $("#topdiv").click(function (e) {
+        e.preventDefault();
+        $(document.documentElement).animate({
+            scrollTop: 0
+        }, 3000);
+        //支持chrome
+        $(document.body).animate({
+            scrollTop: 0
+        }, 3000);
+    });
+
+
+</script>

@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<style>
+    #left_nav > ul > li > a > span {
+        background: url(/img/zhinan_dd.jpg) no-repeat left;
+        height: 8px;
+        width: 8px;
+        display: block;
+        float: left;
+        margin-top: 16px;
+        margin-left: 34px;
+    }
+
+    #left_nav > ul > .span1 {
+        background: url(/img/zhinan_19.jpg) no-repeat left;
+        height: 32px;
+        width: 100%;
+        display: block;
+        float: left;
+    }
+
+    #left_nav > ul > li > a {
+        color: #000;
+        font-size: 15px;
+        line-height: 32px;
+    }
+
+    #left_nav > ul > .span1 span {
+        background: none;
+    }
+
+    #left_nav > ul > .span1 a {
+        color: #fff;
+    }
+
+    #left_nav > ul {
+        margin-top: 16px;
+    }
+</style>
+<div class="container">
+    <div class="pro_bq" style="height:25px;"></div>
+    <div id="left_nav">
+        <div class="head">
+            <span class="gwzn">&nbsp;</span><span>购物指南</span>
+        </div>
+        <ul>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid="about" })"><span></span> 关于我们</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid ="member" })"><span></span>会员介绍</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "process" })"><span></span>购物流程</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "Coupon" })"><span></span>优惠券&优惠码</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "returns" })"><span></span>关于退换货</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "maintain" })"><span></span>关于维修</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "invoice" })"><span></span>关于发票</a></li>
+            <li><a href="@Url.Action("Index", "ShoppingGuide", new { classid = "express" })"><span></span>关于快递</a></li>
+        </ul>
+    </div>
+    <div id="shop01" style="overflow:hidden">
+        <div id="main-con" style="height:auto">
+            <div class="zhinan_tit">
+                <span></span>@ViewBag.title
+            </div>
+            <div class="zhinan_con" style="height:auto">
+                @Html.Raw(ViewBag.com_article_content)
+            </div>
+            <div class="clear_float"></div>
+        </div>
+    </div>
+    <div id="shop02" style="overflow:hidden">
+        <div id="main-con">
+            <div class="zhinan_tit">
+                <span></span>优惠券
+            </div>
+            <div class="zhinan_con">
+                <p>
+                    福库优惠券是福库商城发放给福库会员的福利礼遇。在新会员注册、会员生日、会员首次购买、各大节日、店庆日等福库商城都会提
+                    前会自动给福库会员发放优惠券福利。
+                </p>
+                <div class="shili">优惠券示例：</div>
+                <img src="img/zhinan_10.jpg" />
+                <img src="img/zhinan_12.jpg" />
+                <img src="img/zhinan_14.jpg" />
+                <img src="img/zhinan_16.jpg" />
+                <div class="clear_float"></div>
+            </div>
+            <div class="zhinan_xx"></div>
+            <div class="zhinan_tit">
+                <span></span>优惠码
+            </div>
+            <div class="zhinan_con">
+                <p style="margin-bottom:50px;">福库优惠码是福库商城发放给福库会员的另一种福利礼遇。在特定时间段内咨询客服就有机会可获得优惠码。</p>
+            </div>
+            <div class="zhinan_xx"></div>
+            <div class="zhinan_gz">优惠券/优惠码使用规则：</div>
+            <div class="zhinan_gzbb">
+                <p style="width: 110px; line-height: 56px; "><strong>区分</strong> </p><p style="width: 285px; line-height: 56px; "><strong>发放条件</strong></p><p style="width: 228px; line-height: 56px; "><strong>有效期</strong></p><p style="width: 108px; line-height: 56px; "><strong>使用期限</strong></p><p style="width: 122px; line-height: 56px; "><strong>使用规则</strong></p><p style="width:111px; line-height: 56px;"><strong>备注</strong></p>
+                <p style="width: 110px;height:168px;padding-top:10px;">优惠券</p><p style="width: 270px; height: 168px;padding-left:15px;text-indent:0;padding-top:10px; ">
+                    1、注册会员 —— 新用户发放9.0折券<br />
+                    2、会员生日前三天 —— 发放8.8折券<br />
+                    3、首次购买 —— 发放感谢购买9.0折券<br />
+                    4、新产品上市 —— 会员发放9.0折券<br />
+                    5、各大节日，店庆等 —— 提前n天发放<br />
+                    优惠券（额度随机）
+                </p><p style="width: 213px;height:168px;padding-top:10px;padding-left:15px;text-indent:0; ">
+                    一般优惠券有效期为7天<br />
+                    （各大节日优惠券仅限当天）
+                </p><p style="width: 108px;  height: 178px;"></p><p style="width: 122px; height: 178px; "></p><p style="width:111px;height:178px;"></p>
+
+                <p style="width: 110px; line-height: 56px; ">优惠码</p><p style="width: 285px; line-height: 56px; ">1、特定时间段内咨询客服可获得优惠码</p><p style="width: 228px; line-height: 56px; ">待定</p><p style="width: 108px; line-height: 56px; "></p><p style="width: 122px; line-height: 56px; "></p><p style="width:111px; line-height: 56px;"></p>
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+        <div class="clear_float"></div>
+    </div>
+    @Html.Hidden("classid")
+</div>
+
+<script>
+    var shop01 = $("#shop01");
+    var shop02 = $("#shop02");
+    shop01.hide();
+    shop02.hide();
+    var classid = $("#classid");
+    if (classid.val() == "Coupon") {
+        shop02.show();
+        shop01.hide();
+    } else {
+        shop02.hide();
+        shop01.show();
+    }
+
+</script>

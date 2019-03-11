@@ -1,0 +1,64 @@
+﻿
+
+@{
+    ViewBag.Title = "快递公司";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list" style="width:100%">
+        <div class="ltitle">快递公司</div>
+
+        <div class="lpaixu">
+            <ul>
+
+                <li><a href="@Url.Action("ExpressCreate", "Goods")">新建快递公司</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab" style="width:100%">
+            <tr class="thead">
+                <td>公司名称</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="6"></td>
+            </tr>
+
+            @foreach (var item in ViewBag.list)
+            {
+                <tr>
+                    <td>@item.pro_express_name</td>
+                    <td>@item.pro_express_adduser</td>
+                    <td>@item.pro_express_adddate</td>
+                    <td>@item.pro_express_edituser</td>
+                    <td>@item.pro_express_editdate</td>
+                    <td>
+                        <a href="@Url.Action("ExpressEdit", "Goods", new { pro_express_id = item.pro_express_id })" style="color:green">修改</a>
+                        <a href="@Url.Action("ExpressDel", "Goods", new { pro_express_id = item.pro_express_id })" style="color:red" onclick="return confirm('确定要删除此信息吗？')">删除</a>
+                    </td>
+                </tr>
+
+            }
+
+
+            <tr class="txf">
+                <td colspan="6">
+                    <div class="fenye">
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

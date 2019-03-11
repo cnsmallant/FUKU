@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "上传图标";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">上传图标</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("UploadGoods", "Goods", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">图片title：</td>
+                        <td width="270">
+                            @Html.TextBox("com_img_title")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">图片alt：</td>
+                        <td width="270">
+                            @Html.TextBox("com_img_alt")
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">选择图片：</td>
+                        <td width="270">
+                            @Html.TextBox("com_img_src", "", new { type = "file" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保　存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                @Html.Hidden("pro_class_id")
+            </div>}
+    </div>
+</div>
+<script src="~/Areas/Admin/js/JavaScript_GoodsImg.js"></script>

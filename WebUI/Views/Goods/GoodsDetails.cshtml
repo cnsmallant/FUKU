@@ -1,0 +1,420 @@
+﻿@{
+    ViewBag.Title = ViewBag.pro_sku_title;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    #tab01 .tdHead {
+        border-top: 1px solid #d7d7d7;
+        border-left: 1px solid #d7d7d7;
+        border-right: 1px solid #d7d7d7;
+    }
+
+    #tab01 tr td {
+        border: none;
+        border-bottom: 1px solid #e0e0e0;
+        height: 78px;
+        text-indent: 0;
+    }
+
+    #tab01 .tdHead td {
+        border-bottom: 1px solid #d7d7d7;
+        color: #e70012;
+        font-size: 14px;
+    }
+
+        #tab01 .tdHead td span {
+            color: #5a5a5a;
+            font-size: 12px;
+        }
+
+    #tab01 tr .maijia {
+        color: #e70012;
+        width: 310px;
+        line-height: 78px;
+    }
+
+        #tab01 tr .maijia img {
+            height: 55px;
+            width: 55px;
+            border-radius: 27px;
+            margin-right: 10px;
+            margin-top: 13px;
+            float: left;
+            margin-left: 13px;
+        }
+
+    .col03 {
+        width: 280px;
+    }
+
+    #tab01 tr .color {
+        text-align: left;
+        text-indent: 0;
+    }
+
+    .order {
+        table-layout: auto;
+    }
+
+    .orderState a {
+        color: #515151;
+        display: block;
+    }
+
+    .buyPro img {
+        height: 80px;
+    }
+
+    .buyPro a {
+        color: #696969;
+        display: block;
+        text-indent: 0;
+        line-height: 80px;
+        float: left;
+    }
+
+    .order tr td {
+        border: 1px solid #dbdee9;
+        border-collapse: collapse;
+        font-size: 14px;
+        color: #696969;
+        text-indent: 25px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .orderDetail {
+        height: 34px !important;
+        color: #696969 !important;
+        padding: 0 !important;
+    }
+
+        .orderDetail span {
+            margin-right: 20px;
+        }
+
+    .order #tab_head td {
+        text-indent: 0px !important;
+    }
+
+    .orderAction a {
+        color: #515151 !important;
+    }
+
+    .order .buyPro {
+        width: 350px;
+    }
+
+        .order .buyPro span {
+            display: block;
+            width: auto;
+            text-align: left;
+        }
+
+    .pinglun_title {
+        font-size: 14px;
+        font-weight: bold;
+        width: 100%;
+        margin-bottom: 5px;
+        text-indent: 20px;
+    }
+
+    .pinglun_time {
+        font-size: 13px;
+        width: 100%;
+        margin-bottom: 5px;
+        text-indent: 20px;
+    }
+
+    .pinglun_text {
+        color: #e70012;
+        font-size: 13px;
+        width: 90%;
+        margin-left: 20px;
+        text-indent: 0em;
+    }
+
+    .orderAction span {
+        color: #e70012;
+    }
+
+    #tab_head tr td {
+    }
+
+    .divraty{
+     padding-left:20px;
+        width:100%;
+        text-align:center;
+        float:left;
+    }
+    .divraty img{
+       
+        float:left;
+        width:16px;
+    }
+</style>
+<script src="/js/jquery.raty.min.js"></script>
+<link href="/demo/css/application.css" rel="stylesheet" />
+<div class="container">
+    <div class="pro_bq">首页><span>@ViewBag.pro_sku_title</span></div>
+
+    <div class="pro_con">
+        <div class="proD">
+            <div class="preview">
+                <div id="vertical" class="bigImg">
+                    <img src="/img/v_shap.png" id="v_shap" />
+                    <img src="@ViewBag.com_img_src" width="397" height="397" alt="@ViewBag.com_img_alt" title="@ViewBag.com_img_title" id="midimg" />
+                    <div style="display:none;" id="winSelector"></div>
+                </div>
+                <!--bigImg end-->
+                <div class="smallImg">
+                    <div id="imageMenu">
+                        <ul style="height:75px;">
+                            @Html.Raw(ViewBag.htmlstr)
+                        </ul>
+                        <div class="fx" style="float:right">
+                            <div class="bdsharebuttonbox" style="float:left">
+                                <a href="#" class="bds_more" data-cmd="more" style="background-image: url('/img/prod_fx.jpg');background-repeat: no-repeat;cursor: pointer;float: left;font-size: 14px;height: 14px;line-height: 10px;margin: 6px 6px 6px 0;padding-left: 17px; ">分享</a>
+                            </div>
+                            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                            <dv style="font-size:14px; float:left; margin-top:3px;">
+                                <a href="@Url.Action("PersonalCollectCreates", "Personal", new { pro_skuitem_id=ViewBag.id })"><img src="/img/prod_sc.jpg" />&nbsp;收藏商品</a>（@ViewBag.ucount 人气）
+                            </dv>
+                        </div>
+
+                    </div>
+                </div>
+                <!--smallImg end-->
+                <div id="bigView" style="display:none;left: 0;top: 0;"><img width="500" height="500" alt="" src="" /></div>
+            </div>
+            <div id="pro_xq">
+                <p class="f18">@ViewBag.pro_sku_title</p>
+                <p class="f13">
+                    @ViewBag.pro_item_subtitle
+                </p>
+                <div class="jg">
+                    <s style="line-height: 36px;">原价格：@ViewBag.pro_skuitem_mprice</s>
+
+                    <p>价格：<span>&yen;@ViewBag.pro_skuitem_price</span></p>
+                    <span>全国包邮（除港澳台地区、新疆和西藏）</span>
+                    <span>@ViewBag.text </span>
+
+                </div>
+                <div class="f14">
+                    <span>运费：&nbsp;&nbsp;&nbsp;</span>青岛市  配送至  <input id="start" type="text" placeholder="请选择终点站" readonly="readonly" style="text-align: center;" />  快递：<font id="kdval">暂无配送信息</font>
+                    <div class="div_con" id="div_con">
+                        <div class="div_con_title"><a id="res" href="javascript:;" style="float:left;font-size:14px;padding:5px; color:#fff">[重选]</a><a href="javascript:;" id="closeA" style="float:right;font-size:14px;padding:5px; color:#fff" title="关闭">X</a></div>
+                        <div class="div_con_body">
+                            <ul id="div_con_ul"></ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+
+                    <dl class="count" style="height:32px;">
+
+                        <dt class="right-text-type01 shopping">数量:</dt>
+                        <dd>
+                            <span>
+                                <input name="num" type="text" value="1" id="num" class="count-n" readonly="readonly" style="width:50px">
+                                <span style="float: left;">
+                                    <span class="add" id="add"><a href="javascript:;"></a></span>
+                                    <span class="less" id="less"> <a href="javascript:;"></a></span>
+
+                                </span>
+                                <span style="margin-left: 15px;float: left;" class="right-text-type02 shopping">件</span>
+                                <span class="sold shopping">
+                                    <span class="right-text-type02" style="float: left;color: #b71669;font-weight: 700;"> <font id="ysc">@ViewBag.ysc</font></span><span class="right-text-type02" style="float: left;">件已售 </span>
+                                    <span class="right-text-type02" style="margin-left: 10px;float: left;">库存<font id="kc">@ViewBag.pro_skuitem_stock </font> 件</span>
+                                    
+                                    @Html.Hidden("pro_skuitem_stock", null, new { value = @ViewBag.pro_skuitem_stock })
+                                    @Html.Hidden("pro_skuitem_price", null, new { value = @ViewBag.pro_skuitem_price })
+                                    @Html.Hidden("pro_skuitem_mprice", null, new { value = @ViewBag.pro_skuitem_mprice })
+                                    @Html.Hidden("pro_sku_id", null, new { value = @ViewBag.pro_sku_id })
+
+                                </span>
+                            </span>
+                        </dd>
+
+                    </dl>
+
+                </div>
+              
+                <div @ViewBag.style>
+                    <a href="javascript:;" class="fksc" id="gw" style="padding-left:35px;"><img src="/img/prod_gm.jpg" /></a>
+                    <a href="javascript:;" class="fktm" id="gwc"><img src="/img/prod_gwc.jpg" /></a>
+                </div>
+                <img src="/img/prod_bz.jpg" style="margin:40px 0 0 35px;" />
+            </div>
+            <div class="clear_float">
+            </div>
+        </div>
+        <div class="proDB_l">
+            <div class="tit">
+                新品上市<a href="@Url.Action("GoodsNews","Goods")">更多▶</a>
+            </div>
+            <div class="xp">
+                <div class="picScroll-left_zs">
+                    <a class="prev_zs"></a>
+                    <a class="next_zs"></a>
+                    <div class="bd_zs">
+                        <ul class="picList">
+
+                            @foreach (var item in ViewBag.goodsnew)
+                            {
+                                <li>
+                                    <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                                        <div class="pic"><img src="@item.pro_sku_covimg" /></div>
+                                        <div class="mb">
+                                            <p>@item.pro_brand_id</p>
+                                            <span>&yen;@item.pro_skuitem_price</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <script>
+                    jQuery(".picScroll-left_zs").slide({
+                        titCell: ".hd_zs ul",
+                        mainCell: ".bd_zs ul",
+                        autoPage: true,
+                        effect: "left",
+                        autoPlay: true,
+                        vis: 2,
+                        prevCell: ".prev_zs",
+                        nextCell: ".next_zs"
+                    });
+                </script>
+            </div>
+            <div class="tit" style="margin-bottom:2px;">
+                促销产品<a href="@Url.Action("GoodsSales", "Goods")">更多▶</a>
+            </div>
+
+            @foreach (var item in ViewBag.goodsSales)
+            { <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                <div class="cx"><img src="@item.pro_sku_covimg" /><div class="tit"><p>@item.pro_brand_id</p><span>&yen;@item.pro_skuitem_price</span></div></div>
+            </a>
+            }
+
+        </div>
+        <div class="proDB_r">
+            <div class="slideTxtBox cpxq">
+                <div class="hd">
+                    <ul>
+                        <li>产品详情 </li>
+                        <li>商品评价 </li>
+                        <li>服务详情 </li>
+                    </ul>
+                </div>
+                <div class="bd">
+                    <div class="pro_cs">
+                        @Html.Raw(ViewBag.pro_item_content)
+                    </div>
+                    <div class="pro_cs">
+                        <table border="0" cellspacing="0 " cellpadding="0 " class="order ">
+                            <tr id="tab_head">
+                                <td class="buyPro " style="text-align: left !important;text-indent:20px !important">评论心得</td>
+                                <td style="text-align: left !important; text-indent: 20px !important; ">客户满意度</td>
+                                <td style="text-align: left !important; text-indent: 20px !important; ">评论者</td>
+                            </tr>
+                            @foreach (var item in ViewBag.list)
+                            {
+                                <tr>
+                                    <td class="buyPro">
+                                        <p class="pinglun_time">@item.pro_comment_date</p>
+                                        <p class="pinglun_text">@item.pro_comment_content</p>
+                                    </td>
+                                    <td class="proNums " style="width:150px;text-align: center; text-indent:0px">
+                                        <div id="@item.pro_comment_id" class="divraty"></div>
+                                        <script>
+                                            $.fn.raty.defaults.path = "/lib/img/";
+                                            $.fn.raty.defaults.cancel = false;
+                                            $('#@item.pro_comment_id').raty(
+                                                {
+                                                    hints: ['差', '一般', '好', '非常好', '全五星'],
+                                                    readOnly: true,
+                                                    score: @item.pro_comment_star,
+                                                   
+                                                });
+                                        </script>
+
+                                    </td>
+                                    <td class="orderAction" style="width: 160px; text-indent: 0px; padding-left: 20px;"><span>@item.user_basic_id</span> </td>
+                                </tr>
+                            }
+
+
+                        </table>
+                    </div>
+                    <div class="pro_cs">
+                        @Html.Raw(ViewBag.content)
+                    </div>
+                    <div id="pro_con">
+                        <img src="/img/proD_18.jpg" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear_float"></div>
+        <script type="text/javascript">
+            jQuery(".slideTxtBox").slide();
+        </script>
+        <div class="proD_xh">
+            根据浏览猜你喜欢<a href="">换一批&nbsp;<img src="/img/proDhyp.jpg" /></a>
+        </div>
+        <div class="proD_xhpl">
+
+            @foreach (var item in ViewBag.mPage)
+            {
+                @*<a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                        <div class="lljl_kk">
+                            <img src="@item.pro_sku_covimg" />
+                            <p>
+                                @item.pro_item_id<br />
+                                <span>&yen;@item.pro_sku_arrspe</span>
+                            </p>
+                        </div>
+                    </a>*@
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                    <div class="proD_xhp"><img src="@item.pro_sku_covimg" /><div class="tit"><p>@item.pro_item_id</p><span>&yen;@item.pro_sku_arrspe</span></div></div>
+                </a>
+            }
+            <div class="clear_float"></div>
+        </div>
+
+    </div>
+
+    <div id="fixed_box">
+        <dl>
+            <dt>我的福库</dt>
+            <dd><a href="">优惠券<span>3</span></a></dd>
+            <dd><a href="">积分<span>3</span></a></dd>
+            <dd><a href="">购物车<span>3</span></a></dd>
+            <dd><a href="">最近查看记录<span>3</span></a></dd>
+            <dd>
+                <strong>在线客服QQ</strong> 工作时间
+                <br /> 08:00~17:00
+                <br /> （公休日例外）
+            </dd>
+            <dd>
+                <strong>团购咨询</strong> 0532-87907287
+            </dd>
+        </dl>
+        <div id="scroolT">
+            <a href="">
+                <img src="/img/top.png" />
+                <span>TOP置顶</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/hoverImg.js"></script>
+
+<script src="~/js/JavaScript_tabaddress.js"></script>

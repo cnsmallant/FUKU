@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "验证原手机";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">验证原手机</p>
+        </div>
+        <div style="clear: both;height: 30px; "></div>
+
+        <table border="0" cellspacing="0" cellpadding="0" id="table021">
+            <tr><td class="info_t1">手机号码：</td><td class="info" colspan="2">@Html.TextBox("user_basic_tel", null, new { @placeholder = "请输入手机号码", @class = "text1" })</td></tr>
+            <tr>
+                <td class="info_t1">手机验证码：</td>
+                <td class="info" style="width:auto">@Html.TextBox("user_basic_telreg", null, new { @placeholder = "请输入手机验证码", @class = "text1" }) </td>
+                <td class="info">
+                    <input type="submit" id="btn_regin" class="userD_qd" value="验证码" style="cursor:pointer; margin-bottom:35px; margin-left:-100px;" />
+
+                    <input type="submit" id="btn_regout" class="userD_qd" value="60S" style="cursor:pointer; margin-bottom:35px; margin-left:-100px;" />
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" id="submit" class="userD_qd" value="确认" style="cursor:pointer" />
+
+
+
+    </div>
+
+    <div class="clear_float"></div>
+</div>
+<script>
+
+    var regphone = /^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/;
+    var tel = $("#user_basic_tel");
+    var telreg = $("#user_basic_telreg");
+    var submit = $("#submit");
+    var btn_regin = $("#btn_regin");
+    var btn_regout = $("#btn_regout");
+    var sendregcode = "";
+    var si = 60;
+    btn_regout.hide();
+    btn_regin.click(function () {
+        if (tel.val() == null || tel.val() == "") {
+            alert("请输入手机号码！");
+            return false;
+        } else if (!tel.val().match(regphone)) {
+            alert("手机号码格式不正确！");
+            return false;
+        } else {
+            settime(btn_regout);
+            $.ajax({
+                url: "/SMS?phone=" + tel.val(),
+                type: 'Get',
+                dataType: "JSON",
+                success: function (data) {
+                    sendregcode = data;
+                    setInterval(getAuction, 1000);
+                }
+            });
+        }
+    });
+
+    function settime(val) {
+        if (si == 0) {
+            btn_regin.show();
+            btn_regout.hide();
+            val.val("提取验证码");
+            si = 60;
+        } else {
+            btn_regin.hide();
+            btn_regout.show();
+            val.attr("disabled", "disabled");
+            if (si < 10) {
+                val.val("0" + si+"s");
+            } else {
+                val.val(si+"s");
+            }
+            si--;
+            setTimeout(function () {
+                settime(val)
+            }, 1000)
+        }
+    }
+
+    submit.click(function () {
+
+
+        if (tel.val() == null || tel.val() == "") {
+            alert("请输入手机号码！");
+            return false;
+        } else if (!tel.val().match(regphone)) {
+            alert("手机号码格式不正确！");
+            return false;
+        }
+        else {
+            $.ajax({
+                url: "/Personal/RegSecurityPhone?phone=" + tel.val(),
+                type: 'Get',
+                dataType: "JSON",
+                success: function (data) {
+
+                    if (data == "OK") {
+                        if (telreg.val() == sendregcode) {
+                            window.location.href = "/Personal/SecurityPhone/";
+                        } else {
+                            alert("验证失败！");
+                        }
+                    } else {
+                        alert("此手机号不是原手机！");
+                    }
+                }
+            });
+
+        }
+    });
+
+</script>

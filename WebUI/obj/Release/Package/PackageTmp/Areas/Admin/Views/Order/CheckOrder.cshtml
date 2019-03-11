@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "查看订单商品";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">查看订单商品</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+
+        <div class="con">
+            <table width="800" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="100" height="40" align="right">商品缩图：</td>
+                    <td width="270">
+                        <img src="@ViewBag.pro_sku_covimg" style="width:200px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">商品名称：</td>
+                    <td width="270">
+                        @ViewBag.pro_sku_title
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" align="right">订单价格：</td>
+                    <td width="270">
+                        @ViewBag.shop_orderdetail_total
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" align="right">商品数量：</td>
+                    <td width="270">
+                        @ViewBag.shop_orderdetail_num
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

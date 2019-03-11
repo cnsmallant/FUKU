@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>东八区品牌设计-网站管理系统</title>
+    <link href="~/Areas/Admin/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/js/jquery.min.js"></script>
+    <style>
+        #un {
+            font-size: 12px;
+            color: red;
+            margin-left: 20px;
+            font-family: 'Microsoft YaHei';
+        }
+
+        #up {
+            font-size: 12px;
+            color: red;
+            margin-left: 20px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+    <div id="llqtx"><div style="float:left;">您使用的浏览器版本过低,将会影响系统使用效果,为保障您高效的使用本系统，建议您升级谷歌Chrome浏览器，或升级IE浏览器。</div><span><a href="javascript:clo();">×</a></span></div>
+    <div class="lghead">
+        <div class="logo1"></div>
+        <div class="daohang">
+            <ul>
+                <li><a href="http://www.dongbaqu.com/web.html" target="_blank">网站建设</a></li>
+                <li><a href="http://www.dongbaqu.com/vis.html" target="_blank">标志VI</a></li>
+                <li><a href="http://www.dongbaqu.com/picalbum.html" target="_blank">画册+包装</a></li>
+                <li><a href="http://www.dongbaqu.com/photog.html" target="_blank">摄影+摄像</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="lgcon">
+        <div class="dl">
+            <div class="dlk" id="mrk">
+                <div class="logo3"><img src="/Areas/Admin/images/logo3.png" /> </div>
+                <div class="xtbt1"><img src="/Areas/Admin/images/xtwz1.png" /></div>
+                <div class="uname">@Html.TextBox("uname")</div><p id="un"></p>
+                <div class="pwd">@Html.TextBox("upwd", "", new { @type = "password" })</div><p id="up"></p>
+                <div class="btn1"><input id="submit" type="submit" value="登　录" /> </div>
+                <div class="fwrx1">24小时服务热线：</div>
+                <div class="fwrx2"><img src="/Areas/Admin/images/rxdh01.png" /></div>
+                <div class="ewm1" onclick="xsewm()" style="margin-top:5px"> </div>
+            </div>
+            <div class="dlk" id="ewk" style="display:none;">
+                <div class="ewm2">
+                    <span> 更多服务</span> 请微信扫描二维码
+                </div>
+                <div class="ewm3"><img src="/Areas/Admin/images/dbqewm.png" /></div>
+                <div class="ewm4">咨询手机网站、微信网站、<br />移动APP业务请致电</div>
+                <div class="ewm5">4000-117-087</div>
+                <div class="ewm6" onclick="xsdl()"> </div>
+            </div>
+        </div>
+    </div>
+    <div class="lgfoot">
+        <div class="logo2"><img src="/Areas/Admin/images/logo02.gif"></div>
+        <div class="in1">
+            咨询电话：0532-83871175     传 真：0532-83801234     邮 箱：info@dongbaqu.cn<br />
+            地　　址：青岛市香港中路7号海纳尊邸B座4楼(香格里拉西侧 北海宾馆前);北京市昌平区振兴路9号力兴大厦215A
+        </div>
+    </div>
+
+    <script src="~/Areas/Admin/js/login.js"></script>
+</body>
+</html>
+<script src="~/Areas/Admin/js/login.js"></script>
+<script src="~/Areas/Admin/js/JavaScript_Login.js"></script>

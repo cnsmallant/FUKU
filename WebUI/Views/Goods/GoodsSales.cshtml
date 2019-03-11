@@ -1,0 +1,96 @@
+﻿@model PagedList<WebUI.Controllers.GoodsController.pro_skus>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "促销";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="container">
+    <div class="promo_banner">
+
+        <div class="bd">
+            <ul>
+                @foreach (var item in ViewBag.bannerlist)
+                {
+                    <li>
+                        <div id="ban01">
+                            <a href="@item.com_banner_url"><img src="@item.com_img_src" /></a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="hd">
+            <ul>
+                @foreach (var item in ViewBag.bannerlist)
+                {
+                    <li></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <script>
+        var ary = location.href.split("&");
+        jQuery(".promo_banner").slide({
+            mainCell: ".bd ul",
+            effect: "fade",
+            autoPlay: true,
+            mouseOverStop: false,
+            interTime: 4000,
+            delayTime: 2000
+        });
+    </script>
+    <div class="promo_top">
+        @{
+            int i = 0;
+            foreach (var item in ViewBag.list8)
+            {
+                if (i == 0)
+                {
+                    <a href="@item.com_banner_url" class="left">
+                        <img src="@item.com_img_src" />
+                    </a>
+                }
+                else
+                {
+                    <a href="@item.com_banner_url" style="float:left;margin-left:23px;">
+                        <div class="kk" style="width:255px;">
+                            <img src="@item.com_img_src" style="width:255px; height:255px;" />
+                            <div class="tit">@item.pro_brand_id</div>
+                        </div>
+                    </a>
+                }
+                i++;
+            }
+
+        }
+        <div class="clear_float"></div>
+    </div>
+    <div class="promo_list">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                <div class="kk" style="height:390px;">
+                    <div class="xq">
+                        <div class="tit">
+                            @item.pro_brand_id
+                            <p></p>
+                            <div class="p1"><p>&yen;<span>@item.pro_skuitem_price</span></p></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:-100px;  padding:10px">
+                        <img src="@item.pro_sku_covimg" style="width:274px; height:274px; " />
+                    </div>
+                </div>
+            </a>
+
+        }
+    </div>
+</div>
+<div class="clear_float"></div>
+<div class="pageState">
+    @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+</div>
+

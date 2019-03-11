@@ -1,0 +1,136 @@
+﻿@model PagedList<WebUI.Controllers.GoodsController.pro_skus>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "商品列表";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq"><a href="/">首页</a> ><span>@ViewBag.tiname</span><p>共 @ViewBag.goodscount 件商品</p></div>
+    <div class="pro_top">
+        <ul>
+            @Html.Raw(ViewBag.htmlstrs)
+            <div class="clear_float"></div>
+        </ul>
+        <div class="kk">
+            <div class="kk_ze">已选择：</div><div class="kkr  kkr_xz">
+                <div id="s">
+
+                </div>
+                <div class="qc"><a href="javascript:;" id="qctj">清除条件&nbsp;&nbsp;×</a></div>
+            </div><div class="clear_float"></div>
+        </div>
+        @Html.Raw(ViewBag.htmlstr)
+        <div class="pro_px">
+            @*<div class="kk">
+                <ul>
+                    <li><a href="">综合&nbsp;↓</a></li>
+                    <li><a href="">人气&nbsp;↓</a></li>
+                    <li><a href="">新品&nbsp;↓</a></li>
+                    <li><a href="">销量&nbsp;↓</a></li>
+                    <li><p>价格&nbsp;<a href="" class="a1"><img src="/img/jt_s.jpg" /></a><a href="" class="a2"><img src="/img/jt_x.jpg" /></a> </p></li>
+                </ul>
+            </div>
+            <div class="qq">
+                <div class="qq1">￥</div><div class="qq2">-</div><div class="qq1">￥</div>
+            </div>*@
+            @*<div class="fy">
+                <div class="ym">1/16</div><a href=""><img src="/img/pro_l.jpg" /></a><a href=""><img src="/img/pro_r.jpg" /></a>
+            </div>*@
+        </div>
+        <div class="pro_list">
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                    <div class="pro_dp" style="border: 1px solid #ffffff;">
+                        <img src="@item.pro_sku_covimg" style="width:240px;height:240px;margin-left:28px;" />
+                        <div class="tit" style="width:260px;height:auto;">@item.pro_sku_title<br /><span>&yen;@item.pro_skuitem_price</span></div>
+                    </div>
+                </a>
+            }
+
+        </div>
+        <div class="clear_float"></div>
+        <div class="pageState" style="padding-bottom:10px;">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+        @Html.Hidden("GoodsClassId")
+    </div>
+</div>
+<script>
+    var s = $("#s");
+    var GoodsClassId = $("#GoodsClassId");
+    var words = request("words");
+    var qctj = $("#qctj");
+    var htmlstr = "";
+    var ss = "";
+    $(function () {
+        if (words == "") {
+            s.html("<div class='bq'>全部 &nbsp;&nbsp;</div>");
+        } else {
+            var str = words.split(',');//分割
+            for (var i = 0; i < str.length; i++) {
+                if (str[i] != "") {
+                    htmlstr += "<div class='bq'>" + str[i] + "&nbsp;&nbsp;<a href='javascript:;' onclick='myonclickdel(this)' title='" + str[i] + "'></a></div>"
+                    s.html(htmlstr);
+                }
+            }
+
+        }
+    });
+    qctj.click(function () {
+        window.location.href = "/Goods/GoodsMarkSearch?GoodsClassId=" + GoodsClassId.val();
+    });
+
+    function myonclick(a) {
+        var s = "";
+        if (words == "") {
+            var sss = encodeURIComponent(a.title + ",");
+            window.location.href = "/Goods/GoodsMarkSearch?words=" + sss + "&GoodsClassId=" + GoodsClassId.val();
+        } else {
+            var str = words.split(',');//分割
+
+            for (var i = 0; i < str.length; i++) {
+
+                if (str[i] != "") {
+
+                    s += words + a.title + ",";
+
+                }
+            }
+
+            var strArr = s.split(",");
+
+            strArr.sort();//排序
+            var result = $.unique(strArr);
+
+            window.location.href = "/Goods/GoodsMarkSearch?words=" + encodeURIComponent(result) + "&GoodsClassId=" + GoodsClassId.val();
+        }
+    }
+
+    function myonclickdel(a) {
+        var str = words.replace(a.title + ",", "");
+        if (str == "") {
+            window.location.href = "/Goods/GoodsMarkSearch?GoodsClassId=" + GoodsClassId.val();
+        } else {
+            window.location.href = "/Goods/GoodsMarkSearch?words=" + encodeURIComponent(str) + "&GoodsClassId=" + GoodsClassId.val();
+        }
+
+    }
+
+    function request(paras) {
+        var url = location.href;
+        var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+        var paraObj = {}
+        for (i = 0; j = paraString[i]; i++) {
+            paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
+        }
+        var returnValue = paraObj[paras.toLowerCase()];
+        if (typeof (returnValue) == "undefined") {
+            return "";
+        } else {
+            return decodeURIComponent(returnValue);
+        }
+    }
+
+</script>

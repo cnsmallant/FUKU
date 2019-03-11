@@ -1,0 +1,64 @@
+﻿@using PhoneUI.Controllers
+@model IList<PhoneUI.Controllers.GoodsController.pro_skus>
+
+@{
+    ViewBag.Title = "促销";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @{
+                    for (int i = 0; i < ViewBag.bannerlist.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="item active">
+                                <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                    <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                    <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        @{
+            foreach (var item in Model)
+            {
+                //'/Goods/GoodsDetails/" + v.pro_sku_code + "'
+
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = item.pro_sku_code })">
+                    <div class='col-xs-4 text-left content_div'>
+                        <p><img src='http://www.cuckooshop.cn/@item.pro_sku_covimg' class='img-responsive' /></p>
+                        <p style="font-size:6px;"> @item.pro_brand_id  </p>
+                        <p><span style=' font-size:6px;'> @item.pro_skuitem_price</span></p>
+                    </div>
+                </a>
+
+            }
+
+        }
+
+
+    </div>
+
+</div>

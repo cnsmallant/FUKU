@@ -1,0 +1,66 @@
+﻿@using EFClassLibrary;
+@model Webdiyer.WebControls.Mvc.PagedList<WebUI.Controllers.PersonalController.pro_comments>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "已评价商品";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<script src="/js/jquery.raty.min.js"></script>
+<link href="/demo/css/application.css" rel="stylesheet" />
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    <div id="left_nav">
+        @Html.Partial("LfetPartial")
+
+    </div>
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">商品评价</p>
+        </div>
+        <div id="con">
+            <div id="inner_M">
+                <a href="@Url.Action("ProductReview", "Personal")">待评论商品</a>	<a href="@Url.Action("BeenEvaluated", "Personal")" class="cur-inner">已评论商品</a>
+            </div>
+            @foreach (var item in Model)
+            {
+                <table border="0" cellspacing="0" cellpadding="0" class="order">
+                    <tr id="tab_head">
+                        <td>晒图</td>
+                        <td class="buyPro">购买商品</td>
+                        <td>评星</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="@item.com_img_src" style="width:150px;" />
+                        </td>
+                        <td class="buyPro">
+                            <a href="@Url.Action("GoodsDetails", "Goods", new { id =item.pro_sku.pro_sku_code  })">@item.pro_sku.pro_sku_title</a>
+                        </td>
+                        <td>
+                            <div id="@item.pro_comment_id" class="staediv" style="width:300px;"></div>
+                            <script>
+                                $.fn.raty.defaults.path = "/lib/img/";
+                                $.fn.raty.defaults.cancel = false;
+                                $('#@item.pro_comment_id').raty(
+                                    {
+                                        width:"150px",
+                                        readOnly: true,
+                                        score: @item.pro_comment_star,
+                                    });
+                            </script>
+                        </td>
+                      
+                    </tr>
+                </table>
+            }
+
+
+        </div>
+        <div class="pageState">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>

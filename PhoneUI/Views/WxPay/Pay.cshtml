@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "微信支付";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px; background-color:#ffffff">
+    <div class="row">
+        <div class="thumbnail content_thumbnail" style="padding:20px; background-color:transparent; margin-top:30px;">
+            <div class="col-xs-12" style="margin-top:0px; margin-bottom:10px; line-height:25px; ">
+                <p><img src="~/img/rmb.png" class="img-responsive center-block" /></p>
+            </div>
+            <div class="col-xs-12">
+                <a href="javascript:;" onclick="pay()" class="list-group-item"><img src="/img/wxzf.png" class="img-responsive" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Raw(@ViewBag.jsstr);
+
+
+
+

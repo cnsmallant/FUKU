@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "申请成功";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    <div id="left_nav">
+        @Html.Partial("LfetPartial")
+    </div>
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">退换货 </p>
+
+        </div>
+        <div id="con">
+            <div class="ret">
+                <div class="lc">流程：</div>
+                <div class="hong">
+                    <div class="xz">1 选择订单</div>
+                    <div class="xz">2 选择商品</div>
+                    <div class="xz"> 3 选择服务项目</div>
+                    <div class="xz"> 4 提交成功</div>
+                </div>
+            </div>
+            <div class="clear_float"></div>
+            <div class="retd_tit">换货申请</div>
+            <div class="retd_con">
+                <strong>编号：</strong><span>@ViewBag.shop_choose_code</span> <br />
+                我们会在2个工作日内处理本次<span>换货申请</span> ，请耐心等待！谢谢。
+                <a href="javascript:;" id="submit"><img src="/img/2_03.jpg" /></a>
+            </div>
+        </div>
+
+        @Html.Hidden("shop_choose_code")
+    </div>
+    <div class="clear_float"></div>
+</div>
+
+<script>
+    var submit = $("#submit");
+
+    var shop_choose_code = $("#shop_choose_code");
+
+
+
+
+    submit.click(function () {
+        $.ajax({
+            url: "/Personal/DelChooseRevocation?shop_choose_code=" + shop_choose_code.val(),
+            type: 'GET',
+            dataType: "JSON",
+            success: function (data) {
+                if (data == "NO") {
+                    alert("操作失败");
+                    return;
+                }
+                else {
+                    alert("撤销成功");
+                    window.location.href = "/Personal/ChooseList";
+
+                }
+            },
+            error: function (err) {
+                //alert("data error");
+                alert(err.reponseText);
+            }
+
+        });
+    });
+
+</script>

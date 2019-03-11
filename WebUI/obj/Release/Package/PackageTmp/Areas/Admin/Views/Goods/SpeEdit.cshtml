@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "编辑规格";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">编辑规格</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("EditSpe", "Goods", FormMethod.Post))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">商品父类：</td>
+                        <td width="270">
+                            @Html.DropDownList("pro_class_id", "请选择")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" height="40" align="right">规格名称：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_spe_name")
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100" align="right">排序序号：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_spe_order")
+                            <font>（序号越大越靠前）</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保　存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                @Html.Hidden("pro_spe_id")
+                @Html.Hidden("pro_class_name")
+            </div>}
+    </div>
+</div>
+<script>
+    var pro_class_id = $("#pro_class_id");
+    var pro_spe_name = $("#pro_spe_name");
+
+    var pro_spe_order = $("#pro_spe_order");
+    var pro_class_name = $("#pro_class_name");
+    var submit = $("#submit");
+    var flg = false;
+    pro_class_id.change(function () {
+        if (pro_class_id.find("option:selected").text() == "请选择") {
+            alert("请选择商品父类");
+            flg = false;
+        } else {
+            var ro = pro_class_id.find("option:selected").val();
+            pro_class_name.val(ro);
+            flg = true;
+        }
+    });
+    pro_spe_name.blur(function () {
+        if (pro_spe_name.val() == null || pro_spe_name.val() == "") {
+            alert("请输入规格名称");
+            flg = false;
+        } else {
+            flg = true;
+        }
+    });
+
+    pro_spe_order.blur(function () {
+        if (pro_spe_order.val() == null || pro_spe_order.val() == "") {
+            alert("请输入排序序号");
+            flg = false;
+        } else {
+            flg = true;
+        }
+    });
+    submit.click(function () {
+        if (flg == false) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+</script>

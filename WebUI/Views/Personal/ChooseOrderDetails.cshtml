@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "选择商品";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">退换货</p>
+        </div>
+
+
+        <div id="con">
+            <div class="ret">
+                <div class="lc">流程：</div>
+                <div class="hong">
+                    <div class="xz">1 选择订单</div>
+                    <div class="xz xz1">2 选择商品</div>
+                    <div class="xz2"> 3 选择服务项目</div>
+                    <div class="xz2"> 4 提交成功</div>
+                </div>
+            </div>
+            <div class="clear_float"></div>
+            <div class="resl">请根据订单选择售后服务内容：</div>
+            <div class="font_c02" style="display: block;width: 100%;">
+                <div class="dingdan_hao" style="margin-left:0px;"><span>订单号：@ViewBag.shop_order_code </span><span>@ViewBag.user_address_name</span> <span>@ViewBag.shop_order_buydate</span></div>
+                <table border="0" cellspacing="0" cellpadding="0" class="order" style="width: 885px; margin-top:0;">
+
+                    <tr id="tab_head">
+                        <td class="buyPro">购买产品</td>
+                        <td>数量</td>
+                        <td>价格</td>
+                        <td>时间</td>
+                        <td>操作</td>
+                    </tr>
+                    @foreach (var item in ViewBag.olist)
+                    {
+                        <tr>
+
+                            <td class="buyPro">
+                                <div class="buyImg">
+                                    <img src="@item.shop_order_id" class="buy-pro" /><span>@item.shop_orderdetail_id</span>
+                                    <span>数量：@item.shop_orderdetail_num</span>
+                                    <span class="cont12">&yen;：@item.shop_orderdetail_total</span>
+                                </div>
+
+                            </td>
+                            <td class="proNums" style="vertical-align: top;">@item.shop_orderdetail_num</td>
+                            <td class="orderState" style="vertical-align: top;"><a href="" style="color: #e60012">&yen;:@item.shop_orderdetail_total</a></td>
+                            <td class="buyTime" style="vertical-align: top;">
+                                <span>@ViewBag.shop_order_buydate</span>
+
+                            </td>
+                            <td class="buycz" style="vertical-align: top;">
+                                <a href="@Url.Action("ChooseSelectServices", "Personal", new { pro_skuitem_id = item.pro_skuitem_id, shop_order_code = ViewBag.shop_order_code })">申请售后></a>
+                                <a href="">评价商品></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+            <div class="clear_float"></div>
+
+        </div>
+
+
+
+    </div>
+    <div class="clear_float"></div>
+</div>

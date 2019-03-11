@@ -1,0 +1,156 @@
+﻿@using EFClassLibrary;
+@model List<user_address>
+
+@{
+    ViewBag.Title = "收货地址";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">收货地址</p>
+        </div>
+        <div id="con" style="padding: 40px;position: relative;">
+            @using (Html.BeginForm("AddShippingAddress", "Personal", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                <div id="add_dr">
+                    @Html.TextBox("user_address_name", null, new { @class = "text-in", @placeholder = "收件人姓名" })
+                    @Html.TextBox("user_address_tel", null, new { @class = "text-in", @placeholder = "11位手机号码" })
+                    <div class="text-in list">
+                        <select id="Province" style="width:99%">
+                            <option>省份</option>
+                        </select>
+                    </div>
+                    <div class="text-in list" style="float: right;">
+                        <select id="City" style="width:99%">
+                            <option>城市</option>
+                        </select>
+
+                    </div>
+                    <div class="text-in list01" style="float: right;">
+                        <select id="County" style="width:99%">
+                            <option>区县</option>
+                        </select>
+                    </div>
+                    @Html.TextArea("user_address_detail", new { @placeholder = "路名或街道地址，门牌号", @class = "text-in area" })
+                    @Html.TextBox("user_address_ZipCode", null, new { @class = "text-in", @placeholder = "邮政编码" })
+                    @Html.TextBox("user_address_tags", null, new { @class = "text-in", @placeholder = "地址标签：如'家'、'公司' 限5个字内" })
+                    <a href="javascript:;" id="cancel">取消</a>
+                    <input id="submit" type="submit" style="float: right;" value="保存" class="save" />
+                    @Html.Hidden("user_address_province")
+                    @Html.Hidden("user_address_city")
+                    @Html.Hidden("user_address_county")
+                </div>
+            }
+            <div class="addInfo box_a m-left">
+                <div id="add" style="margin-left:60px;left:auto;">
+                    <img src="~/img/shoppe_adddz.jpg" />
+                </div>
+
+            </div>
+
+
+            @foreach (var item in Model)
+            {
+
+                <div class="box_a m-left ">
+                    <p class="cont044" style="line-height: 36px;">@item.user_address_name</p>
+                    <div style="height: 0px !important;border-top:1px solid #dfdfdf">
+                    </div>
+                    <p class="cont044">@item.user_address_tel</p>
+                    <p class="cont044">
+                        @{
+                D8MallEntities db = new D8MallEntities();
+                int user_address_province = Convert.ToInt32(item.user_address_province);
+                int user_address_city = Convert.ToInt32(item.user_address_city);
+                int user_address_county = Convert.ToInt32(item.user_address_county);
+                var province = db.com_area.Where(u => u.com_area_id == user_address_province).SingleOrDefault().com_area_name;
+                var city = db.com_area.Where(u => u.com_area_id == user_address_city).SingleOrDefault().com_area_name;
+                var county = db.com_area.Where(u => u.com_area_id == user_address_county).SingleOrDefault().com_area_name;
+                ViewBag.adress = province + city + county;
+
+                        }
+                        @ViewBag.adress@item.user_address_detail（@item.user_address_ZipCode）
+                    </p>
+                    <a href="@Url.Action("ShippingAddressEdit", "Personal", new { user_address_id=@item.user_address_id })" class="cont044" id="edit">编辑</a><a class="cont044" href="@Url.Action("ShippingAddressDel", "Personal", new { user_address_id=@item.user_address_id })" id="del">删除</a>
+                </div>
+
+
+
+
+            }
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+
+</div>
+<script src="~/js/JavaScript_Cascade.js"></script>
+<script>
+
+    var add_dr = $("#add_dr");
+    var add = $("#add");
+    var cancel = $("#cancel");
+    var user_address_province = $("#user_address_province");
+    var user_address_city = $("#user_address_city");
+    var user_address_county = $("#user_address_county");
+    var user_address_name = $("#user_address_name");
+    var user_address_tel = $("#user_address_tel");
+    var user_address_detail = $("#user_address_detail");
+    var user_address_ZipCode = $("#user_address_ZipCode");
+    var user_address_tags = $("#user_address_tags");
+    var regphone = /^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/;
+    var regzipcode = /^\d{6}$/;
+    var submit = $("#submit");
+    add_dr.hide();
+    add.click(function () {
+        add_dr.show();
+    });
+    cancel.click(function () {
+        add_dr.hide();
+    });
+    $("#County").change(function () {
+        user_address_province.val($("#Province").find("option:selected").val());
+        user_address_city.val($("#City").find("option:selected").val());
+        user_address_county.val($("#County").find("option:selected").val());
+    });
+    submit.click(function () {
+        if (user_address_name.val() == null || user_address_name.val() == "") {
+            alert("请输入收件人姓名！");
+            return false;
+        }
+        if (user_address_tel.val() == null || user_address_tel.val() == "") {
+            alert("请输入手机号码！");
+            return false;
+        }
+        if (!user_address_tel.val().match(regphone)) {
+            alert("手机号码格式不正确！");
+            return false;
+        }
+        if ($("#Province").find("option:selected").text() == "省份" || $("#City").find("option:selected").text() == "城市" || $("#County").find("option:selected").text() == "县区") {
+            alert("请选地址");
+            return false;
+        }
+        if (user_address_detail.val() == null || user_address_detail.val() == "") {
+            alert("请输入详细地址");
+            return false;
+        }
+        //if (user_address_ZipCode.val() == null || user_address_ZipCode.val() == "") {
+        //    alert("请输入邮编！");
+        //    return false;
+        //}
+        //if (!user_address_ZipCode.val().match(regzipcode)) {
+        //    alert("邮编格式不正确！");
+        //    return false;
+        //}
+        //if (user_address_tags.val() == null || user_address_tags.val() == "") {
+        //    alert("请输入地址标签！");
+        //    return false;
+        //}
+
+    });
+
+</script>

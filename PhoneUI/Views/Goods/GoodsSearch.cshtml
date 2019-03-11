@@ -1,0 +1,36 @@
+﻿@using PhoneUI.Controllers
+@model IList<PhoneUI.Controllers.GoodsController.pro_skus>
+
+@{
+    ViewBag.Title = "商品搜索";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row" style=" background-color: #ffffff; overflow: hidden;">
+        <div class="page-header" style="margin:0px; padding:10px;">
+            <p style="font-size:16px;">福库为您找到<font style="color:#ff0000">@ViewBag.count</font>件符合条件的商品</p>
+            <p style="font-size:12px;">搜索标签：<span class="label label-danger" style="border-radius:0px; font-size:12px; font-weight:normal" >@ViewBag.words</span></p>
+        </div>
+      
+        @{
+            foreach (var item in Model)
+            {
+                //'/Goods/GoodsDetails/" + v.pro_sku_code + "'
+
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = item.pro_sku_code })">
+                    <div class='col-xs-4 text-left content_div'>
+                        <p><img src='http://www.cuckooshop.cn/@item.pro_sku_covimg' class='img-responsive' /></p>
+                        <p style="font-size:12px;"> @item.pro_sku_title  </p>
+                        <p><span style=' font-size:12px;'> @item.pro_skuitem_price</span></p>
+                    </div>
+                </a>
+
+            }
+
+        }
+
+
+    </div>
+
+</div>

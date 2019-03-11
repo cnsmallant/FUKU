@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "商品评价";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">商品评价</p>
+        </div>
+        <div id="con" >
+            <div class="resl">请选择商品进行评价：</div>
+            <div class="font_c02" style="display: block;width: 100%;">
+                <div class="dingdan_hao" style="margin-left:0px;"><span>订单号：@ViewBag.shop_order_code </span><span>@ViewBag.user_address_name</span> <span>@ViewBag.shop_order_buydate</span></div>
+                <table border="0" cellspacing="0" cellpadding="0" class="order" style="width: 885px; margin-top:0; overflow:hidden">
+
+                    <tr id="tab_head">
+                        <td class="buyPro">购买产品</td>
+                        <td>数量</td>
+                        <td>时间</td>
+                        <td>操作</td>
+                    </tr>
+                    @foreach (var item in ViewBag.olist)
+                    {
+                        <tr>
+                      
+                            <td class="buyPro">
+                                <div class="buyImg">
+                                    <img src="@item.shop_order_id" class="buy-pro" /><span>@item.shop_orderdetail_id</span>
+                                    <span>数量：@item.shop_orderdetail_num</span>
+                                    <span class="cont12">&yen;：@item.shop_orderdetail_total</span>
+                                </div>
+
+                            </td>
+                            <td class="proNums" style="vertical-align: top;">@item.shop_orderdetail_num</td>
+                            <td class="buyTime" style="vertical-align: top;">
+                                <span>@ViewBag.shop_order_buydate</span>
+
+                            </td>
+                            <td class="buycz" style="vertical-align: top;">
+                                <a href="@Url.Action("ReviewsDetails", "Personal", new { shop_orderdetail_id = item.pro_skuitem_id, shop_order_code=ViewBag.shop_order_code })">评价商品></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+         
+        </div>
+   
+    </div>
+    <div class="clear_float"></div>
+</div>

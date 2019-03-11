@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "权限管理";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+@Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">权限列表</div>
+
+        <div class="lpaixu">
+            <ul>
+                <li><a href="@Url.Action("PurviewCreate","Sys")">新建</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>编号</td>
+                <td>名称</td>
+                <td>页面</td>
+                <td>日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+            @foreach (var item in ViewBag.list)
+            {
+            <tr>
+                <td>@item.sys_purview_id</td>
+                <td>@item.sys_purview_name</td>
+                <td>@item.sys_purview_page</td>
+                <td>@item.sys_purview_editdate</td>
+                <td><a href="@Url.Action("PurviewEdit", "Sys", new { sys_purview_id= item.sys_purview_id })" style="color:green">修改</a></td>
+            </tr>
+
+            }
+         
+
+            
+
+        </table>
+    </div>
+</div>

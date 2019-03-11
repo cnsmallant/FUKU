@@ -1,0 +1,401 @@
+﻿@{
+    ViewBag.Title = "订单";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="lay2">
+    <div class="container">
+        @*<img src="/img/logo.png" />*@
+        <div id="shop_steps">
+            <a href="" id="step01" class="stp_cur01"><span>&nbsp;</span>我的购物车</a>
+            <a href="" id="step02" class="stp_cur022"><span>&nbsp;</span>填写核对订单信息</a>
+            <a href="" id="step03"><span>&nbsp;</span>成功提交订单</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="cart">
+        <img src="/img/tianxi_dd.jpg" style="display: block;float: left;margin-top:16px;margin-right:5px;"><p class="title03" style="font-weight: bold; color: #e60012; display: block; float: left; line-height:55px !important; margin-bottom: 15px;font-size:18px;">填写核对订单信息</p>
+    </div>
+
+    @using (Html.BeginForm("GoodsOrderAdd", "Goods", FormMethod.Post))
+    {
+
+        <div id="shoppingcar">
+            <div class="shope">
+                <div class="shope_tit">请选择您的收货地址：</div>
+                <table id="shope_tab">
+                    @foreach (var item in ViewBag.user_address)
+                    {
+                        <tr>
+                            <td class="inp"><input name="Radio1" type="radio" value="@item.user_address_id" /></td>
+                            <td>用户名：@item.user_address_name</td>
+                            <td>电话：@item.user_address_tel</td>
+                            <td>
+                                地址：
+                                @{
+                        EFClassLibrary.D8MallEntities db = new EFClassLibrary.D8MallEntities();
+                        int user_address_province = Convert.ToInt32(item.user_address_province);
+                        int user_address_city = Convert.ToInt32(item.user_address_city);
+                        int user_address_county = Convert.ToInt32(item.user_address_county);
+                        var province = db.com_area.Where(u => u.com_area_id == user_address_province).SingleOrDefault().com_area_name;
+                        var city = db.com_area.Where(u => u.com_area_id == user_address_city).SingleOrDefault().com_area_name;
+                        var county = db.com_area.Where(u => u.com_area_id == user_address_county).SingleOrDefault().com_area_name;
+                        ViewBag.adress = province + city + county;
+
+                                }
+                                @ViewBag.adress@item.user_address_detail
+
+                            </td>
+                            <td>邮编：（@item.user_address_ZipCode）</td>
+                            <td>
+                                <a href="@Url.Action("ShippingAddressEdit", "Personal", new { user_address_id=@item.user_address_id })" style="margin-right:6px;"><img src="/img/shoppe_bj.jpg" /></a>
+                                <a href="@Url.Action("ShippingAddressDel", "Personal", new { user_address_id=@item.user_address_id })"><img src="/img/shoppe_sc.jpg" /></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                <a href="@Url.Action("ShippingAddress","Personal")" class="adddz"><img src="/img/shoppe_adddz.jpg" /></a>
+            </div>
+            <div class="fangshi">
+                <span>支付方式：</span><p>在线支付</p>
+            </div>
+            <div class="fangshi" style="margin-left:8px;">
+                <span>配送方式：</span><p>快递配送</p>
+            </div><div class="clear_float"></div>
+            <div class="fapiao">
+                <span>是否需要发票？</span>
+                <input id="y" name="Radio2" type="radio" style="margin-left:50px;" value="是" />是
+                <input id="n" name="Radio2" type="radio" style="margin-left:50px;" value="否" checked="checked" />否
+
+            </div><div class="clear_float"></div>
+            <div class="fapiao_xx" id="fp">
+                <img src="/img/fapiao_dd.jpg" style="position:absolute;top:-11px;left:200px;" />
+                <span>请填写发票信息：</span>
+                <div class="taitou">
+                    <span>请填写发票抬头：</span>
+                    <div class="ri">
+                        <input id="gr" name="Radio3" type="radio" style="margin-left:20px;margin-right:5px;" value="gr" />个人
+                    </div>
+                    <div class="fapiao_xxkk">
+                        <div class="tit">姓名</div>
+
+                        @Html.TextBox("shop_invoice_username", null, new { @class = "text", placeholder = "请输入您的姓名" })
+                    </div><div class="fapiao_xxkk">
+                        <div class="tit" style="width:100px;">身份证号码：</div>
+
+                        @Html.TextBox("shop_invoice_usercode", null, new { @class = "text", style = "width:285px;", placeholder = "请输入您的18位身份证号码" })
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <div class="taitou" style="margin-left:112px;margin-top:6px;">
+                    <span></span>
+                    <div class="ri"><input id="gs" name="Radio3" type="radio" style="margin-left:20px;margin-right:5px;" value="gs" />企业</div><div class="fapiao_xxkk" style="width:850px;">
+                        <div class="tit">企业全称</div>
+
+                        @Html.TextBox("shop_invoice_company", null, new { @class = "text", style = "width:750px;", placeholder = "请填写您的企业全称，如需开具增值税专用发票，请联系在线客服" })
+                    </div>
+                    <div class="clear_float"></div>
+                </div>
+                <a href="/ShoppingGuide?classid=invoice" class="fapiao_sm"><img src="/img/fapiao_sm.jpg" /> </a>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" id="car_tab">
+                <tr id="t_head"><td id="proName">&nbsp;&nbsp;&nbsp;&nbsp;商品名称</td><td id="num">数量</td><td id="counts">全额小计</td></tr>
+                @foreach (var item in ViewBag.list)
+                {
+                    <tr>
+                        <td class="con-td">
+                            <img src="@item.pro_sku_covimg" class="buy-pro" />
+                            <div class="proname">
+                                <span>
+                                    @item.pro_sku_title
+                                </span>
+
+                            </div>
+                        </td>
+
+
+                        <td>@item.shop_car_num</td>
+                        <td class="price">
+                            ¥：@item.pro_skuitem_price
+                        </td>
+
+                    </tr>
+                }
+
+
+
+                <tr>
+                    <td class="heji"></td>
+                    <td style="background-color: #f5f5f5;"> <strong>合计</strong><span>&nbsp;&nbsp;&nbsp;&nbsp;商品数量：<font id="tnum">@ViewBag.tnum</font></span></td>
+                    <td style="background-color: #f5f5f5;"><span>商品总额：</span><strong style="color:#e60012">￥<font id="pro_price">@ViewBag.tpirce</font></strong></td>
+                </tr>
+
+
+
+            </table>
+            <div @ViewBag.dis>
+                <div class="youhuiquan">
+                    <p class="title06"><input type="radio" name="radio5" id="useryhm" />&nbsp;使用优惠码：</p><div class="clear_float"></div>
+                    <p class="magrin">您有可用的优惠码是<span style="color:  #DC1E52;">（@ViewBag.list_02.Count）</span></p>
+                    <div id="yhq" class="magrin">
+                        @Html.TextBox("youhuima", null, new { @placeholder = "请输入优惠码" })
+                        <a href="javascript:;" id="yhmsy">使用</a>
+                    </div>
+                    <p class="magrin">共使用了<span style="color:  #DC1E52;" id="yhmsynum">0</span>张优惠码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以优惠<span style="color:  #DC1E52;" id="yhmsyqs">0.0</span>元</p>
+
+                </div>
+                <div style="float:right;margin-right:15px;">
+                    <div class="youhuiquan" id="youhuiquan">
+                        <p class="title06"><input type="radio" name="radio5" id="useryhq" />&nbsp;使用优惠券：</p><div class="clear_float"></div>
+                        <p class="magrin">您有可用的优惠券是<span style="color:  #DC1E52;">（@ViewBag.list_01.Count）</span></p>
+                        <div id="yhq" class="magrin">
+                            <select id="consignee_city" name="consigneeParam.cityId" tabindex="3" class="fapiao_xl">
+                                <option value="01" selected="selected">
+                                    请选择优惠券
+                                </option>
+                                @foreach (var item in ViewBag.list_01)
+                                {
+                                    <option value="@item.pro_coupon_discount" name="@item.pro_coupon_id">
+                                        @(Convert.ToDouble(item.pro_coupon_discount) * 10) 折优惠券
+                                    </option>
+                                }
+
+
+                            </select>
+                            <a href="javascript:;" id="couponused">使用</a>
+                        </div>
+                        <p class="magrin">共使用了<span style="color:  #DC1E52;"><font id="yhqsy">0</font></span>张优惠券&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以优惠<span style="color:  #DC1E52;"><font id="kyyh">00.00</font>元</span></p>
+
+                    </div>
+                    <p style="color: #e60012;font-size:13px;text-align:center;line-height:24px;">注：同一订单，优惠券与优惠码不可以同时使用。</p>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+            <div id="count" style="width: 293px;height: 177px;padding: 30px;">
+                <p class="cont04">优惠券抵扣：<span style="color:#e60012">¥<font id="dis">00.00</font></span></p>
+                <p class="cont04">+运费：<span>¥<font id="pro_shipment_price">00.00</font></span></p>
+                <p class="cont04">-节省金额：<span>¥<font id="jiesheng">00.00</font></span></p>
+                <p class="cont04" style="margin-top:15px;">应付总金额：<span class="title01"> ￥<font id="tpro_price">00.00</font></span></p>
+                <p>
+                    <input type="submit" id="accounts" value="立即下单" style="cursor: pointer; font-family:microsoft yahei;" />
+
+                    <a href="@Url.Action("GoodsCart","Goods")" id="buy">返回购物车</a>
+                </p>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+
+        @Html.Hidden("user_address_id")
+        @Html.Hidden("shop_order_totalmoeny")
+        @Html.Hidden("shop_order_waynum")
+        @Html.Hidden("items")
+        @Html.Hidden("fapiao")
+        @Html.Hidden("user_coupon_id")
+
+    }
+</div>
+
+<script>
+    var user_coupon_id = $("#user_coupon_id");
+    var usercode = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+    var accounts = $("#accounts");
+    var fp = $("#fp");
+    var y = $("#y");
+    var n = $("#n");
+    var gr = $("#gr");
+    var gs = $("#gs");
+    var tpro_price = $("#tpro_price");//应付金额
+    var pro_price = $("#pro_price");//商品总金额
+    var dis = $("#dis");//折扣金额
+    var jiesheng = $("#jiesheng");//节省金额
+    tpro_price.text(pro_price.text());
+    var shop_invoice_username = $("#shop_invoice_username");
+    var shop_invoice_usercode = $("#shop_invoice_usercode");
+    var shop_invoice_company = $("#shop_invoice_company");
+    var pro_shipment_price = $("#pro_shipment_price");//运费
+    var user_address_id = $("#user_address_id");
+    var shop_order_totalmoeny = $("#shop_order_totalmoeny");
+    var shop_order_waynum = $("#shop_order_waynum");
+    var items = $("#items");
+    var tnum = $("#tnum");
+    shop_order_waynum.val(tnum.text());
+    var fapiao = $("#fapiao");
+    var yhmsy = $("#yhmsy");
+    var youhuima = $("#youhuima");
+    var radio1 = "";
+    var radio2 = "";
+    fp.hide();
+    shop_invoice_username.attr('disabled', 'true');
+    shop_invoice_usercode.attr('disabled', 'true');
+    shop_invoice_company.attr('disabled', 'true');
+
+
+    var msg = "";
+    $("input:radio[name=Radio1]").change(function () {
+
+        var g = $('input[name="Radio1"]:checked ').val();
+
+        $.ajax({
+            url: "/Goods/GoodsGetShipment",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(
+                {
+                    user_address_id: g
+                }),
+            dataType: "JSON",
+            success: function (data) {
+                if (data == "暂无配送信息") {
+                    pro_shipment_price.text("0.00");
+                    var j = parseInt(pro_price.text());
+                    tpro_price.text(j);
+                    msg = "暂无配送信息";
+                } else {
+                    pro_shipment_price.text(data);
+                    var j = parseInt(pro_price.text()) + parseInt(data);
+                    tpro_price.text(j);
+                    msg = data;
+                    shop_order_totalmoeny.val(j);
+                    user_address_id.val(g);
+
+                }
+
+            }
+        });
+    });
+
+    $("input:radio[name=Radio3]").change(function () {
+        var g = $('input[name="Radio3"]:checked ').val();
+        if (g = "gr") {
+            fapiao.val("gr");
+        } else {
+            fapiao.val("gs");
+        }
+    });
+
+    y.click(function () {
+        fp.show();
+    });
+    n.click(function () {
+        fp.hide();
+    });
+
+    gr.click(function () {
+        shop_invoice_username.removeAttr('disabled');
+        shop_invoice_usercode.removeAttr('disabled');
+        shop_invoice_company.attr('disabled', 'true');
+    });
+    gs.click(function () {
+        shop_invoice_username.attr('disabled', 'true');
+        shop_invoice_usercode.attr('disabled', 'true');
+        shop_invoice_company.removeAttr('disabled');
+    });
+    accounts.click(function () {
+        //alert("支付接口未申请，暂时无法提交");
+        //return false;
+        if (msg == "暂无配送信息" || msg == "") {
+            alert("暂无配送信息，暂时不能下单！");
+            return false;
+        } else {
+
+            $("input[name='Radio1']:checked").each(function (i, obj) {
+                radio1 = obj.value;
+            });
+            $("input[name='Radio2']:checked").each(function (i, obj) {
+                radio2 = obj.value;
+            });
+            if (shop_invoice_usercode.val() != null && shop_invoice_usercode.val() != "") {
+                if (!shop_invoice_usercode.val().match(usercode)) {
+                    alert("身份证号码格式不正确");
+                    return false;
+                }
+            }
+        }
+    });
+    var couponused = $("#couponused");
+    var kyyh = $("#kyyh");
+    var useryhm = $("#useryhm");
+    var useryhq = $("#useryhq");
+    $('#youhuima').attr("disabled", "disabled");
+    $('#consignee_city').attr("disabled", "disabled");
+    useryhq.click(function () {
+        $('#youhuima').attr("disabled", "disabled");
+        $('#consignee_city').removeAttr("disabled");
+        //优惠券使用功能
+        // var consignee_city = $("#consignee_city");
+        var yhqsy = $("#yhqsy");;
+        couponused.click(function () {
+            var consignee_city = $("#consignee_city").find("option:selected").val();
+            //  var consignee_city_name = $("#consignee_city").find("option:selected").name();
+            var consignee_city_name = $("#consignee_city").find("option:selected").attr("name");
+            user_coupon_id.val(consignee_city_name);
+            var m01 = parseFloat(pro_price.text()) * parseFloat(consignee_city);//折扣后价格
+            var m02 = parseFloat(pro_price.text()) - m01;//优惠金额
+            dis.text(m02.toFixed(2));
+            kyyh.text(m02.toFixed(2));
+            var m03 = m02 - parseFloat(pro_shipment_price.text());//节省金额
+            jiesheng.text(m03.toFixed(2));
+            var m04 = (m01 + parseFloat(pro_shipment_price.text()));//应付金额
+            tpro_price.text(m04.toFixed(2));
+            shop_order_totalmoeny.val(m04.toFixed(2));
+            if (m02 > 0) {
+                yhqsy.text("1");
+            }
+        });
+    });
+    useryhm.click(function () {
+        $('#consignee_city').attr("disabled", "disabled");
+        $('#youhuima').removeAttr("disabled");
+        //优惠码实用功能
+        var youhuima = $("#youhuima");
+        var yhmsy = $("#yhmsy");
+        var yhmsynum = $("#yhmsynum");
+        var yhmsyqs = $("#yhmsyqs");
+        yhmsy.click(function () {
+            if (youhuima.val() == "" || youhuima.val() == null) {
+                alert("请输入优惠码！");
+            } else {
+                $.ajax({
+                    url: "/Goods/YHM",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(
+                        {
+                            yhm: youhuima.val(),
+                        }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == "NO") {
+                            alert("此优惠码不可用");
+                        } else {
+                            var d = data.split("|");
+
+                            user_coupon_id.val(d[0]);
+                            var ddd = d[1];//折扣率
+                            var m01 = parseFloat(pro_price.text()) * parseFloat(ddd);//折扣后价格
+                            var m02 = parseFloat(pro_price.text()) - m01;//优惠金额
+                            dis.text(m02.toFixed(2));
+                            yhmsyqs.text(m02.toFixed(2));
+                            var m03 = m02 - parseFloat(pro_shipment_price.text());//节省金额
+                            jiesheng.text(m03.toFixed(2));
+                            var m04 = (m01 + parseFloat(pro_shipment_price.text()));//应付金额
+                            tpro_price.text(m04.toFixed(2));
+                            shop_order_totalmoeny.val(m04.toFixed(2));
+                            if (m02 > 0) {
+                                yhmsynum.text("1");
+                            }
+                        }
+
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
+
+</script>

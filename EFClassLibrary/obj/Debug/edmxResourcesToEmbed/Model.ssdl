@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="D8Mall_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="ad_info">
+    <Key>
+      <PropertyRef Name="ad_id" />
+    </Key>
+    <Property Name="ad_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ad_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="ad_img" Type="nvarchar(max)" />
+    <Property Name="ad_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="ad_sdate" Type="date" />
+    <Property Name="ad_edate" Type="date" />
+    <Property Name="ad_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="com_area">
+    <Key>
+      <PropertyRef Name="com_area_id" />
+    </Key>
+    <Property Name="com_area_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="com_area_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_parentid" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_shortname" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_lng" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_lat" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_lev" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_area_position" Type="nvarchar(max)" />
+    <Property Name="com_area_sort" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="com_article">
+    <Key>
+      <PropertyRef Name="com_article_id" />
+    </Key>
+    <Property Name="com_article_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="com_article_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_article_content" Type="ntext" />
+    <Property Name="com_article_class" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_article_userid" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_article_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="com_banner">
+    <Key>
+      <PropertyRef Name="com_banner_id" />
+    </Key>
+    <Property Name="com_banner_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="com_banner_class" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_banner_order" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_banner_url" Type="nvarchar(max)" />
+    <Property Name="com_banner_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_banner_adddate" Type="datetime" />
+    <Property Name="com_banner_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_banner_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="com_img">
+    <Key>
+      <PropertyRef Name="com_img_id" />
+    </Key>
+    <Property Name="com_img_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="com_img_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_img_alt" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_img_src" Type="nvarchar(max)" />
+    <Property Name="com_img_fk" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_img_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_img_adddate" Type="datetime" />
+    <Property Name="com_img_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="com_img_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_brand">
+    <Key>
+      <PropertyRef Name="pro_brand_id" />
+    </Key>
+    <Property Name="pro_brand_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_subclass_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_adddate" Type="datetime" />
+    <Property Name="pro_brand_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_editdate" Type="datetime" />
+    <Property Name="pro_brand_order" Type="int" />
+  </EntityType>
+  <EntityType Name="pro_class">
+    <Key>
+      <PropertyRef Name="pro_class_id" />
+    </Key>
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_class_order" Type="int" />
+    <Property Name="pro_class_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_parent" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_page" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_img" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_adddate" Type="datetime" />
+    <Property Name="pro_class_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_classsub">
+    <Key>
+      <PropertyRef Name="pro_classsub_id" />
+    </Key>
+    <Property Name="pro_classsub_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_classsub_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_classsub_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_classsub_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_classsub_adddate" Type="datetime" />
+    <Property Name="pro_classsub_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_classsub_eidtdate" Type="datetime" />
+    <Property Name="pro_classsub_order" Type="int" />
+  </EntityType>
+  <EntityType Name="pro_comment">
+    <Key>
+      <PropertyRef Name="pro_comment_id" />
+    </Key>
+    <Property Name="pro_comment_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_comment_star" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_comment_content" Type="nvarchar(max)" />
+    <Property Name="pro_sku_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_comment_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_coupon">
+    <Key>
+      <PropertyRef Name="pro_coupon_id" />
+    </Key>
+    <Property Name="pro_coupon_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_coupon_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_enddate" Type="datetime" />
+    <Property Name="pro_coupon_class" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_stastus" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_discount" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_fuliprice" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_derating" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_credit" Type="nchar" MaxLength="10" />
+    <Property Name="pro_coupon_num" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_date" Type="datetime" />
+    <Property Name="pro_coupon_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_stadate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_express">
+    <Key>
+      <PropertyRef Name="pro_express_id" />
+    </Key>
+    <Property Name="pro_express_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_express_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_express_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_express_adddate" Type="datetime" />
+    <Property Name="pro_express_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_express_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_item">
+    <Key>
+      <PropertyRef Name="pro_item_id" />
+    </Key>
+    <Property Name="pro_item_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_subclass_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_subtitle" Type="nvarchar(max)" />
+    <Property Name="pro_item_covimg" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_arrimg" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_content" Type="ntext" />
+    <Property Name="pro_item_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_adddate" Type="datetime" />
+    <Property Name="pro_item_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_editdate" Type="datetime" />
+    <Property Name="pro_item_status" Type="int" />
+    <Property Name="pro_item_order" Type="int" />
+  </EntityType>
+  <EntityType Name="pro_newsgoods">
+    <Key>
+      <PropertyRef Name="pro_newsgoods_id" />
+    </Key>
+    <Property Name="pro_newsgoods_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_sku_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_newsgoods_order" Type="int" />
+    <Property Name="pro_newsgoods_status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pro_sales">
+    <Key>
+      <PropertyRef Name="pro_sales_id" />
+    </Key>
+    <Property Name="pro_sales_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_sku_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sales_stadate" Type="datetime" />
+    <Property Name="pro_sales_enddate" Type="datetime" />
+    <Property Name="pro_sales_stastus" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sales_order" Type="int" />
+    <Property Name="pro_sales_price" Type="money" />
+  </EntityType>
+  <EntityType Name="pro_shipment">
+    <Key>
+      <PropertyRef Name="pro_shipment_id" />
+    </Key>
+    <Property Name="pro_shipment_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_express_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_starcity" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_province" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_county" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_price" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_adddate" Type="datetime" />
+    <Property Name="pro_shipment_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_shipment_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="pro_sku">
+    <Key>
+      <PropertyRef Name="pro_sku_id" />
+    </Key>
+    <Property Name="pro_sku_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_item_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_covimg" Type="nvarchar(max)" />
+    <Property Name="pro_sku_keywords" Type="nvarchar(max)" />
+    <Property Name="pro_sku_description" Type="nvarchar(max)" />
+    <Property Name="pro_sku_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_arrspe" Type="nvarchar(max)" />
+    <Property Name="pro_sku_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_adddate" Type="datetime" />
+    <Property Name="pro_sku_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_sku_editdate" Type="datetime" />
+    <Property Name="pro_sku_order" Type="int" />
+  </EntityType>
+  <EntityType Name="pro_skuitem">
+    <Key>
+      <PropertyRef Name="pro_skuitem_id" />
+    </Key>
+    <Property Name="pro_skuitem_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_sku_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_item_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_subclass_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_brand_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_price" Type="money" />
+    <Property Name="pro_skuitem_mprice" Type="money" />
+    <Property Name="pro_skuitem_pprice" Type="money" />
+    <Property Name="pro_skuitem_stock" Type="int" />
+    <Property Name="pro_skuitem_img" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_status" Type="int" />
+    <Property Name="pro_skuitem_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_adddate" Type="datetime" />
+    <Property Name="pro_skuitem_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_editdate" Type="datetime" />
+    <Property Name="pro_skuitem_order" Type="int" />
+  </EntityType>
+  <EntityType Name="pro_spe">
+    <Key>
+      <PropertyRef Name="pro_spe_id" />
+    </Key>
+    <Property Name="pro_spe_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_class_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_parent" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_subclass_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_adddate" Type="datetime" />
+    <Property Name="pro_spe_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spe_editdate" Type="datetime" />
+    <Property Name="pro_spe_order" Type="int" />
+    <Property Name="pro_spe_page" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pro_spesub">
+    <Key>
+      <PropertyRef Name="pro_spesub_id" />
+    </Key>
+    <Property Name="pro_spesub_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_spe_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_value" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_adddate" Type="datetime" />
+    <Property Name="pro_spesub_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_spesub_editdate" Type="datetime" />
+    <Property Name="pro_spesub_order" Type="int" />
+  </EntityType>
+  <EntityType Name="shop_car">
+    <Key>
+      <PropertyRef Name="shop_car_id" />
+    </Key>
+    <Property Name="shop_car_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_skuitem_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_car_spe" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_car_num" Type="int" />
+    <Property Name="shop_car_price" Type="money" />
+    <Property Name="shop_car_adddate" Type="datetime" />
+    <Property Name="shop_car_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="shop_choose">
+    <Key>
+      <PropertyRef Name="shop_choose_id" />
+    </Key>
+    <Property Name="shop_choose_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shop_order_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_choose_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shop_choose_date" Type="datetime" />
+    <Property Name="shop_choose_des" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_orderdetail_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_choose_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_choose_service" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_choose_isget" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_express_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_express_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_username" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_address" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="shop_invoice">
+    <Key>
+      <PropertyRef Name="shop_invoice_id" />
+    </Key>
+    <Property Name="shop_invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shop_invoice_class" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_invoice_username" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_invoice_usercode" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_invoice_company" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_order_id" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="shop_order">
+    <Key>
+      <PropertyRef Name="shop_order_id" />
+    </Key>
+    <Property Name="shop_order_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shop_order_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_pay_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_order_totalmoeny" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_shipping_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_order_remark" Type="nvarchar(max)" />
+    <Property Name="shop_order_buydate" Type="datetime" />
+    <Property Name="shop_order_adddate" Type="datetime" />
+    <Property Name="shop_order_editdate" Type="datetime" />
+    <Property Name="shop_order_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_order_waynum" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_order_shipmentnumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="shop_orderdetail">
+    <Key>
+      <PropertyRef Name="shop_orderdetail_id" />
+    </Key>
+    <Property Name="shop_orderdetail_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shop_order_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_skuitem_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_orderdetail_num" Type="int" />
+    <Property Name="shop_orderdetail_price" Type="money" />
+    <Property Name="shop_orderdetail_total" Type="money" />
+  </EntityType>
+  <EntityType Name="shop_pay">
+    <Key>
+      <PropertyRef Name="shop_pay_id" />
+    </Key>
+    <Property Name="shop_pay_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shop_pay_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_pay_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_pay_adddate" Type="datetime" />
+    <Property Name="shop_pay_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_pay_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="shop_shipping">
+    <Key>
+      <PropertyRef Name="shop_shipping_id" />
+    </Key>
+    <Property Name="shop_shipping_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="shop_shipping_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_shipping_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_shipping_adddate" Type="datetime" />
+    <Property Name="shop_shipping_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="shop_shipping_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Sms">
+    <Key>
+      <PropertyRef Name="smsid" />
+    </Key>
+    <Property Name="smsid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SendID" Type="nvarchar(max)" />
+    <Property Name="SendToPhone" Type="nvarchar(max)" />
+    <Property Name="SendStatus" Type="nvarchar(max)" />
+    <Property Name="SendContent" Type="nvarchar(max)" />
+    <Property Name="SendDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sys_admin">
+    <Key>
+      <PropertyRef Name="sys_admin_id" />
+    </Key>
+    <Property Name="sys_admin_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sys_admin_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_admin_pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_admin_role" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_admin_satatus" Type="int" />
+    <Property Name="sys_admin_addadduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_admin_adddate" Type="datetime" />
+    <Property Name="sys_admin_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_admin_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sys_log">
+    <Key>
+      <PropertyRef Name="sys_log_id" />
+    </Key>
+    <Property Name="sys_log_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sys_log_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_log_ip" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_log_content" Type="nvarchar(max)" />
+    <Property Name="sys_admin_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_log_adddate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sys_purview">
+    <Key>
+      <PropertyRef Name="sys_purview_id" />
+    </Key>
+    <Property Name="sys_purview_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sys_purview_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_purview_page" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_purview_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_purview_adddate" Type="datetime" />
+    <Property Name="sys_purview_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_purview_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sys_role">
+    <Key>
+      <PropertyRef Name="sys_role_id" />
+    </Key>
+    <Property Name="sys_role_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sys_role_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_role_purview" Type="nvarchar(max)" />
+    <Property Name="sys_role_adduser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_role_addate" Type="datetime" />
+    <Property Name="sys_role_edituser" Type="nvarchar" MaxLength="50" />
+    <Property Name="sys_role_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_address">
+    <Key>
+      <PropertyRef Name="user_address_id" />
+    </Key>
+    <Property Name="user_address_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_province" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_county" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_detail" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_adddate" Type="datetime" />
+    <Property Name="user_address_editdate" Type="datetime" />
+    <Property Name="user_address_ZipCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_address_tags" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_bank">
+    <Key>
+      <PropertyRef Name="user_bank_id" />
+    </Key>
+    <Property Name="user_bank_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_card" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_bank_adddate" Type="datetime" />
+    <Property Name="user_bank_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_basic">
+    <Key>
+      <PropertyRef Name="user_basic_id" />
+    </Key>
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_basic_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_basic_login" Type="nvarchar(max)" />
+    <Property Name="user_basic_tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_email" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_adddate" Type="datetime" />
+    <Property Name="user_basic_editdate" Type="datetime" />
+    <Property Name="user_basic_tels" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_emails" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_collect">
+    <Key>
+      <PropertyRef Name="user_collect_id" />
+    </Key>
+    <Property Name="user_collect_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="pro_skuitem_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_collect_adddate" Type="datetime" />
+    <Property Name="user_collect_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_coupon">
+    <Key>
+      <PropertyRef Name="user_coupon_id" />
+    </Key>
+    <Property Name="user_coupon_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pro_coupon_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_coupon_stastus" Type="nvarchar" MaxLength="50" />
+    <Property Name="pro_coupon_class" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_detail">
+    <Key>
+      <PropertyRef Name="user_detail_id" />
+    </Key>
+    <Property Name="user_detail_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_lastname" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_birthday" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_photo" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_tel" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_zipcode" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_province" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_city" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_county" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_address" Type="nvarchar(max)" />
+    <Property Name="user_detail_Fcard" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_Bcard" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_detail_adddate" Type="datetime" />
+    <Property Name="user_detail_editdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_info">
+    <Key>
+      <PropertyRef Name="user_info_id" />
+    </Key>
+    <Property Name="user_info_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_info_title" Type="nvarchar(max)" />
+    <Property Name="user_info_content" Type="ntext" />
+    <Property Name="user_info_source" Type="nvarchar(max)" />
+    <Property Name="user_basic_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="user_info_date" Type="datetime" />
+    <Property Name="user_info_sta" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="D8Mall_dbModelStoreContainer">
+    <EntitySet Name="ad_info" EntityType="Self.ad_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="com_area" EntityType="Self.com_area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="com_article" EntityType="Self.com_article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="com_banner" EntityType="Self.com_banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="com_img" EntityType="Self.com_img" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_brand" EntityType="Self.pro_brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_class" EntityType="Self.pro_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_classsub" EntityType="Self.pro_classsub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_comment" EntityType="Self.pro_comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_coupon" EntityType="Self.pro_coupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_express" EntityType="Self.pro_express" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_item" EntityType="Self.pro_item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_newsgoods" EntityType="Self.pro_newsgoods" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_sales" EntityType="Self.pro_sales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_shipment" EntityType="Self.pro_shipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_sku" EntityType="Self.pro_sku" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_skuitem" EntityType="Self.pro_skuitem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_spe" EntityType="Self.pro_spe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pro_spesub" EntityType="Self.pro_spesub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_car" EntityType="Self.shop_car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_choose" EntityType="Self.shop_choose" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_invoice" EntityType="Self.shop_invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_order" EntityType="Self.shop_order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_orderdetail" EntityType="Self.shop_orderdetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_pay" EntityType="Self.shop_pay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shop_shipping" EntityType="Self.shop_shipping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sms" EntityType="Self.Sms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sys_admin" EntityType="Self.sys_admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sys_log" EntityType="Self.sys_log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sys_purview" EntityType="Self.sys_purview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sys_role" EntityType="Self.sys_role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_address" EntityType="Self.user_address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_bank" EntityType="Self.user_bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_basic" EntityType="Self.user_basic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_collect" EntityType="Self.user_collect" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_coupon" EntityType="Self.user_coupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_detail" EntityType="Self.user_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_info" EntityType="Self.user_info" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <ul class="list-group list_group">
+            <li class="list-group-item login_title text-center" style="font-size:16px;"><strong>欢迎注册cuckoo福库商城</strong> </li>
+            <li class="list-group-item">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            for (int i = 0; i < ViewBag.bannerlist.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="item active">
+                                        <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                            <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                            <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">会员名称</span>
+                    <input id="user_basic_login" type="text" class="form-control" placeholder="请输入会员名称">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon ">会员性别</span>
+                    <input id="user_detail_gender" type="text" class="form-control" placeholder="请输入会员性别">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">会员生日</span>
+                    <input id="user_detail_birthday" type="date" class="form-control" placeholder="请输入会员生日">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">登录密码</span>
+                    <input id="user_basic_pwd" type="password" class="form-control" placeholder="请输入登录密码">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">确认密码</span>
+                    <input id="user_basic_pwd_reg" type="password" class="form-control" placeholder="请输入确认密码">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon ">电子邮箱</span>
+                    <input id="user_basic_email" type="email" class="form-control" placeholder="请输入电子邮箱">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">手机号码</span>
+                    <input id="user_basic_tel" type="tel" class="form-control" placeholder="请输入手机号码">
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="input-group input-group-lg">
+                    <input id="regcode" type="text" class="form-control" placeholder="手机验证码">
+                    <span class="input-group-addon"><button id="btn_regin" style="border:none;background-color:transparent;margin:-10px;">获取</button></span>
+
+                </div>
+            </li>
+            <li class="list-group-item">
+                <button id="submit" type="button" class="btn  btn-block btn-default btn-success">立即注册</button>
+            </li>
+            <li class="list-group-item" style="overflow:hidden">
+
+                <span class="pull-right">我有账号，来这里<a href="@Url.Action("Index","Login")" style="color:#ff0000">登录</a> </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var regpwd = /^[0-9a-zA-Z_]{6,18}$/;
+    var regphone = /^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/;
+    var regemail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    var submit = $("#submit");
+    var contaction = $("#user_basic_login");//会员名
+    var user_detail_gender = $("#user_detail_gender");
+    var psw = $("#user_basic_pwd");//密码
+    var rpsw = $("#user_basic_pwd_reg");//确认密码
+    var eml = $("#user_basic_email");//电子邮箱
+    var tel = $("#user_basic_tel");//手机号码
+    var regcode = $("#regcode");//验证码
+    var captcha = $("#captcha");
+    var err = $("#err");
+    var dater = $("#user_detail_birthday");//生日
+    var btn_regin = $("#btn_regin");//获取验证码按钮
+    var btn_regout = $("#btn_regout");//计时
+    var sendregcode = "";//发送的验证码
+
+    var si = 60;
+    btn_regin.click(function () {
+
+        if (tel.val() == null || tel.val() == "") {
+            alert("请输入手机号码");
+        } else if (!tel.val().match(regphone)) {
+            alert("手机号码格式不正确");
+        } else {
+            settime(btn_regin);
+            $.ajax({
+                url: "/SMS?phone=" + tel.val(),
+                type: 'Get',
+                dataType: "JSON",
+                success: function (data) {
+                    sendregcode = data;
+                }
+            });
+        }
+    });
+
+    function settime(val) {
+        if (si == 0) {
+            val.removeAttr("disabled");
+            val.text("获取");
+            si = 60;
+        } else {
+
+            val.attr("disabled", "disabled");
+            if (si < 10) {
+                val.text("0" + si + "S");
+            } else {
+                val.text(si + "S");
+            }
+            si--;
+            setTimeout(function () {
+                settime(val)
+            }, 1000)
+        }
+    }
+
+
+    submit.click(function () {
+        if (contaction.val() == null || contaction.val() == "") {
+
+            alert("请输入会员名称！");
+        }
+        else if (user_detail_gender.val() == null || user_detail_gender.val() == "") {
+
+            alert("请输入会员性别！");
+        } else if (user_detail_gender.val() != "男" && user_detail_gender.val() != "女") {
+            alert("会员性别只允许输入男或者女！");
+        }
+        else if (dater.val() == null || dater.val() == "") {
+
+            alert("请选择生日日期！");
+        } else if (psw.val() == null || psw.val() == "") {
+
+            alert("请输入登录密码！");
+        } else if (!psw.val().match(regpwd)) {
+
+            alert("密码格式不正确！");
+        }
+        else if (rpsw.val() == null || rpsw.val() == "") {
+
+            alert("请输入确认密码！");
+        }
+        else if (rpsw.val() != psw.val()) {
+
+            alert("密码不一致！");
+        } else if (eml.val() == "" || eml.val() == null) {
+
+            alert("请输入电子邮箱！");
+        } else if (!eml.val().match(regemail)) {
+
+            alert("电子邮箱格式不正确！");
+        }
+        else if (tel.val() == null || tel.val() == "") {
+
+            alert("请输入手机号码！");
+        } else if (!tel.val().match(regphone)) {
+
+            alert("手机号码格式不正确！");
+        }
+        else if (regcode.val() == null || regcode.val() == "") {
+
+            alert("请输入手机验证码！");
+        } else if (regcode.val() != sendregcode) {
+
+            alert("手机验证码错误！");
+        } else {
+            $("#submit").attr("disabled", "disabled");
+            $("#submit").text("正在注册");
+            $.ajax({
+                url: "/Register/RegisterCreate",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        user_basic_login: contaction.val(),
+                        user_basic_pwd: psw.val(),
+                        user_basic_tel: tel.val(),
+                        user_detail_gender: user_detail_gender.val(),
+                        user_detail_birthday: dater.val(),
+                        user_basic_email: eml.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "UNO") {
+                        alert("用户名已经存在，请重新填写！");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("立即注册");
+                    } else if (data == "PNO") {
+                        alert("手机号已经存在，请重新填写！");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("立即注册");
+                    } else if (data == "NO") {
+
+                        alert("注册失败！");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("立即注册");
+                    } else {
+                        alert("恭喜您成为福库购物商城会员！");
+                        window.location.href = "/Personal";
+                    }
+                }
+            });
+
+        }
+    });
+
+
+</script>

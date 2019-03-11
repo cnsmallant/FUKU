@@ -1,0 +1,340 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                @{
+                    for (int i = 0; i < ViewBag.bannerlist.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="item active">
+                                <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                    <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <a href="@ViewBag.bannerlist[i].com_banner_url">
+                                    <img src="http://www.cuckooshop.cn/@ViewBag.bannerlist[i].com_img_src" class="img-responsive">
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="thumbnail content_thumbnail" style="color:#717171;padding-top:10px;">
+            <a href="@Url.Action("Index", "Personal")">
+                <div class="col-xs-3 text-center"><p><img src="/img/001.png" class="img-responsive center-block" /></p><p>我的</p></div>
+            </a>
+            <a href="@Url.Action("GoodsNews", "Goods")">
+                <div class="col-xs-3 text-center"><p><img src="/img/news.png" class="img-responsive  center-block" /></p><p>新品</p></div>
+            </a>
+            <a href="@Url.Action("GoodsSales", "Goods")">
+                <div class="col-xs-3 text-center"><p><img src="/img/hots.png" class="img-responsive  center-block" /></p><p>促销</p></div>
+            </a>
+            <a href="@Url.Action("Index", "ShoppingGuide" , new { classid="process" })">
+                <div class="col-xs-3 text-center"><p><img src="/img/004.png" class="img-responsive  center-block" /></p><p>指南</p></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row content_thumbnail" style="color:#717171;padding-top:10px;">
+        @foreach (var item in ViewBag.recommend)
+        {
+            <a href="@Url.Action("GoodsDetails", "Goods" , new { id=@item.pro_sku_code })" style="color:#242221">
+                <div class="col-xs-6 text-center" style="padding-left:3px;padding-right:3px; position:relative">
+                    <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p>
+                    <p style="position:absolute;left:5px;top:5px;">@item.pro_brand_id</p>
+                    <p style="position:absolute;left:5px;top:20px;">&yen;<span>@item.pro_skuitem_price</span></p>
+                    <span style="position:absolute;right:4px;top:-2px; background-color:#e60012; color:#ffffff;padding:2px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">荐</span>
+                </div>
+            </a>
+        }
+
+
+    </div>
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">超高压电饭煲系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "RiceCooker"})"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent; margin-bottom:0px;">
+            @foreach (var item in ViewBag.list2)
+            {
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div">
+                        <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p>
+                        <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+
+
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">原装进口IH高压电饭煲系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "RiceCooker" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            @{
+                int j = 0;
+                foreach (var item in ViewBag.list3)
+                {
+
+                    if (j == 0)
+                    {
+
+                        <a href="@item.com_banner_url">
+                            <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></div>
+                        </a>
+                    }
+                    else
+                    {
+
+                        <a href="@item.com_banner_url">
+                            <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                        </a>
+                    }
+                    j++;
+                }
+            }
+        </div>
+
+    </div>
+
+
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">安心空气净化器系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "HomeAppliances" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class="content_thumbnail" style="background-color:transparent;">
+            <a href="@ViewBag.jhqadurl">
+                <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@ViewBag.jhqimg" class="img-responsive" /></div>
+            </a>
+            @foreach (var item in ViewBag.list4_1)
+            {
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+            @foreach (var item in ViewBag.list4_2)
+            {
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">原汁机系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "KitchenAppliances" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            <a href="@ViewBag.yzjadurl">
+                <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@ViewBag.yzjimg" class="img-responsive" /></div>
+            </a>
+
+            @foreach (var item in ViewBag.list5)
+            {
+
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+
+
+        </div>
+
+    </div>
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">重汤机系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "KitchenAppliances" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            <a href="@ViewBag.ztjadurl">
+                <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@ViewBag.ztjimg" class="img-responsive" /></div>
+            </a>
+            @foreach (var item in ViewBag.list6)
+            {
+
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+
+        </div>
+
+    </div>
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">电烤盘系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "KitchenAppliances" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            <a href="@ViewBag.dkpadurl">
+                <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@ViewBag.dkpimg" class="img-responsive" /></div>
+            </a>
+            @foreach (var item in ViewBag.list7)
+            {
+
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+
+        </div>
+
+    </div>
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">电水壶系列</span></span>
+                <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "KitchenAppliances" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            <a href="@ViewBag.dshadurl">
+                <div class="col-xs-12 text-left content_div"><img src="http://www.cuckooshop.cn/@ViewBag.dshimg" class="img-responsive" /></div>
+            </a>
+            @foreach (var item in ViewBag.list8)
+            {
+
+                <a href="@item.com_banner_url">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.com_img_src" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p><span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+
+        </div>
+
+    </div>
+    <div class="row content_thumbnail" style="background-color:transparent;">
+        <div class="page-header">
+            <div class=" content_thumbnail div_pager">
+                <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">特价商品</span></span>
+                <span class="pull-right"><a href="@Url.Action("GoodsNews","Goods")"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+            </div>
+        </div>
+        <div class=" content_thumbnail" style="background-color:transparent;">
+            @foreach (var item in ViewBag.goodes)
+            {
+                <a href="@Url.Action("GoodsDetails", "Goods", new { id = @item.pro_sku_code })">
+                    <div class="col-xs-6 text-left content_div"> <p><img src="http://www.cuckooshop.cn/@item.pro_sku_covimg" class="img-responsive" /></p> <p>@item.pro_brand_id</p> <p>&yen;<span>@item.pro_skuitem_price</span></p></div>
+                </a>
+            }
+
+
+
+        </div>
+
+    </div>
+    <div class="row content_thumbnail_footer text-center">
+        <div class="col-xs-12" style="padding-top:10px;">
+            <div class="col-xs-3"><img src="/img/swep_03.jpg" class="img-responsive" /></div>
+            <div class="col-xs-3"><img src="/img/swep_05.jpg" class="img-responsive" /></div>
+            <div class="col-xs-3"><img src="/img/swep_07.jpg" class="img-responsive" /></div>
+            <div class="col-xs-3"><img src="/img/swep_09.jpg" class="img-responsive" /></div>
+        </div>
+        <div class="col-xs-12" style="margin-top:5px;  padding-bottom:10px;">
+            Copyright&nbsp;&copy;&nbsp;@{ViewBag.date = DateTime.Now.ToString("yyyy");}@ViewBag.date&nbsp;青岛福库电子有限公司<br />
+            <a href="http://www.miibeian.gov.cn/" target="_blank" style="color:white">  ICP备案：鲁ICP备12012005号-1</a>
+            <span style="display:none"> 技术支持：<a href="http://www.dongbaqu.com/" target="_blank">东八区</a></span>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .modal-content {
+        position: relative;
+    }
+</style>
+
+<div id="mySmallModalLabel" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="background-color:transparent;border-color:transparent;border:0px;">
+    <div class="modal-dialog modal-sm" style="border-color:transparent;border:0px;">
+        <div style="padding:0px; background-color:transparent; border-color:transparent; border:0px;">
+           
+               
+          
+            <div style="width:300px; margin:0 auto">
+                <a id="gb" href="javascript:;" title="关闭">
+                    <div style="background-color: red; height:27px; width:32px;text-align:center; padding-top:5px;float:right">
+                        <span style="color:#ffffff;">X</span>
+                    </div>
+                </a>
+                <a id="Aid">
+                    <img id="imgA" class="img-responsive  center-block;" style="margin: 0 auto; display:block" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //var Mask = $("#Mask");
+    //var ad = $("#ad");
+    var gb = $("#gb");
+    gb.click(function () {
+    
+        $('#mySmallModalLabel').modal('hide');
+    });
+    $(function () {
+        $.ajax(
+            {
+                url: "/Home/Ad",
+                type: 'POST',
+                success: function (data) {
+
+                    if (data == "NO") {
+                        $('#mySmallModalLabel').modal('hide');
+                    } else {
+                        $('#mySmallModalLabel').modal('show');
+                        var com_img_src = eval(data).com_img_src;
+                        var ad_title = eval(data).ad_title;
+                        var ad_img = eval(data).ad_img;
+                        $('#Aid').attr('href', ad_img);
+                        $('#imgA').attr('src', com_img_src);
+                    }
+                }
+            });
+    });
+
+</script>

@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "账户安全";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">账户安全</p>
+        </div>
+        <div id="con">
+            <div class="box12">
+                <span class="title10" style="margin-right: 20px;">安全等级</span>
+                <span class="title05" style="margin: 0;font-weight: bold;" id="title05">80</span><span class="cont04" style="font-weight: normal;">分</span>
+                <span id="layer01"><span id="layer02" style="width:80%"></span></span>
+                <span class="cont04" style="font-weight: normal;">存在<span class="Tips3" style="float: none !important;display: inline-block;font-weight: bold;color: #DC1E52;font-size: 20px;" id="Tips3">1</span>项风险</span>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0" id="table03">
+                <tr>
+                    <td class="img_ico"><img src="/img/zh_s1.png" /></td>
+                    <td>
+                        <p class="title10" style="padding: 0 !important; line-height: 25px !important;">账号密码</p>
+                        <p class="cont13">用于保护账号信息和登录安全</p>
+
+                    </td>
+                    <td class="menu"><a href="javascript:;" class="revise" id="pwd_xg">修改</a></td>
+                </tr>
+                <tr>
+                    <td class="img_ico"><img src="/img/zh_s2.png" /></td>
+                    <td>
+                        <p class="title10" style="padding: 0 !important; line-height: 25px !important;">
+                            安全邮箱 @ViewBag.mailbox  <span id="msg" style="color:red"></span>
+                        </p>
+                        <p class="cont13">安全邮箱可以用于置密码或其他安全验证</p>
+
+                    </td>
+                    <td class="menu"><a href="javascript:;" class="revise" id="xgyx">修改</a></td>
+                </tr>
+                <tr>
+                    <td class="img_ico"><img src="/img/zh_s3.png" /></td>
+                    <td>
+                        <p class="title10" style="padding: 0 !important; line-height: 25px !important;">安全手机</p>
+                        <p class="cont13" style="color: #DC1E52;">安全手机可以用于重置密码或其他安全验证</p>
+
+                    </td>
+                    <td class="menu"><a href="@Url.Action("VerifySecurityPhone","Personal")" class="revise">修改</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+    @Html.Hidden("mailbox")
+    @Html.Hidden("mailboxs")
+    
+</div>
+<style>
+    .box {
+        background: #FFFFFF;
+        height: 34px;
+        width: 258px;
+        border: 1px solid #808080;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="cover" id="pwd">
+    <div id="opc" style="width:350px;height:250px; top:200px;">
+        <div id="aler_con" style="width:350px;height:250px;">
+            <p class="alertHead">修改密码<a href="javascript:;" style="float:right;margin-right:16px;color:#fff;" id="pwdc">×</a></p>
+            @using (Html.BeginForm("PersonalPassword", "Personal", FormMethod.Post))
+            {
+                <div class="container01" style="text-align:center; margin:0px auto; width:300px">
+                    <p>@Html.TextBox("user_basic_ypwd", null, new { type = "password", @class = "box", @placeholder = "请输入原密码" })</p>
+                    <p>@Html.TextBox("user_basic_pwd", null, new { type = "password", @class = "box", @placeholder = "请设置新密码" })</p>
+                    <p>@Html.TextBox("user_basic_pwd_reg", null, new { type = "password", @class = "box", @placeholder = "请确认新密码" })</p>
+                    <p><input type="submit" id="submit_pwd" value="保存" class="submitbtu" style="width:260px"></p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    //修改密码
+    var regpwd = /^[0-9a-zA-Z_]{6,18}$/;
+    var pwd_xg = $("#pwd_xg");
+    var pwd = $("#pwd");
+    var pwdc = $("#pwdc");
+    var user_basic_pwd = $("#user_basic_pwd");
+    var user_basic_pwd_reg = $("#user_basic_pwd_reg");
+    var submit_pwd = $("#submit_pwd");
+    var user_basic_ypwd = $("#user_basic_ypwd");
+    var xgyx = $("#xgyx");//修改邮箱按钮
+    var layer02 = $("#layer02");
+    var mailbox = $("#mailbox");
+    var mailboxs = $("#mailboxs");
+    if (mailboxs.val()=="已认证") {
+        $("#layer02").width("100%");
+        $("#Tips3").text("0");
+        $("#title05").text("100");
+    } else {
+        $("#msg").text("请尽快认证/设置安全邮箱！");
+    }
+    pwd.hide();
+    pwd_xg.click(function () {
+        pwd.show();
+    });
+    pwdc.click(function () {
+        pwd.hide();
+    });
+
+    submit_pwd.click(function () {
+
+        if (user_basic_ypwd.val() == null || user_basic_ypwd.val() == "") {
+            alert("请输入原密码");
+            return false;
+        }
+        if (user_basic_ypwd.val() != "" || user_basic_ypwd.val() != null) {
+            $.ajax({
+                url: "/Personal/OldPassword",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        user_basic_ypwd: user_basic_ypwd.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("原密码错误");
+                        user_basic_ypwd.val("");
+                        return false;
+                    }
+                }
+            });
+        }
+
+        if (user_basic_pwd.val() == null || user_basic_pwd.val() == "") {
+            alert("请设置新密码");
+            return false;
+        } if (user_basic_pwd_reg.val() == null || user_basic_pwd_reg.val() == "") {
+            alert("请确认新密码");
+            return false;
+        }
+        if (!user_basic_pwd.val().match(regpwd)) {
+            alert("密码格式不正确");
+            return false;
+        }
+        if (user_basic_pwd.val() != user_basic_pwd_reg.val()) {
+            alert("密码不一致");
+            return false;
+        }
+
+    });
+
+    xgyx.click(function () {
+        $.ajax({
+            url: "/Personal/IsOldMailbox?phone=" + mailbox.val(),
+            type: 'POST',
+            dataType: "JSON",
+            success: function (data) {
+                if (data == "OK") {
+                    window.location.href = "/Personal/VerifyOldMailbox";
+                } else {
+                    window.location.href = "/Personal/VerifyNewMailbox";
+                }
+            }
+        });
+    });
+
+
+</script>

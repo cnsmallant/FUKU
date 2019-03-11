@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="D8Mall_dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="pro_brand">
+    <Key>
+      <PropertyRef Name="pro_brand_id" />
+    </Key>
+    <Property Name="pro_brand_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_subclass_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_brand_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_brand_order" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pro_class">
+    <Key>
+      <PropertyRef Name="pro_class_id" />
+    </Key>
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_class_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_class_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_class_order" Type="Int32" />
+    <Property Name="pro_parent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_page" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pro_item">
+    <Key>
+      <PropertyRef Name="pro_item_id" />
+    </Key>
+    <Property Name="pro_item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_subclass_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_covimg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_arrimg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_item_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_item_status" Type="Int32" />
+    <Property Name="pro_item_order" Type="Int32" />
+    <Property Name="pro_item_subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pro_skuitem">
+    <Key>
+      <PropertyRef Name="pro_skuitem_id" />
+    </Key>
+    <Property Name="pro_skuitem_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_sku_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_subclass_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_brand_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_skuitem_mprice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_skuitem_pprice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_skuitem_stock" Type="Int32" />
+    <Property Name="pro_skuitem_img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_status" Type="Int32" />
+    <Property Name="pro_skuitem_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_skuitem_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_skuitem_order" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pro_spe">
+    <Key>
+      <PropertyRef Name="pro_spe_id" />
+    </Key>
+    <Property Name="pro_spe_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_subclass_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_spe_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_spe_order" Type="Int32" />
+    <Property Name="pro_spe_parent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_page" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user_basic">
+    <Key>
+      <PropertyRef Name="user_basic_id" />
+    </Key>
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_basic_login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_adddate" Type="DateTime" Precision="3" />
+    <Property Name="user_basic_editdate" Type="DateTime" Precision="3" />
+    <Property Name="user_basic_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_basic_tels" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_emails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user_detail">
+    <Key>
+      <PropertyRef Name="user_detail_id" />
+    </Key>
+    <Property Name="user_detail_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_adddate" Type="DateTime" Precision="3" />
+    <Property Name="user_detail_editdate" Type="DateTime" Precision="3" />
+    <Property Name="user_detail_Fcard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_Bcard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_birthday" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_detail_zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="D8MallEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="pro_brand" EntityType="Self.pro_brand" />
+    <EntitySet Name="pro_class" EntityType="Self.pro_class" />
+    <EntitySet Name="pro_item" EntityType="Self.pro_item" />
+    <EntitySet Name="pro_skuitem" EntityType="Self.pro_skuitem" />
+    <EntitySet Name="pro_spe" EntityType="Self.pro_spe" />
+    <EntitySet Name="user_basic" EntityType="Self.user_basic" />
+    <EntitySet Name="user_detail" EntityType="Self.user_detail" />
+    <EntitySet Name="com_area" EntityType="D8Mall_dbModel.com_area" />
+    <EntitySet Name="user_address" EntityType="D8Mall_dbModel.user_address" />
+    <EntitySet Name="pro_classsub" EntityType="D8Mall_dbModel.pro_classsub" />
+    <EntitySet Name="pro_spesub" EntityType="D8Mall_dbModel.pro_spesub" />
+    <EntitySet Name="user_bank" EntityType="D8Mall_dbModel.user_bank" />
+    <EntitySet Name="user_collect" EntityType="D8Mall_dbModel.user_collect" />
+    <EntitySet Name="com_img" EntityType="D8Mall_dbModel.com_img" />
+    <EntitySet Name="shop_order" EntityType="D8Mall_dbModel.shop_order" />
+    <EntitySet Name="shop_orderdetail" EntityType="D8Mall_dbModel.shop_orderdetail" />
+    <EntitySet Name="shop_pay" EntityType="D8Mall_dbModel.shop_pay" />
+    <EntitySet Name="shop_shipping" EntityType="D8Mall_dbModel.shop_shipping" />
+    <EntitySet Name="shop_car" EntityType="D8Mall_dbModel.shop_car" />
+    <EntitySet Name="sys_admin" EntityType="D8Mall_dbModel.sys_admin" />
+    <EntitySet Name="sys_purview" EntityType="D8Mall_dbModel.sys_purview" />
+    <EntitySet Name="sys_role" EntityType="D8Mall_dbModel.sys_role" />
+    <EntitySet Name="sys_log" EntityType="D8Mall_dbModel.sys_log" />
+    <EntitySet Name="pro_sku" EntityType="D8Mall_dbModel.pro_sku" />
+    <EntitySet Name="pro_express" EntityType="D8Mall_dbModel.pro_express" />
+    <EntitySet Name="pro_shipment" EntityType="D8Mall_dbModel.pro_shipment" />
+    <EntitySet Name="com_banner" EntityType="D8Mall_dbModel.com_banner" />
+    <EntitySet Name="pro_newsgoods" EntityType="D8Mall_dbModel.pro_newsgoods" />
+    <EntitySet Name="pro_sales" EntityType="D8Mall_dbModel.pro_sales" />
+    <EntitySet Name="pro_coupon" EntityType="D8Mall_dbModel.pro_coupon" />
+    <EntitySet Name="user_coupon" EntityType="D8Mall_dbModel.user_coupon" />
+    <EntitySet Name="shop_invoice" EntityType="D8Mall_dbModel.shop_invoice" />
+    <EntitySet Name="Sms" EntityType="D8Mall_dbModel.Sms" />
+    <EntitySet Name="com_article" EntityType="D8Mall_dbModel.com_article" />
+    <EntitySet Name="pro_comment" EntityType="D8Mall_dbModel.pro_comment" />
+    <EntitySet Name="shop_choose" EntityType="D8Mall_dbModel.shop_choose" />
+    <EntitySet Name="user_info" EntityType="D8Mall_dbModel.user_info" />
+  </EntityContainer>
+  <EntityType Name="com_area">
+    <Key>
+      <PropertyRef Name="com_area_id" />
+    </Key>
+    <Property Name="com_area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="com_area_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_parentid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_lng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_lev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="com_area_sort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user_address">
+    <Key>
+      <PropertyRef Name="user_address_id" />
+    </Key>
+    <Property Name="user_address_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_adddate" Type="DateTime" Precision="3" />
+    <Property Name="user_address_editdate" Type="DateTime" Precision="3" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_tags" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pro_classsub">
+    <Key>
+      <PropertyRef Name="pro_classsub_id" />
+    </Key>
+    <Property Name="pro_classsub_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_classsub_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_classsub_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_classsub_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_classsub_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_classsub_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_classsub_eidtdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_classsub_order" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pro_spesub">
+    <Key>
+      <PropertyRef Name="pro_spesub_id" />
+    </Key>
+    <Property Name="pro_spesub_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spe_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_spesub_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_spesub_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_spesub_order" Type="Int32" />
+  </EntityType>
+  <EntityType Name="user_bank">
+    <Key>
+      <PropertyRef Name="user_bank_id" />
+    </Key>
+    <Property Name="user_bank_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_card" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_adddate" Type="DateTime" Precision="3" />
+    <Property Name="user_bank_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_collect">
+    <Key>
+      <PropertyRef Name="user_collect_id" />
+    </Key>
+    <Property Name="user_collect_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_collect_adddate" Type="DateTime" Precision="3" />
+    <Property Name="user_collect_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="com_img">
+    <Key>
+      <PropertyRef Name="com_img_id" />
+    </Key>
+    <Property Name="com_img_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_alt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_src" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_adddate" Type="DateTime" Precision="3" />
+    <Property Name="com_img_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_img_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="shop_order">
+    <Key>
+      <PropertyRef Name="shop_order_id" />
+    </Key>
+    <Property Name="shop_order_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_pay_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_shipping_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_buydate" Type="DateTime" Precision="3" />
+    <Property Name="shop_order_adddate" Type="DateTime" Precision="3" />
+    <Property Name="shop_order_editdate" Type="DateTime" Precision="3" />
+    <Property Name="shop_order_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_waynum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_totalmoeny" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_shipmentnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="shop_orderdetail">
+    <Key>
+      <PropertyRef Name="shop_orderdetail_id" />
+    </Key>
+    <Property Name="shop_orderdetail_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_orderdetail_num" Type="Int32" />
+    <Property Name="shop_orderdetail_price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="shop_orderdetail_total" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="shop_pay">
+    <Key>
+      <PropertyRef Name="shop_pay_id" />
+    </Key>
+    <Property Name="shop_pay_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_pay_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_pay_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_pay_adddate" Type="DateTime" Precision="3" />
+    <Property Name="shop_pay_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_pay_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="shop_shipping">
+    <Key>
+      <PropertyRef Name="shop_shipping_id" />
+    </Key>
+    <Property Name="shop_shipping_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_shipping_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_shipping_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_shipping_adddate" Type="DateTime" Precision="3" />
+    <Property Name="shop_shipping_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_shipping_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="shop_car">
+    <Key>
+      <PropertyRef Name="shop_car_id" />
+    </Key>
+    <Property Name="shop_car_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_skuitem_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_car_spe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_car_num" Type="Int32" />
+    <Property Name="shop_car_price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="shop_car_adddate" Type="DateTime" Precision="3" />
+    <Property Name="shop_car_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="sys_admin">
+    <Key>
+      <PropertyRef Name="sys_admin_id" />
+    </Key>
+    <Property Name="sys_admin_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_addadduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_adddate" Type="DateTime" Precision="3" />
+    <Property Name="sys_admin_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_editdate" Type="DateTime" Precision="3" />
+    <Property Name="sys_admin_satatus" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sys_purview">
+    <Key>
+      <PropertyRef Name="sys_purview_id" />
+    </Key>
+    <Property Name="sys_purview_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sys_purview_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_purview_page" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_purview_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_purview_adddate" Type="DateTime" Precision="3" />
+    <Property Name="sys_purview_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_purview_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="sys_role">
+    <Key>
+      <PropertyRef Name="sys_role_id" />
+    </Key>
+    <Property Name="sys_role_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_role_purview" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sys_role_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_role_addate" Type="DateTime" Precision="3" />
+    <Property Name="sys_role_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_role_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="sys_log">
+    <Key>
+      <PropertyRef Name="sys_log_id" />
+    </Key>
+    <Property Name="sys_log_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_log_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_log_ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_log_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sys_admin_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sys_log_adddate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pro_sku">
+    <Key>
+      <PropertyRef Name="pro_sku_id" />
+    </Key>
+    <Property Name="pro_sku_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_item_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_class_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_covimg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_arrspe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_sku_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_editdate" Type="DateTime" Precision="3" />
+    <Property Name="pro_sku_order" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pro_express">
+    <Key>
+      <PropertyRef Name="pro_express_id" />
+    </Key>
+    <Property Name="pro_express_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_express_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_express_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_express_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_express_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_express_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pro_shipment">
+    <Key>
+      <PropertyRef Name="pro_shipment_id" />
+    </Key>
+    <Property Name="pro_shipment_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_express_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_starcity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_county" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_adddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_shipment_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_shipment_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="com_banner">
+    <Key>
+      <PropertyRef Name="com_banner_id" />
+    </Key>
+    <Property Name="com_banner_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_adduser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_adddate" Type="DateTime" Precision="3" />
+    <Property Name="com_banner_edituser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_banner_editdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pro_newsgoods">
+    <Key>
+      <PropertyRef Name="pro_newsgoods_id" />
+    </Key>
+    <Property Name="pro_newsgoods_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_sku_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_newsgoods_order" Type="Int32" />
+    <Property Name="pro_newsgoods_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pro_sales">
+    <Key>
+      <PropertyRef Name="pro_sales_id" />
+    </Key>
+    <Property Name="pro_sales_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_sku_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sales_stadate" Type="DateTime" Precision="3" />
+    <Property Name="pro_sales_enddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_sales_stastus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sales_order" Type="Int32" />
+    <Property Name="pro_sales_price" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="pro_coupon">
+    <Key>
+      <PropertyRef Name="pro_coupon_id" />
+    </Key>
+    <Property Name="pro_coupon_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_enddate" Type="DateTime" Precision="3" />
+    <Property Name="pro_coupon_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_stastus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_fuliprice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_derating" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_credit" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="pro_coupon_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_date" Type="DateTime" Precision="3" />
+    <Property Name="pro_coupon_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_stadate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_coupon">
+    <Key>
+      <PropertyRef Name="user_coupon_id" />
+    </Key>
+    <Property Name="user_coupon_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_coupon_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_coupon_stastus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_coupon_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="shop_invoice">
+    <Key>
+      <PropertyRef Name="shop_invoice_id" />
+    </Key>
+    <Property Name="shop_invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="shop_invoice_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_invoice_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_invoice_usercode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_invoice_company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Sms">
+    <Key>
+      <PropertyRef Name="smsid" />
+    </Key>
+    <Property Name="smsid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SendID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendToPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SendDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="com_article">
+    <Key>
+      <PropertyRef Name="com_article_id" />
+    </Key>
+    <Property Name="com_article_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_article_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_article_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="com_article_class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_article_userid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="com_article_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="pro_comment">
+    <Key>
+      <PropertyRef Name="pro_comment_id" />
+    </Key>
+    <Property Name="pro_comment_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_comment_star" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_sku_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_comment_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="shop_choose">
+    <Key>
+      <PropertyRef Name="shop_choose_id" />
+    </Key>
+    <Property Name="shop_choose_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_order_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_choose_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="shop_choose_date" Type="DateTime" Precision="3" />
+    <Property Name="shop_choose_des" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_orderdetail_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_choose_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_choose_service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_choose_isget" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_address_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_express_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="shop_express_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_bank_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="user_info">
+    <Key>
+      <PropertyRef Name="user_info_id" />
+    </Key>
+    <Property Name="user_info_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_info_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_info_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_info_source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_basic_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="user_info_date" Type="DateTime" Precision="3" />
+    <Property Name="user_info_sta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

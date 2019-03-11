@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "详细信息";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">会员详细信息</div>
+        <div class="con">
+            <table width="800" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="100" height="40" align="right">会员编号：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_code")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">会员名称：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_login")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">真实姓名：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_name")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">会员状态：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_status")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">手机号码：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_tel")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">电子邮箱：</td>
+                    <td width="270">
+                        @Html.Value("user_basic_email")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">会员生日：</td>
+                    <td width="270">
+                        @Html.Value("user_detail_birthday")
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">详细地址：</td>
+                    <td width="270">
+                        @Html.Value("user_detail_address")
+                    </td>
+                </tr>
+              
+
+            </table>
+
+            <table width="800" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>未使用优惠券:</td>
+                    @foreach (var item in ViewBag.qwsy)
+                    {
+                        <td>折扣 @item.pro_coupon_discount (@item.pro_coupon_num 个)</td>
+                    }
+                </tr>
+                <tr>
+                    <td>未使用优惠码:</td>
+                    @foreach (var item in ViewBag.mwsy)
+                    {
+                        <td>折扣 @item.pro_coupon_discount (@item.pro_coupon_num 个)</td>
+                    }
+                </tr>
+                <tr>
+                    <td>已使用优惠券:</td>
+                    @foreach (var item in ViewBag.qysy)
+                    {
+                        <td>折扣 @item.pro_coupon_discount (@item.pro_coupon_num 个)</td>
+                    }
+                </tr>
+                <tr>
+                    <td>已使用优惠码:</td>
+                    @foreach (var item in ViewBag.mysy)
+                    {
+                        <td>折扣 @item.pro_coupon_discount (@item.pro_coupon_num 个)</td>
+                    }
+                </tr>
+            </table>
+
+            <table width="800" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="100" height="40" align="right">消息标题：</td>
+                    <td width="270">
+                        @Html.TextBox("user_info_title", null, new { @style = "width:350px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100" height="40" align="right">消息内容：</td>
+                    <td width="270">
+                        @Html.TextArea("user_info_content", new { @style = "width:350px; height:280px" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="30">&nbsp;</td>
+                    <td height="40">
+                        <input class="btn" id="submit01" type="submit" value="发送站内消息" />
+                        <input class="btn" id="submit02" type="submit" value="发送电子邮箱" />
+                        <input class="btn" id="submit03" type="submit" value="发送手机短信" />
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+            @Html.Hidden("tid")
+            @Html.Hidden("user_basic_id")
+        </div>
+    </div>
+</div>
+<script>
+    var user_info_title = $("#user_info_title");
+    var user_info_content = $("#user_info_content");
+    var submit01 = $("#submit01");
+    var submit02 = $("#submit02");
+    var submit03 = $("#submit03");
+    var tid = $("#tid");
+    var user_basic_id = $("#user_basic_id");
+    submit01.click(function () {
+        tid.val("01");
+        if (user_info_title.val() == "" || user_info_title.val() == null) {
+            alert("请输入消息标题");
+            return false;
+        }
+        else
+            if (user_info_content.val() == "" || user_info_content.val() == null) {
+                alert("请输入消息内容");
+                return false;
+            } else {
+                $.ajax({
+                    url: "/Admin/Users/AddMessageSingle",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(
+                        {
+                            user_basic_id: user_basic_id.val(),
+                            user_info_title: user_info_title.val(),
+                            user_info_content: user_info_content.val(),
+                            tid: tid.val()
+                        }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == "NO") {
+                            alert("操作失败");
+                            return;
+                        } else if (data == "OK") {
+                            alert("操作成功");
+                        }
+                    },
+                    error: function (err) {
+                        //alert("data error");
+                        alert(err.reponseText);
+                    }
+                });
+            }
+    });
+    submit02.click(function () {
+        tid.val("02");
+        if (user_info_title.val() == "" || user_info_title.val() == null) {
+            alert("请输入消息标题");
+            return false;
+        }
+        else
+            if (user_info_content.val() == "" || user_info_content.val() == null) {
+                alert("请输入消息内容");
+                return false;
+            } else {
+                $.ajax({
+                    url: "/Admin/Users/AddMessageSingle",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(
+                        {
+                            user_basic_id: user_basic_id.val(),
+                            user_info_title: user_info_title.val(),
+                            user_info_content: user_info_content.val(),
+                            tid: tid.val()
+                        }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == "NO") {
+                            alert("操作失败");
+                            return;
+                        } else if (data == "OK") {
+                            alert("操作成功");
+                        }
+                    },
+                    error: function (err) {
+                        //alert("data error");
+                        alert(err.reponseText);
+                    }
+                });
+            }
+
+    });
+    submit03.click(function () {
+        tid.val("03");
+        if (user_info_title.val() == "" || user_info_title.val() == null) {
+            alert("请输入消息标题");
+            return false;
+        }
+        else
+            if (user_info_content.val() == "" || user_info_content.val() == null) {
+                alert("请输入消息内容");
+                return false;
+            } else {
+                $.ajax({
+                    url: "/Admin/Users/AddMessageSingle",
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(
+                        {
+                            user_basic_id: user_basic_id.val(),
+                            user_info_title: user_info_title.val(),
+                            user_info_content: user_info_content.val(),
+                            tid: tid.val()
+                        }),
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == "NO") {
+                            alert("操作失败");
+                            return;
+                        } else if (data == "OK") {
+                            alert("操作成功");
+                        }
+                    },
+                    error: function (err) {
+                        //alert("data error");
+                        alert(err.reponseText);
+                    }
+                });
+            }
+    });
+</script>

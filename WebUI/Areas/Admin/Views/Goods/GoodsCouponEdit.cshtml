@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "修改券码";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<script src="~/My97DatePicker/WdatePicker.js"></script>
+<script src="~/My97DatePicker/lang/zh-cn.js"></script>
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">修改券码</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("EditGoodsCoupon", "Goods", FormMethod.Post))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">券码类型：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_coupon_class", null, new { @readonly = "readonly" })
+                            <a href="javascript:;" style="color:green" onclick="classselect(this)" name="优惠券">优惠券</a>&nbsp;|&nbsp;
+                            <a href="javascript:;" style="color:green" onclick="classselect(this)" name="优惠码">优惠码</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" height="40" align="right">券码名称：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_coupon_name")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">券码折扣：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_coupon_discount", null, new { onkeyup = @"value=value.replace(/[^\d.]/g,'')" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">截止日期：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_coupon_enddate", null, new { @readonly = "readonly", onfocus = "WdatePicker({dateFmt:'yyyy-MM-dd'})" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">券码数量：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_coupon_num", null, new { onkeyup = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保　存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    @Html.Hidden("pro_coupon_id")
+                </table>
+            </div>}
+    </div>
+</div>
+
+<script>
+    var pro_coupon_class = $("#pro_coupon_class");
+    var pro_coupon_name = $("#pro_coupon_name");
+    var pro_coupon_discount = $("#pro_coupon_discount");
+    var pro_coupon_num = $("#pro_coupon_num");
+    var pro_coupon_enddate = $("#pro_coupon_enddate");
+    var submit = $("#submit");
+    function classselect(a) {
+        pro_coupon_class.val(a.name);
+    }
+    submit.click(function () {
+        if (pro_coupon_class.val() == null || pro_coupon_class.val() == "") {
+            alert("请选择券码类型");
+            return false;
+        }
+        if (pro_coupon_name.val() == null || pro_coupon_name.val() == "") {
+            alert("请输入券码名称");
+            return false;
+        }
+        if (pro_coupon_discount.val() == null || pro_coupon_discount.val() == "") {
+            alert("请输入券码折扣");
+            return false;
+        }
+        if (pro_coupon_discount.val()>1) {
+            alert("券码折扣不正确");
+            return false;
+        }
+        if (pro_coupon_enddate.val() == null || pro_coupon_enddate.val() == "") {
+            alert("请选择截止日期");
+            return false;
+        }
+        if (pro_coupon_num.val() == null || pro_coupon_num.val() == "") {
+            alert("请输入券码数量");
+            return false;
+        }
+    });
+</script>

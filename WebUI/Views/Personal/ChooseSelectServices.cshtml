@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "选择服务项目";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">退换货</p>
+
+        </div>
+        <div id="con">
+            <div class="ret">
+                <div class="lc">流程：</div>
+                <div class="hong">
+                    <div class="xz">1 选择订单</div>
+                    <div class="xz">2 选择商品</div>
+                    <div class="xz xz1"> 3 选择服务项目</div>
+                    <div class="xz2"> 4 提交成功</div>
+                </div>
+            </div>
+            <div class="clear_float"></div>
+            <div class="font_c02" style="display: block;width: 100%;">
+                <div class="dingdan_hao" style="margin-left:0px;"><span>订单号：@ViewBag.shop_order_code</span><span>@ViewBag.user_address_name</span> <span>@ViewBag.shop_order_buydate </span></div>
+                <table border="0" cellspacing="0" cellpadding="0" class="order" style="width: 885px; margin-top:0;">
+
+                    <tr id="tab_head">
+                        <td class="buyPro">购买产品</td>
+                        <td>数量</td>
+                        <td>价格</td>
+                        <td>时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+
+                        <td class="buyPro">
+                            <div class="buyImg">
+                                <img src="@ViewBag.shop_order_id" class="buy-pro" /><span>@ViewBag.shop_orderdetail_id</span>
+                            </div>
+
+                        </td>
+                        <td class="proNums" style="vertical-align: top;">@ViewBag.shop_orderdetail_num</td>
+                        <td class="orderState" style="vertical-align: top;"><a href="" style="color: #e60012">&yen;:@ViewBag.shop_orderdetail_total</a></td>
+                        <td class="buyTime" style="vertical-align: top;">
+                            <span>@ViewBag.shop_order_buydate</span>
+                        </td>
+                        <td class="buycz" style="vertical-align: top;">
+                            <a href="@Url.Action("GoodsDetails", "Goods", new { id = ViewBag.Id })">查看商品></a>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div class="clear_float"></div>
+            <div class="ret_tit">
+                <span>请选择售后服务项目：</span>
+            </div>
+            <a href="javascript:;" class="ret_kk_hh " id="hh"></a><a id="th" href="javascript:;" class="ret_kk_tk"></a>
+            <div class="clear_float"></div>
+            <div class="ref">说明：申请退款后，退还的是您的实际支付金额，优惠券，优惠码抵扣金额不退。</div>
+            <div class="ret_tit">
+                是否收到商品<strong>*</strong>
+            </div>
+            <input id="Radio1" type="radio" name="radio" value="已经收到货" />&nbsp;&nbsp;已经收到货&nbsp;&nbsp;&nbsp;&nbsp;<input id="Radio2" type="radio" name="radio" value="没有收到货物" />&nbsp;&nbsp;没有收到货
+            <div class="ret_tit" style="margin-top:10px">
+                问题描述<strong>*</strong>
+            </div>
+
+            <input id="Text1" type="text" class="miaoshu" placeholder="必填，请具体如实的说明要求退款的情况，如：未收到货，货物存在严重质量问题等。" />
+
+            <div class="ret_shzc">
+                <input id="Checkbox1" type="checkbox" checked="checked" disabled="disabled" /><p>我已阅读并同意</p> <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "returns" })">《售后政策》</a>
+            </div>
+            <a href="javascript:;" class="ret_tjj" id="ret_tjj"><img src="/img/1_21.jpg" /></a>
+        </div>
+    </div>
+    <div class="clear_float"></div>
+</div>
+@Html.Hidden("shop_order_code")
+@Html.Hidden("user_address_id")
+@Html.Hidden("pro_skuitem_id")
+<script>
+    var hh = $("#hh");
+    var th = $("#th");
+    var ret_tjj = $("#ret_tjj");
+    var Text1 = $("#Text1");
+    var shop_order_code = $("#shop_order_code");
+    var user_address_id = $("#user_address_id");
+    var pro_skuitem_id = $("#pro_skuitem_id");
+
+    var thh = "";
+    var sh = "";
+    hh.click(function () {
+        $("#hh").attr("class", "ret_kk_hh ret_kk_hhx");
+        $("#th").attr("class", "ret_kk_tk");
+        thh = "换货";
+        $("#Radio2").attr("disabled", "disabled");
+    });
+    th.click(function () {
+        $("#th").attr("class", "ret_kk_tk ret_kk_tkx");
+        $("#hh").attr("class", "ret_kk_hh");
+        thh = "退款";
+        $("#Radio2").removeAttr("disabled");
+    });
+
+    ret_tjj.click(function () {
+        var list = $('input:radio[name="radio"]:checked').val();
+        if (list != null) {
+            sh = list;
+        }
+        if (thh == "") {
+            alert("请选择售后服务项目！");
+        } else if (sh == "") {
+            alert("请确认是否收到商品！");
+        } else if (Text1.val() == "" || Text1.val() == null) {
+            alert("请输入商品详情！");
+        } else {
+            $.ajax({
+                url: "/Personal/AddChooseSelectServices",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(
+                    {
+                        shop_order_code: shop_order_code.val(),
+                        user_address_id: user_address_id.val(),
+                        pro_skuitem_id: pro_skuitem_id.val(),
+                        thh: thh,
+                        sh: sh,
+                        des: Text1.val()
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("操作失败");
+                        return;
+                    } else if (data == "Y") {
+                        alert("该产品已申请售后，正在处理中");
+                        return;
+                    } else {
+
+                        window.location.href = "/Personal/ChooseRevocation?shop_choose_id=" + data;
+
+                    }
+                },
+                error: function (err) {
+                    //alert("data error");
+                    alert(err.reponseText);
+                }
+
+            });
+        }
+    });
+</script>

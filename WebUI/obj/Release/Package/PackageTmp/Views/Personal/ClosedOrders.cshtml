@@ -1,0 +1,79 @@
+﻿@using EFClassLibrary;
+@model Webdiyer.WebControls.Mvc.PagedList<shop_order>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "已签收订单";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">订单管理</p>
+        </div>
+        <div id="con">
+            <div id="inner_M">
+                <span id="in_M_t">
+                    筛选：
+                </span>
+                <a href="@Url.Action("PersonalOrder", "Personal")">全部订单 </a>
+                <a href="@Url.Action("OrderPaid", "Personal")">已支付订单</a>
+                <a href="@Url.Action("Unpaid", "Personal")">未支付订单</a>
+                <a href="@Url.Action("Shipped", "Personal")" >已发货订单</a>
+
+                <a href="@Url.Action("ClosedOrders", "Personal")" class="cur-inner">已签收订单 <img src="/img/innerM.jpg" /></a>
+
+            </div>
+            @*<div class="dingdan_qbxz">
+                <input id="Checkbox1" type="checkbox" />
+                <a href=""><img src="/img/dingdan_del.jpg" /></a>
+            </div>*@
+            @foreach (var item in Model)
+            {
+                <table border="0" cellspacing="0" cellpadding="0" class="order">
+                    <tr>@*<td class="biaoge"><input id="Checkbox1" type="checkbox" /></td>*@<td colspan="5" class="orderDetail"><span>订单号：@item.shop_order_code</span><span>@item.user_address_id</span><span>@item.shop_order_buydate</span> </td></tr>
+                    <tr id="tab_head">
+                        @*<td class="biaoge_bj"></td>*@
+                        <td class="orderState">订单状态</td>
+                        <td class="buyPro">购买产品</td>
+                        <td>数量</td>
+                        <td>金额</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        @*<td class="biaoge"></td>*@
+                        <td class="orderState"><a href="">@item.shop_order_status</a></td>
+                        <td class="buyPro">
+
+                            @{
+                D8MallEntities db = new D8MallEntities();
+                var list = db.shop_orderdetail.Where(so => so.shop_order_id == item.shop_order_id).ToList();
+                foreach (var items in list)
+                {
+                    pro_sku sku = db.pro_sku.Where(p => p.pro_sku_code == items.pro_skuitem_id).SingleOrDefault();
+                    <a href="@Url.Action("GoodsDetails", "Goods", new { id =sku.pro_sku_code  })">@sku.pro_sku_title</a>
+                }
+                            }
+
+
+                        </td>
+                        <td class="proNums">@item.shop_order_waynum</td>
+                        <td class="money">
+                            &yen;：@item.shop_order_totalmoeny<br />
+                            （含运费：&yen;@item.shop_order_remark）
+                        </td>
+                        <td class="orderAction1">
+                        <a href="@Url.Action("PersonalOrderDetails", "Personal", new { shop_order_id=item.shop_order_id })" class="axz">订单详情></a>
+                        <a href="@Url.Action("ChooseOrderDetails", "Personal", new { shop_order_id = item.shop_order_id })">申请售后></a>
+                        <a href="@Url.Action("Reviews", "Personal", new { shop_order_id = item.shop_order_id })">评价商品></a></td>
+                    </tr>
+                </table>
+            }
+        </div>
+        <div class="pageState">
+            @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+        </div>
+    </div>    <div class="clear_float"></div>
+</div>

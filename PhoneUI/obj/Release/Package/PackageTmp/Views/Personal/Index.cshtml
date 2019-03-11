@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    .list-group-item:first-child {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+</style>
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px; background-color:#ffffff">
+    <div class="row" style="background-image:url(/img/user_bg.png); overflow:hidden">
+        <div class="col-xs-12" style="font-size:20px; margin-top:10px;">
+            <a href="#" style="color:#ffffff;"><span class="fa fa-cog pull-right"></span></a>
+        </div>
+        <div class="col-xs-4">
+            <div class="thumbnail " style="margin-top:10px; background-color:transparent; border:none;">
+                @{
+                    EFClassLibrary.D8MallEntities db = new EFClassLibrary.D8MallEntities();
+                    var uname = TDESHelper.DecryptString(Request.Cookies["keys"].Value);
+                    var upwd = Request.Cookies["value"].Value;
+                    var user_basic = db.user_basic.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                    var user_basic_code = user_basic.user_basic_code.ToString();
+                    EFClassLibrary.com_img img = db.com_img.Where(i => i.com_img_fk == user_basic_code).SingleOrDefault();
+                    if (img != null)
+                    {
+                        var com_img_src = img.com_img_src;
+                        if (string.IsNullOrEmpty(com_img_src))
+                        {
+                            <img src="http://www.cuckooshop.cn/img/userImg.png" class="img-circle img-responsive" />
+                        }
+                        else
+                        {
+                            <img src="http://www.cuckooshop.cn/@com_img_src" class="img-circle img-responsive" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="http://www.cuckooshop.cn/img/userImg.png" class="img-circle img-responsive" />
+                    }
+                }
+
+
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="thumbnail " style="margin-top:10px; background-color:transparent; border:none;">
+                <p style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;<span>@ViewBag.username</span></p>
+                <p style="color:#ffffff;"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;<span>@ViewBag.userid</span></p>
+                <p style="color:#ffffff;">
+                    <a href="@Url.Action("AccountInformation", "Personal")" style="color:#ffffff;"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;<span>我的帐户</span></a>&nbsp;&nbsp;
+                    <a href="#" style="color:#ffffff;"><span class="fa fa-list-alt"></span>&nbsp;&nbsp;<span>我的订单</span></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="thumbnail divthumbnail">
+            <div class="col-xs-3">
+                <p><img src="/img/font.png" class="img-responsive" /></p>
+                <p>等待付款</p>
+            </div>
+            <div class="col-xs-3 ">
+                <p><img src="/img/mailbox.png" class="img-responsive" /></p>
+                <p>等待收货</p>
+            </div>
+            <div class="col-xs-3">
+                <p><img src="/img/favourites.png" class="img-responsive" /></p>
+                <p>我的收藏</p>
+            </div>
+            <div class="col-xs-3 ">
+                <p><img src="/img/pencil63.png" class="img-responsive" /></p>
+                <p>我的消息</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="list-group" style="margin-top:0px; margin-bottom:0px;">
+                <a href="@Url.Action("AccountInformation", "Personal")" class="list-group-item"><span class="glyphicon glyphicon-credit-card" style="color:#bea624"></span>&nbsp;&nbsp;<span>我的账户</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="fa fa-list-alt" style="color:#0cb723"></span>&nbsp;&nbsp;<span>我的订单</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-map-marker" style="color:#22b7b7"></span>&nbsp;&nbsp;<span>地址管理</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="fa fa-heart-o" style="color:#ff0000"></span>&nbsp;&nbsp;<span>我的收藏</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-headphones" style="color:#ff6a00"></span>&nbsp;&nbsp;<span>在线客服</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="fa fa-question-circle-o" style="color:#ffd800"></span>&nbsp;&nbsp;<span>帮助中心</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+                <a href="#" class="list-group-item"><span class="fa fa-cogs" style="color:#c70f0f"></span>&nbsp;&nbsp;<span>系统设置</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="page-header" style="margin-top:0px;">
+                <div class="content_thumbnail ">
+                    <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">我的收藏</span></span>
+                    <span class="pull-right"><a href="@Url.Action("Index", "Goods", new { GoodsClassId = "RiceCooker" })"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+                </div>
+            </div>
+            <div class="thumbnail divthumbnail" style=" margin-bottom:0px; overflow:hidden">
+                @{
+                    foreach (var item in ViewBag.user_collect_list)
+                    {
+                        //'/Goods/GoodsDetails/" + v.pro_sku_code + "'
+
+                        <a href="@Url.Action("GoodsDetails", "Goods", new { id = item.pro_sku_code })">
+                            <div class='col-xs-4 text-left content_div'>
+                                <p><img src='http://www.cuckooshop.cn/@item.pro_sku_covimg' class='img-responsive' /></p>
+                                <p style="font-size:6px;"> @item.pro_skuitem_id  </p>
+                                <p><span style=' font-size:6px;'> @item.pro_skuitem_price</span></p>
+                            </div>
+                        </a>
+
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="page-header" style="margin-top:0px;">
+                <div class="content_thumbnail ">
+                    <span class="pull-left"><span class="span_tags">|</span> <span class="title_text">特价商品</span></span>
+                    <span class="pull-right"><a href="@Url.Action("GoodsSales", "Goods")"> <span class="fa fa-plus-square span_plus"></span> </a></span>
+                </div>
+            </div>
+            <div class="thumbnail divthumbnail" style=" margin-bottom:0px; overflow:hidden">
+                @{
+                    foreach (var item in ViewBag.goodes)
+                    {
+                        //'/Goods/GoodsDetails/" + v.pro_sku_code + "'
+
+                        <a href="@Url.Action("GoodsDetails", "Goods", new { id = item.pro_sku_code })">
+                            <div class='col-xs-4 text-left content_div'>
+                                <p><img src='http://www.cuckooshop.cn/@item.pro_sku_covimg' class='img-responsive' /></p>
+                                <p style="font-size:6px;"> @item.pro_brand_id  </p>
+                                <p><span style=' font-size:6px;'> @item.pro_skuitem_price</span></p>
+                            </div>
+                        </a>
+
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "修改商品详细";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<script src="~/kindeditor/kindeditor-all-min.js"></script>
+<script src="~/kindeditor/lang/zh-CN.js"></script>
+<script>
+
+    KindEditor.ready(function (K) {
+        K.create('#pro_item_content', {
+            uploadJson: '/kindeditor/asp.net/upload_json.ashx',
+            fileManagerJson: '/kindeditor/asp.net/file_manager_json.ashx',
+            allowFileManager: true,
+            afterBlur: function () { this.sync() }
+        });
+
+    });
+</script>
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">修改商品详细</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("EditGoodsDetails", "Goods", FormMethod.Post))
+        {
+            <div class="con">
+
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+
+                    <tr>
+                        <td width="100" height="40" align="right">商品标题：</td>
+                        <td width="370">
+                            @Html.TextBox("pro_item_title", null, new { @style = "width:695px;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">商品副标题：</td>
+                        <td width="370">
+                            @Html.TextBox("pro_item_subtitle", null, new { @style = "width:695px;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">商品序号：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_sku_order", null, new { onkeyup = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">商品标码：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_brand_id")
+                        </td>
+                    </tr>
+                    <tr>
+                                            <td width="100" height="40" align="right">市场价格：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_skuitem_mprice", null, new { onkeyup = @"value=value.replace(/[^\d.]/g,'')" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">商城价格：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_skuitem_price", null, new { onkeyup = @"value=value.replace(/[^\d.]/g,'')" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">商品库存：</td>
+                        <td width="270">
+                            @Html.TextBox("pro_skuitem_stock", null, new { onkeyup = "this.value=this.value.replace(/[^0-9]/g,'')" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100" align="right">商品详细：</td>
+                        <td width="270">
+                            @Html.TextArea("pro_item_content", new { @style = "width:700px; height:433px" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="100" align="right"></td>
+                        <td width="270">
+                            @Html.Hidden("pro_sku_id")
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保  存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+
+
+            </div>}
+    </div>
+</div>
+<script>
+    var pro_item_title = $("#pro_item_title");
+    var pro_item_subtitle = $("#pro_item_subtitle");
+    var pro_sku_order = $("#pro_sku_order");
+    var pro_skuitem_mprice = $("pro_skuitem_mprice");
+    var pro_skuitem_price = $("pro_skuitem_price");
+    var pro_skuitem_stock = $("pro_skuitem_stock");
+    var pro_item_content = $("pro_item_content");
+
+    var submit = $("#submit");
+    submit.click(function () {
+        if (pro_item_title.val() == null || pro_item_title.val() == "") {
+            alert("请输入商品标题");
+            return false;
+        }
+        if (pro_item_subtitle.val() == null || pro_item_subtitle.val() == "") {
+            alert("请输入商品副标题");
+            return false;
+        }
+
+        if (pro_sku_order.val() == null || pro_sku_order.val() == "") {
+            alert("请输入商品序号");
+            return false;
+        }
+
+        if (pro_skuitem_mprice.val() == "") {
+            alert("请输入市场价格");
+            return false;
+        }
+
+        if (pro_skuitem_price.val() == "") {
+            alert("请输入商城价格");
+            return false;
+        }
+
+        if (pro_skuitem_stock.val() == "") {
+            alert("请输入商品库存");
+            return false;
+        }
+
+
+        if (pro_item_content.val() == "") {
+            alert("请输入商品详细");
+            return false;
+        }
+
+
+    });
+
+</script>

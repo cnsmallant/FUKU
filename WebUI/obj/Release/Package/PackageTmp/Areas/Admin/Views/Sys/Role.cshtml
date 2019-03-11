@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">角色列表</div>
+
+        <div class="lpaixu">
+            <ul>
+                <li><a href="@Url.Action("RoleCreate", "Sys")">新建</a></li>
+
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>角色名称</td>
+                <td>权限码值</td>
+                <td>操作日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+            @foreach (var item in ViewBag.list)
+            {
+                <tr>
+                    <td>@item.sys_role_name</td>
+                    <td>@item.sys_role_purview</td>
+                    <td>@item.sys_role_editdate</td>
+                    <td><a href="@Url.Action("RoleEdit", "Sys", new { sys_role_id = item.sys_role_id })" style="color:green">修改</a></td>
+                </tr>
+
+            }
+
+
+
+
+        </table>
+    </div>
+</div>

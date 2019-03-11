@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0dfafe52d18a470eab7f77ed33d6704e" Name="Diagram1" ShowGrid="true">
+        <EntityTypeShape EntityType="D8Mall_dbModel.com_area" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.com_article" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.com_banner" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.com_img" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_brand" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_class" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_classsub" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_comment" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_coupon" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_express" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_item" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_newsgoods" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_sales" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_shipment" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_sku" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_skuitem" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_spe" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.pro_spesub" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_car" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_choose" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_invoice" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_order" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_orderdetail" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_pay" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.shop_shipping" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.Sms" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.sys_admin" Width="1.5" PointX="14.75" PointY="9.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.sys_log" Width="1.5" PointX="14.75" PointY="13.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.sys_purview" Width="1.5" PointX="4.75" PointY="15.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.sys_role" Width="1.5" PointX="6.75" PointY="15.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_address" Width="1.5" PointX="8.75" PointY="15.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_bank" Width="1.5" PointX="10.75" PointY="15.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_basic" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_collect" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_coupon" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_detail" Width="1.5" PointX="16.75" PointY="7.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.user_info" Width="1.5" PointX="12.75" PointY="16.75" />
+        <EntityTypeShape EntityType="D8Mall_dbModel.ad_info" Width="1.5" PointX="15.375" PointY="16.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

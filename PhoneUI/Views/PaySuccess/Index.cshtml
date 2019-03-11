@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "支付成功";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px; background-color:#ffffff">
+    <div class="row">
+        <div class="thumbnail content_thumbnail" style="padding:20px; background-color:transparent; margin-top:30px;">
+            <div class="col-xs-12" style="margin-top:0px; margin-bottom:10px; line-height:25px; ">
+                <p><img src="/img/paysuss.png" class="img-responsive center-block" /></p>
+                <p class="text-center" style="color: #0ac224; font-size:26px">支付成功</p>
+            </div>
+            <div class="col-xs-12">
+                <a href="@Url.Action("OrderPaid", "Personal")" class="btn btn-block btn-success">查看订单</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,3 @@
+﻿User-agent: *
+Disallow: /bin/
+Sitemap: http://m.cuckooshop.cn/sitemap.xml

@@ -1,0 +1,96 @@
+﻿
+
+<div id="left_nav">
+    <div class="head">
+        <span class="wddp">&nbsp;</span><span>会员中心</span>
+    </div>
+    <ul>
+        <li>
+            <a href="javascript:;"><span></span> 个人信息管理<i>&nbsp;</i></a>
+            <ul id="cur01">
+                <li id="zh"><a href="@Url.Action("AccountInformation", "Personal")">账户信息</a></li>
+                <li><a href="@Url.Action("PersonalSafe", "Personal")">账户安全</a></li>
+                <li><a href="@Url.Action("ShippingAddress", "Personal")">收货地址</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><span></span>订单管理<i>&nbsp;</i></a>
+            <ul id="cur02">
+                <li id="dd"><a href="@Url.Action("PersonalOrder", "Personal")">我的订单</a></li>
+                <li><a href="@Url.Action("PersonalCollect", "Personal")">我的收藏</a></li>
+                <li><a href="@Url.Action("PersonalScan", "Personal")">浏览记录</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><span></span>用户服务<i>&nbsp;</i></a>
+            <ul id="cur03">
+                <li id="fw"><a href="@Url.Action("AfterSales", "Personal")">退换货政策</a></li>
+                <li><a href="@Url.Action("ChooseList", "Personal")">退换货</a></li>
+                <li><a href="@Url.Action("ProductReview", "Personal")">商品评价</a></li>
+                <li><a href="@Url.Action("MessageCenter", "Personal")">我的消息</a></li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><span></span>我的资产<i>&nbsp;</i></a>
+            <ul id="cur04">
+                <li  id="zc"><a href="@Url.Action("PersonalCoupon", "Personal")">我的优惠券</a></li>
+                <li ><a href="@Url.Action("PersonalPromoCode", "Personal")">我的优惠码</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+    var zh = $("#zh");
+    var dd = $("#dd");
+    var fw = $("#fw");
+    var zc = $("#zc");
+
+    var myA = document.getElementById("cur01").getElementsByTagName("a");
+    var myLi = document.getElementById("cur01").getElementsByTagName("li");
+    var myURL = document.location.href;
+    for (var i = 0; i < myA.length; i++) {
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+        if (myURL.indexOf(links) != -1) {
+            myLi[i].className = "cur08";
+
+        }
+    }
+    var myA = document.getElementById("cur02").getElementsByTagName("a");
+    var myLi = document.getElementById("cur02").getElementsByTagName("li");
+    var myURL = document.location.href;
+    for (var i = 0; i < myA.length; i++) {
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+        if (myURL.indexOf(links) != -1) {
+            myLi[i].className = "cur08";
+
+
+        }
+    }
+    var myA = document.getElementById("cur03").getElementsByTagName("a");
+    var myLi = document.getElementById("cur03").getElementsByTagName("li");
+    var myURL = document.location.href;
+    for (var i = 0; i < myA.length; i++) {
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+        if (myURL.indexOf(links) != -1) {
+            myLi[i].className = "cur08";
+
+
+        }
+    }
+    var myA = document.getElementById("cur04").getElementsByTagName("a");
+    var myLi = document.getElementById("cur04").getElementsByTagName("li");
+    var myURL = document.location.href;
+    for (var i = 0; i < myA.length; i++) {
+        var links = myA[i].getAttribute("href");
+        var myURL = document.location.href;
+        if (myURL.indexOf(links) != -1) {
+            myLi[i].className = "cur08";
+
+
+        }
+    }
+</script>

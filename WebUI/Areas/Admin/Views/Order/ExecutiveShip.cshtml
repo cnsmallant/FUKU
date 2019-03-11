@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "执行发货";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+</div>
+<div class="div_right">
+    <div class="item">
+        <div class="ltitle">执行发货</div>
+
+        <div class="tishi">
+            <strong>操作说明：</strong><br />
+            <span>
+                1.可添加在线客服，访问统计，网站分享等第三方js脚本代码。支持同时使用多个代码。<br />
+                2.请尽可能添加知名度高、认可度高的第三方代码，以确保网站安全。<br />
+                3.由于添加不安全代码引起的网站访问异常、网站挂马等情况本公司概不负责。<br />
+            </span>
+        </div>
+        @using (Html.BeginForm("EditExecutiveShip", "Order", new { shop_order_id = Request["shop_order_id"] }, FormMethod.Post))
+        {
+            <div class="con">
+                <table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100" height="40" align="right">发货快递名称：</td>
+                        <td width="270">
+                            @Html.TextBox("shop_shipping_id")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100" align="right">发货快递单号：</td>
+                        <td width="270">
+                            @Html.TextBox("shop_order_shipmentnumber")
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td height="40"><input class="btn" id="submit" type="submit" value="保　存" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+
+            </div>}
+    </div>
+</div>
+<script>
+    var shop_shipping_id = $("#shop_shipping_id");
+    var shop_order_shipmentnumber = $("#shop_order_shipmentnumber");
+    var submit = $("#submit");
+
+    submit.click(function () {
+        if (shop_shipping_id.val() == "" || shop_shipping_id.val() == null) {
+            alert("请输入发货快递名称");
+            return false;
+        } else if (shop_order_shipmentnumber.val() == "" || shop_order_shipmentnumber.val() == null) {
+            alert("请输入发货快递单号");
+            return false;
+        }
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "消息详细";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    .messageD_tit {
+        width: 100%;
+        text-align: center;
+        line-height: 60px;
+        color: #000;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .messageD_sour {
+        width: 904px;
+        margin: 0 auto;
+        border-bottom: 1px dashed #bababa;
+        color: #313131;
+        font-size: 12px;
+        font-family: SimSun;
+        line-height: 35px;
+        text-align: center;
+    }
+
+        .messageD_sour span {
+            color: #e60012;
+        }
+
+    .messageD_con {
+        width: 904px;
+        margin: 0 auto;
+        padding-top: 18px;
+    }
+
+        .messageD_con p {
+            color: #000000;
+            font-size: 13px;
+            line-height: 24px;
+        }
+</style>
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">我的消息</p>
+        </div>
+        <div id="con">
+            <div class="messageD_tit">@ViewBag.user_info_title </div>
+            <div class="messageD_sour">来源：<span>@ViewBag.user_info_source</span>  |  时间：@ViewBag.user_info_date</div>
+            <div class="messageD_con">
+                <p>
+                    @ViewBag.user_info_content
+                </p>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="clear_float"></div>
+    </div><div class="clear_float"></div>
+</div>

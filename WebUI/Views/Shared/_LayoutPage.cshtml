@@ -1,0 +1,326 @@
+﻿@using EFClassLibrary;
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        @{
+
+            if (string.IsNullOrEmpty(ViewBag.Title))
+            {
+                ViewBag.Title = "CUCKOO福库官方商城-来自韩国的乐趣！";
+            }
+            else
+            {
+                ViewBag.Title = ViewBag.Title + "-CUCKOO福库官方商城-来自韩国的乐趣！";
+            }
+            @ViewBag.Title
+
+        }
+    </title>
+    <meta name="Author" content="dongbaqu.com" />
+    <meta name="Keywords" content="CUCKOO福库官方商城,CUCKOO福库,福库中国,福库中国官网,福库,CUCKOO,福库电饭煲,电饭煲,韩国福库,韩国,贵族家电,小家电,高压力电饭煲,高压力,高品质,家电,CPR,CCK,CG,CCPR,青岛福库电子有限公司" />
+    <meta name="Description" content="CUCKOO福库始终致力于高压力电饭煲的研究与创新，被誉为韩国的贵族家电品牌，小家电领域的杰出者！高压力高品质，米饭当然好味道。来自韩国的乐趣！" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="/img/favicon.ico" rel="icon" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <link href="/css/hoverImg.css" rel="stylesheet" />
+  
+</head>
+<body>
+
+    @{
+        var url = Request.CurrentExecutionFilePath;
+        ViewBag.url = url;
+    }
+    @Html.Hidden("url")
+    <script>
+    var url = $("#url");
+    function browserRedirect() {
+
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+            window.location.href = "http://m.cuckooshop.cn" + url.val();
+        }
+    }
+
+    browserRedirect();
+
+
+    </script>
+
+    <div>
+        <div id="head">
+            <div class="container">
+                <ul>
+                    <li id="site01">
+                        <a href="http://www.cuckoo.cn/">福库官网</a>
+                    </li>
+                    <li id="site02" class="at01">
+                        <a href="/">福库商城</a>
+                    </li>
+                    <li><a href="http://weibo.com/fukujd" target="_blank">福库微博</a></li>
+                    <li><a href="https://cuckooqingdao.tmall.com/" target="_blank">福库天猫</a></li>
+                </ul>
+                <a href="@Url.Action("PersonalOrder", "Personal")" id="order">订单/配送查询</a>
+                <a href="@Url.Action("GoodsCart", "Goods")">
+                    <div id="carL">
+                        <img src="/img/shopping.png" />
+                        <span>购物车</span>
+
+                    </div>
+                </a>
+                <div id="user_top">
+                    @{
+                        if (HttpContext.Current.Request.Cookies["keys"] != null || HttpContext.Current.Request.Cookies["value"] != null)
+                        {
+                            D8MallEntities db = new D8MallEntities();
+                            var query = db.user_basic;
+                            var uname = TDESHelper.DecryptString(HttpContext.Current.Request.Cookies["keys"].Value);
+                            var upwd = HttpContext.Current.Request.Cookies["value"].Value;
+                            var user_basic = query.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                            ViewBag.user_basic = user_basic;
+                            if (user_basic != null)
+                            {
+                                <a href="@Url.Action("AccountInformation", "Personal")">@ViewBag.user_basic.user_basic_login</a>
+                                <a href="@Url.Action("UserLogout", "Personal")">注销</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index","Login")">登录</a>
+                                <a href="@Url.Action("Index", "Register")">注册</a>
+                            }
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Login")">登录</a>
+                            <a href="@Url.Action("Index", "Register")">注册</a>
+                        }
+                    }
+
+                    <a href="@Url.Action("Index", "Personal")">我的福库</a>
+                </div>
+            </div>
+        </div>
+        <div class="lay2">
+            <div class="container">
+                <a href="/" style="float:left"><img src="/img/logo.png" /></a>
+
+                <div id="nav">
+                    <a href="@Url.Action("Index", "Goods")">所有产品</a>
+                    <a href="@Url.Action("GoodsSales", "Goods")">促销产品</a>
+                    <a href="@Url.Action("GoodsNews","Goods")">新款上市</a>
+                    <a href="@Url.Action("Index", "ShoppingGuide", new { classid = "process" })">购物指南</a>
+                </div>
+                <img src="/img/home2_06.jpg" id="pro_t" />
+                <div class="input_box">
+                    <input type="text" id="so" style="height:30px" placeholder="请输入搜索关键字" />
+                    <a href="javascript:;" id="sobtn"><img src="/img/ser.png" /></a>
+                    <script>
+                        var so = $("#so");
+                        var sobtn = $("#sobtn");
+                        sobtn.click(function () {
+                            window.location.href = "/Goods/GoodsMarkSearch?words=" + encodeURIComponent(so.val());
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+        <div id="foot">
+            <div class="container">
+                <div id="adr">
+                    <img src="/img/logo.png" />
+                    <pre>
+<strong>青岛福库电子有限公司 </strong>
+团购咨询：0532-8790-7287      售后服务：40065-80805
+法人代表：具滋信                       营业证号：913702147403894451
+电话：0532-8790-5615
+总公司地址：山东省 青岛市 城阳区 青大工业园 益园路 1号
+郑重声明：本公司网站内的所有图片、文字、视频等，版权归本公司所有，严禁盗用，盗用必究
+					</pre>
+                </div>
+                <div style="float: right;">
+                    <div class="swp">
+                        <img src="/img/swep_03.jpg" />
+                        <span>官方商城</span>
+                    </div>
+                    <div class="swp">
+                        <img src="/img/swep_05.jpg" />
+                        <span>官方天猫</span>
+                    </div>
+                    <div class="swp">
+                        <img src="/img/swep_07.jpg" />
+                        <span>官方微博</span>
+                    </div>
+                    <div class="swp">
+                        <img src="/img/swep_09.jpg" />
+                        <span>官方微信</span>
+                    </div>
+                </div>
+                <div class="clear_float">
+                </div>
+            </div>
+            <div id="copyright" style="height:auto; overflow:hidden">
+                Copyright&nbsp;&copy;&nbsp; <a href="http://www.cuckoo.cn/" target="_blank" style="color:white">
+                    青岛福库电子有限公司
+                </a>   &nbsp;&nbsp;All right reserved&nbsp;&nbsp;<a href="http://www.miibeian.gov.cn/" target="_blank" style="color:white"> 鲁ICP备12012005号-1</a>&nbsp;&nbsp;Powered by：<a href="http://www.dongbaqu.com/" target="_blank" style="color:white">东八区</a>&nbsp;&nbsp;
+                    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1260348956'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260348956%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+            </div>
+        </div>
+    </div>
+    <div id="fixed_box">
+        <dl>
+            <dt>我的福库</dt>
+            @{
+
+                if (HttpContext.Current.Request.Cookies["keys"] != null || HttpContext.Current.Request.Cookies["value"] != null)
+                {
+                    D8MallEntities db = new D8MallEntities();
+                    var query = db.user_basic;
+                    var uname = TDESHelper.DecryptString(HttpContext.Current.Request.Cookies["keys"].Value);
+                    var upwd = HttpContext.Current.Request.Cookies["value"].Value;
+                    var user_basic = query.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                    ViewBag.user_basic = user_basic;
+                    if (user_basic != null)
+                    {
+
+                        IList<WebUI.Controllers.PersonalController.pro_coupons> pro_list = new List<WebUI.Controllers.PersonalController.pro_coupons>();
+                        IList<user_coupon> ulist = db.user_coupon.Where(u => u.user_basic_id == user_basic.user_basic_id & u.user_coupon_stastus == "0").ToList();
+                        foreach (var item in ulist)
+                        {
+                            WebUI.Controllers.PersonalController.pro_coupons pros = new WebUI.Controllers.PersonalController.pro_coupons();
+                            pros.pro_coupon_id = item.user_coupon_id.ToString();//用户优惠券所属ID
+                            pros.pro_coupon_class = db.pro_coupon.Where(d => d.pro_coupon_id == item.pro_coupon_id).SingleOrDefault().pro_coupon_class;
+                            pros.pro_coupon_discount = db.pro_coupon.Where(d => d.pro_coupon_id == item.pro_coupon_id).SingleOrDefault().pro_coupon_discount;
+                            pros.pro_coupon_stadate = db.pro_coupon.Where(d => d.pro_coupon_id == item.pro_coupon_id).SingleOrDefault().pro_coupon_stadate;
+                            pros.pro_coupon_enddate = db.pro_coupon.Where(d => d.pro_coupon_id == item.pro_coupon_id).SingleOrDefault().pro_coupon_enddate;
+                            pros.pro_coupon_num = "1";
+                            pro_list.Add(pros);
+                        }
+                        ViewBag.coupon = pro_list.Where(l => l.pro_coupon_enddate >= DateTime.Now && l.pro_coupon_class == "优惠券").ToList().Count;
+                        //ViewBag.coupon = db.user_coupon.Where(c => c.user_basic_id == user_basic.user_basic_id & c.pro_coupon_class == "优惠券").ToList().Count;
+                        //ViewBag.PromoCode = db.user_coupon.Where(c => c.user_basic_id == user_basic.user_basic_id & c.pro_coupon_class == "优惠码").ToList().Count;
+                        <dd><a href="@Url.Action("PersonalCoupon","Personal")">优惠券<span>@ViewBag.coupon</span></a></dd>
+                    }
+                    else
+                    {
+
+                        <dd><a href="@Url.Action("Index","Login")">登录</a></dd>
+                        <dd>
+                            <a href="@Url.Action("Index", "Register")">注册</a>
+                        </dd>
+
+                    }
+
+                }
+                else
+                {
+                    <dd><a href="@Url.Action("Index","Login")">登录</a></dd>
+                    <dd>
+                        <a href="@Url.Action("Index", "Register")">注册</a>
+                    </dd>
+                }
+
+            }
+
+
+
+            <dd>
+                <p>
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=729819807&site=qq&menu=yes"><img border="0" src="~/img/qq1.png" alt="销售咨询" title="销售咨询"></a>
+                </p>
+                <p>
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2499557252&site=qq&menu=yes"><img border="0" src="~/img/qq1.png" alt="销售咨询" title="销售咨询"></a>
+                </p>
+                <p><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3413359593&site=qq&menu=yes"><img border="0" src="~/img/qq3.png" alt="售后服务1" title="售后服务1"></a></p>
+                <p><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3187221158&site=qq&menu=yes"><img border="0" src="~/img/qq4.png" alt="售后服务2" title="售后服务2"></a></p>
+                <p> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2890488028&site=qq&menu=yes"><img border="0" src="~/img/qq5.png" alt="投诉建议" title="投诉建议"></a></p>
+                <p>  工作时间</p>
+                <p> 08:00~17:00</p>
+                <p> （公休日例外）</p>
+            </dd>
+            <dd>
+                <strong>团购咨询</strong> 0532-87907287
+            </dd>
+        </dl>
+        <div id="scroolT">
+            <a href="javascript:;" id="topdiv">
+                <img src="/img/top.png" />
+                <span>TOP置顶</span>
+            </a>
+        </div>
+    </div>
+
+  
+
+
+ 
+</body>
+</html>
+<script>
+    //var url = $("#url");
+    //function browserRedirect() {
+
+    //    var sUserAgent = navigator.userAgent.toLowerCase();
+    //    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    //    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    //    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    //    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    //    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    //    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    //    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    //    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    //    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+    //        window.location.href = "http://m.cuckooshop.cn" + url.val();
+    //    } 
+    //}
+
+    //browserRedirect();
+
+    //$(function () {
+    //    var href = window.location.href.replace("http://", "");
+    //    if (href.search("www") == -1) {
+    //        top.location="http://www." + href;
+    //    }
+    //});
+    $(function () {
+        var href = window.location.href.replace("http://", "");
+        if (href.search("www") == -1) {
+            top.location = "http://www." + href;
+        }
+    });
+
+    $("#topdiv").click(function (e) {
+        e.preventDefault();
+        $(document.documentElement).animate({
+            scrollTop: 0
+        }, 3000);
+        //支持chrome
+        $(document.body).animate({
+            scrollTop: 0
+        }, 3000);
+    });
+    
+</script>
+
+<script src="~/js/JavaScript_Rightfloat.js"></script>
+<script src="~/My97DatePicker/WdatePicker.js"></script>
+<script src="~/My97DatePicker/lang/zh-cn.js"></script>
+
+

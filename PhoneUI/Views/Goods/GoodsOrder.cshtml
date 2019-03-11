@@ -1,0 +1,293 @@
+﻿@using EFClassLibrary
+@{
+    ViewBag.Title = "填写订单";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:55px;margin-bottom:60px; background-color:#ffffff">
+    <div class="row" id="address">
+
+        @{
+
+            foreach (var item in ViewBag.user_address)
+            {
+
+                <div class="list-group" style="margin-top:0px; margin-bottom:0px; padding:2px;">
+                    <a href="javascript:;" id="@item.user_address_id" onclick="AddressSelection(this.id)" class="list-group-item" style=" border: 1px solid #acacac; ">
+                        <p>
+                            <span class="fa  fa-address-book" style="color:#acacac"></span>&nbsp;&nbsp;<span>@item.user_address_name</span>
+                            <span class="fa fa-check-circle pull-right" style="color:#acacac"></span>
+                        </p>
+                        <p><span class="fa  fa-phone-square" style="color:#acacac"></span>&nbsp;&nbsp;<span>@item.user_address_tel</span></p>
+                        <p>
+                            <span class="fa  fa-map-marker" style="color:#acacac"></span>&nbsp;&nbsp;<span>
+                                @{
+                D8MallEntities db = new D8MallEntities();
+                int user_address_province = Convert.ToInt32(item.user_address_province);
+                int user_address_city = Convert.ToInt32(item.user_address_city);
+                int user_address_county = Convert.ToInt32(item.user_address_county);
+                var province = db.com_area.Where(u => u.com_area_id == user_address_province).SingleOrDefault().com_area_name;
+                var city = db.com_area.Where(u => u.com_area_id == user_address_city).SingleOrDefault().com_area_name;
+                var county = db.com_area.Where(u => u.com_area_id == user_address_county).SingleOrDefault().com_area_name;
+                ViewBag.adress = province + city + county;
+
+                                }
+                                @ViewBag.adress@item.user_address_detail（@item.user_address_ZipCode）
+                            </span>
+                        </p>
+                    </a>
+                </div>
+
+            }
+
+        }
+
+
+        <div class="col-xs-12">
+            <a class="btn btn-default btn-link" href="@Url.Action("ShippingAddressAdd", "Personal")" style="font-size:12px;"><span class="fa fa-plus"></span> 增加地址</a>
+        </div>
+    </div>
+    <div class="row" style="background-color:#ffffff;">
+
+
+        <div class="col-xs-4">
+            <img class="img-responsive" src="http://www.cuckooshop.cn/@ViewBag.sku.pro_sku_covimg" />
+        </div>
+        <div class="col-xs-8">
+            <p><span></span><span> @ViewBag.sku.pro_sku_title</span></p>
+            <p><span>&times;</span><span> @ViewBag.tnum</span></p>
+            <p><span>&yen;</span><span>  @ViewBag.tpirce</span></p>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="list-group" style="margin-top:0px; margin-bottom:0px;">
+                <a href="#fp" class="list-group-item" data-toggle="modal"><span class="fa  fa-newspaper-o" style="color:#acacac"></span>&nbsp;&nbsp;<span>发票</span><span class="fa fa-chevron-right pull-right" style="color:#acacac"></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="thumbnail divthumbnail text-left">
+            <div class="col-xs-12">
+                <p style="color:#d05802"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;<span>优惠：&yen;</span><span>0.00</span></p>
+                <p style="color:#06a0d1"><span class="fa fa-ship"></span>&nbsp;&nbsp;<span>运费：&yen;</span><span>0.00</span></p>
+                <p style="color:#43a904"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;<span>节省：&yen;</span><span>0.00</span></p>
+            </div>
+            <div class="col-xs-12">
+                <p style="font-size:18px;color:#d52116"><span class="fa fa-shopping-bag"></span>&nbsp;&nbsp;<span>总数：&times;</span><span id="tnum">@ViewBag.tnum</span></p>
+                <p style="font-size:18px;color:#d52116"><span class="fa fa-money"></span>&nbsp;&nbsp;<span>应付：&yen;</span><span id="tpirce">@ViewBag.tpirce</span></p>
+            </div>
+            <div class="col-xs-12">
+                <p><button id="submit" class="btn btn-block btn-warning">立即下单</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--发票-->
+<div class="modal fade" id="fp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">发票</h4>
+            </div>
+            <div class="modal-body">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#gr" data-toggle="tab">
+                            个人发票
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#gs" data-toggle="tab">
+                            公司发票
+                        </a>
+                    </li>
+
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="gr">
+                        <ul class="list-group list_group" style="margin-top:10px;">
+                            <li class="list-group-item">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon fa fa-user"></span>
+                                    <input id="uname" type="text" class="form-control" placeholder="请输入您的姓名">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon fa fa-address-book"></span>
+                                    <input id="ucode" type="number" class="form-control" placeholder="请输入身份证号">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-group input-group-lg">
+                                    <button id="gr_submit" type="button" class="btn  btn-block btn-default btn-success">保存</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="gs">
+                        <ul class="list-group list_group" style="margin-top:10px;">
+                            <li class="list-group-item">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon fa fa-university"></span>
+                                    <input id="cname" type="text" class="form-control" placeholder="请输入公司名称">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-group input-group-lg">
+                                    <button id="gs_submit" type="button" class="btn  btn-block btn-default btn-success">保存</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .cura {
+        border: 1px solid red;
+        color: red;
+    }
+    .cura>p{
+        color: red;
+    }
+</style>
+
+<!--发票-->
+@Html.Hidden("pro_skuitem_id")
+<script>
+    var usercode = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;//验证身份证正则
+    var pro_skuitem_id = $("#pro_skuitem_id");//商品ID
+    var addressid = "";//地址ID
+    var shop_invoice_username = "";//个人发票姓名
+    var shop_invoice_usercode = "";//个人发票证件
+    var shop_invoice_company = "";//企业名称
+    var tnum = $("#tnum");//总数
+    var tpirce = $("#tpirce");//总价格
+    var uname = $("#uname");//个人姓名
+    var ucode = $("#ucode");//身份证号
+    var cname = $("#cname")//公司名称
+    var gr_submit = $("#gr_submit");
+    var gs_submit = $("#gs_submit");
+    var fapiao = "";
+    var submit = $("#submit");//下单按钮
+
+    //发票操作
+    gr_submit.click(function () {
+        if (uname.val() == "" || uname.val() == null) {
+            alert("请输入个人姓名");
+        } else if (ucode.val() == "" || ucode.val() == null) {
+            alert("请输入身份证号");
+        } else if (!ucode.val().match(usercode)) {
+            alert("身份证号码格式不正确");
+        }
+        else {
+            fapiao = "gr";
+        }
+    });
+
+    gs_submit.click(function () {
+        if (cname.val() == "" || cname.val() == null) {
+            alert("请输入公司名称");
+        } else {
+            fapiao = "gs";
+        }
+    });
+    //发票操作
+    //地址选择
+    function AddressSelection(id) {
+        var myA = document.getElementById("address").getElementsByTagName("a");
+        for (var i = 0; i < myA.length; i++) {
+            var ids = myA[i].getAttribute("id");
+            if (ids == id) {
+                document.getElementById(id).className = "list-group-item cura"
+
+            } else {
+                document.getElementById(ids).className = "list-group-item"
+            }
+            $.ajax({
+                url: "/Goods/GoodsGetShipment",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(
+                    {
+                        user_address_id: id
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "暂无配送信息") {
+                        //pro_shipment_price.text("0.00");
+                        //var j = parseInt(pro_price.text());
+                        //tpro_price.text(j);
+                        //msg = "暂无配送信息";
+                        alert("暂无配送信息");
+                    } else {
+                        //pro_shipment_price.text(data);
+                        //var j = parseInt(pro_price.text()) + parseInt(data);
+                        //tpro_price.text(j);
+                        //msg = data;
+                        //shop_order_totalmoeny.val(j);
+                        //user_address_id.val(g);
+                        addressid = id;
+                    }
+                }
+            });
+        }
+    }
+    //地址选择
+
+    //立即下单
+    submit.click(function () {
+        if (addressid == "" || addressid == null) {
+            alert("请选择收货人信息");
+        } else {
+            $("#submit").attr("disabled", "disabled");
+            $("#submit").text("正在下单");
+            $.ajax({
+                url: "/Goods/GoodsOrderAdd",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        addressid: addressid,//地址ID
+                        shop_invoice_username: uname.val(),//个人姓名
+                        shop_invoice_usercode: ucode.val(),//身份证号
+                        shop_invoice_company: cname.val(),//公司名称
+                        fapiao: fapiao,//发票
+                        tnum: tnum.text(),//总数
+                        tpirce: tpirce.text(),//总价格
+                        pro_skuitem_id: pro_skuitem_id.val(),//商品ID
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data == "NO") {
+                        alert("下单失败");
+                        $("#submit").removeAttr("disabled");
+                        $("#submit").text("立即下单");
+                    } else {
+                        window.location.href = data;
+                    }
+                }
+            });
+        }
+    });
+
+    //立即下单
+
+
+
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    $('#fp').modal(options);
+</script>

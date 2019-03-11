@@ -1,0 +1,92 @@
+﻿@using EFClassLibrary
+@model PagedList<shop_choose>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "退换货列表";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">退换货表</div>
+        <div class="lpaixu">
+            <ul>
+                <li><a>查询：</a></li>
+                <li><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("申请中") })">申请中</a></li>
+                <li><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("同意申请") })">同意申请</a></li>
+                <li><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("驳回申请") })">驳回申请</a></li>
+            </ul>
+        </div>
+        <div class="lpaixu">
+            <ul style="width:100%">
+                <li style="width:20%"><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("未收货退款申请") })">未收货退款申请</a>-<a style="color:red" href="@Url.Action("ExportExcelReturns", "Order", new { Status = Server.UrlEncode("未收货退款申请") })">导出</a></li>
+                <li style="width:20%"><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("已收货退款申请") })">已收货退款申请</a>-<a style="color:red" href="@Url.Action("ExportExcelReturns", "Order", new { Status = Server.UrlEncode("已收货退款申请") })">导出</a></li>
+                <li style="width:20%"><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("换货已申请") })">换货已申请</a>-<a style="color:red" href="@Url.Action("ExportExcelReturns", "Order", new { Status = Server.UrlEncode("换货已申请") })">导出</a></li>
+                <li style="width:20%"><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("已换货") })">已换货</a>-<a style="color:red" href="@Url.Action("ExportExcelReturns", "Order", new { Status = Server.UrlEncode("已换货") })">导出</a></li>
+                <li style="width:20%"><a href="@Url.Action("StatusReturns", "Order", new { Status = Server.UrlEncode("已退款") })">已退款</a>-<a style="color:red" href="@Url.Action("ExportExcelReturns", "Order", new { Status = Server.UrlEncode("已退款") })">导出</a></li>
+
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>用户</td>
+                <td>联系方式</td>
+                <td>类别</td>
+                <td>服务编码</td>
+                <td>状态</td>
+                <td>快递名称</td>
+                <td>快递单号</td>
+                <td>时间</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.user_basic_id</td>
+                        <td>@item.user_address_id</td>
+                        <td>@item.shop_choose_service</td>
+                        <td>@item.shop_choose_code</td>
+                        <td>@item.shop_choose_status</td>
+                        <td>@item.shop_express_name</td>
+                        <td>@item.shop_express_code</td>
+                        <td>@item.shop_choose_date</td>
+                        <td>
+                            <a href="@Url.Action("CheckOrder", "Order", new { shop_choose_id = item.shop_choose_id })" target=" _blank">查看订单商品</a>
+                            @if (item.shop_choose_status == "申请中")
+                            {
+                                <a href="@Url.Action("ReturnsStatus", "Order", new { shop_choose_id = item.shop_choose_id, shop_choose_status = Server.UrlEncode("驳回申请") })" onclick="return window.confirm('驳回申请?')">驳回申请</a>
+                                <a href="@Url.Action("ReturnsStatus", "Order", new { shop_choose_id = item.shop_choose_id, shop_choose_status = Server.UrlEncode("同意申请") })" onclick="return window.confirm('同意申请?')">同意申请</a>
+                            }
+                            else if (item.shop_choose_status == "换货已申请")
+                            {
+                                <a href="@Url.Action("ReturnsStatus", "Order", new { shop_choose_id = item.shop_choose_id, shop_choose_status = Server.UrlEncode("已换货") })" onclick="return window.confirm('确认换货?')">确认换货</a>
+                            }
+                            else if (item.shop_choose_status == "未收货退款申请" || item.shop_choose_status == "已收货退款申请")
+                            {
+                                <a href="@Url.Action("ReturnsStatus", "Order", new { shop_choose_id = item.shop_choose_id, shop_choose_status = Server.UrlEncode("已退款") })" onclick="return window.confirm('确认退款?')">确认退款</a>
+                            }
+
+                        </td>
+                    </tr>
+                }}
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

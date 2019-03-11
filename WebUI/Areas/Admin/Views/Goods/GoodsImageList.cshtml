@@ -1,0 +1,71 @@
+﻿@using EFClassLibrary
+@model PagedList<com_img>
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "商品图片列表";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">商品图片列表</div>
+        <div class="lpaixu">
+            <ul>
+                <li><a href="@Url.Action("GoodsUploadImage", "Goods", new { pro_sku_id = Request["pro_sku_id"] })">上传图片</a></li>
+                <li><a href="#">重建</a></li>
+                <li><a href="#">返回</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>商品图片</td>
+                <td>图片Title</td>
+                <td>图片Alt</td>
+                <td>所属商品</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="@item.com_img_src" style="width:100px;height:100px" /></td>
+                    <td>@item.com_img_title</td>
+                    <td>@item.com_img_alt</td>
+                    <td>@item.com_img_fk</td>
+                    <td>@item.com_img_adduser</td>
+                    <td>@item.com_img_adddate</td>
+                    <td>@item.com_img_edituser</td>
+                    <td>@item.com_img_editdate</td>
+                    <td>
+                        <a href="@Url.Action("GoodsImgaeEdit", "Goods", new { com_img_id = item.com_img_id, pro_sku_id = Request["pro_sku_id"] })" style="color:green">修改图片</a>
+                        <a href="@Url.Action("GoodsImgaeDel", "Goods", new { com_img_id = item.com_img_id, pro_sku_id = Request["pro_sku_id"] })" style="color:red" onclick="return confirm('确定要删除此信息吗？')">删除信息</a>
+
+                    </td>
+                </tr>
+
+            }
+
+
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

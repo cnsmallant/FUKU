@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = ViewBag.pro_sku_title;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<link href="~/css/swiper-3.4.0.min.css" rel="stylesheet" />
+<script src="~/js/swiper-3.4.0.jquery.min.js"></script>
+<script src="~/js/jquery.raty.min.js"></script>
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <div class="swiper-container" style="width:100%; margin:0px; padding:0px;">
+            <div class="swiper-wrapper" style="width:100%">
+                @Html.Raw(ViewBag.htmlstr)
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="thumbnail content_thumbnail">
+            <p>@ViewBag.pro_sku_title</p>
+            <p style="text-decoration:line-through"><span>原价：</span><span>@ViewBag.pro_skuitem_mprice</span></p>
+            <p>
+                <span>现价：</span><span style="font-size:20px; color:#e60012 "><span>&yen;</span><span>@ViewBag.pro_skuitem_price</span></span>
+            </p>
+            <p><span>售出：</span><span id="ysc">@ViewBag.ysc</span>件&nbsp;&nbsp;<span>库存：</span><span id="kc">@ViewBag.pro_skuitem_stock</span>件</p>
+            <p>
+                <span>客服：</span>
+                <a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=729819807&version=1&src_type=web&web_src=oicqzone.com" style="color: #e60012; text-decoration:none"><span class="fa fa-qq"></span>&nbsp;<span>销售</span></a>
+                <a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=2499557252&version=1&src_type=web&web_src=oicqzone.com" style="color: #e60012; text-decoration:none"><span class="fa fa-qq"></span>&nbsp;<span>销售</span></a>
+                <a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=3413359593&version=1&src_type=web&web_src=oicqzone.com" style="color: #e60012; text-decoration:none"><span class="fa fa-qq"></span>&nbsp;<span>售后1</span></a>
+                <a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=3187221158&version=1&src_type=web&web_src=oicqzone.com" style="color: #e60012; text-decoration:none"><span class="fa fa-qq"></span>&nbsp;<span>售后2</span></a>
+                <a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=2890488028&version=1&src_type=web&web_src=oicqzone.com" style="color: #e60012; text-decoration:none"><span class="fa fa-qq"></span>&nbsp;<span>投诉</span></a>
+            </p>
+            <p>
+                <span>数量：</span><span id="less" class="fa fa-minus-circle"></span>&nbsp;<span><input style="width:30px;" name="num" type="text" value="1" id="num" readonly="readonly"></span>&nbsp;<span id="add" class="fa fa-plus-circle"></span>
+            </p>
+            <p><img src="/img/prod_bz.jpg" class="img-responsive" /></p>
+            <p><button id="gw" type="button" class="btn btn-block btn-success">立即购买</button></p>
+            <p>@Html.Raw(@ViewBag.pro_item_content)</p>
+            <div class="list-group">
+                <a class="list-group-item disabled">
+                    商品评价
+                </a>
+
+                @foreach (var item in ViewBag.list)
+                {
+                    <a class="list-group-item">
+                        <div class="col-xs-12">@item.user_basic_id</div>
+                        <div class="col-xs-12">
+                            <div id="@item.pro_comment_id" style="width:100%"></div>
+                            <script>
+                                $.fn.raty.defaults.path = "/demo/img/";
+                                $.fn.raty.defaults.cancel = false;
+                                $('#@item.pro_comment_id').raty(
+                                    {
+                                        hints: ['差', '一般', '好', '非常好', '全五星'],
+                                        readOnly: true,
+                                        score: @item.pro_comment_star,
+                                    });
+                            </script>
+                        </div>
+
+                        <p class="list-group-item-text text-left">
+                            [@item.pro_comment_date]
+                            @item.pro_comment_content
+                        </p>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("id")
+<script src="/js/JavaScript_Cascade.js"></script>
+<script>
+    //var swiper = new Swiper('.swiper-container');
+    $(document).ready(function () {
+        var mySwiper = new Swiper('.swiper-container', {
+
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+
+        });
+    });
+
+    var res = $("#res");
+
+    var gw = $("#gw");
+    var ysc = $("#ysc");
+    var kc = $("#kc");
+    var num = $("#num");
+    var adds = $("#add");
+    var less = $("#less");
+    var id=$("#id");
+
+    var i = 1;
+    adds.click(function () {
+        i++;
+        var y = parseInt(kc.text());
+        if (i >= y) {
+            i = y;
+        }
+        num.val(i);
+    });
+    less.click(function () {
+        i--;
+        if (i <= 0) {
+            i = 1;
+        }
+        num.val(i);
+    });
+
+    gw.click(function () {
+
+        var x = parseInt(ysc.text());
+        var y = parseInt(kc.text());
+
+        if (y < 1) {
+            alert("库存不足");
+        }else{
+            $("#gw").attr("disabled", "disabled");
+            $("#gw").text("正在购买");
+            $.ajax({
+                url: "/Goods/OrderTransfer",
+                type: 'POST',
+                data: JSON.stringify(
+                    {
+                        id: id.val(),
+                        num: num.val(),
+                    }),
+                dataType: "JSON",
+                success: function (data) {
+                    if (data != "NO") {
+                     
+                        window.location.href = "/Goods/GoodsOrder?items=" +encodeURIComponent(data);
+                    }else{
+                        $("#gw").removeAttr("disabled");
+                        $("#gw").text("立即购买");
+                    }
+                }
+            });
+
+
+        }
+    });
+</script>

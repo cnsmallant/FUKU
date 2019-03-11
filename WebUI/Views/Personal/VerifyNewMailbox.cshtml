@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "绑定新邮箱";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">绑定新邮箱</p>
+        </div>
+        <div style="clear: both;height: 30px; "></div>
+        @using (Html.BeginForm("SendEmail", "Personal", FormMethod.Post))
+        {
+            <table border="0" cellspacing="0" cellpadding="0" id="table021">
+                <tr><td class="info_t1">邮箱：</td><td class="info">@Html.TextBox("user_basic_email", null, new { @placeholder = "请输入邮箱", @class = "text1" })</td></tr>
+            </table>
+            <input type="submit" id="submit" class="userD_qd" value="确定" style="cursor:pointer" />
+            <a href="" class="userD_qd userD_qx">取消</a>
+            @Html.Hidden("VerifyMailbox")
+        }
+    </div>
+
+    <div class="clear_float"></div>
+</div>
+

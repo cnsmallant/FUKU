@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "账户信息";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:50px;margin-bottom:60px;">
+    <div class="row">
+        <div class="thumbnail divthumbnail">
+            <div class="list-group" style="margin-top:10px; margin-bottom:0px;">
+
+
+                <a class="list-group-item ">
+                    <span>我的头像：</span><span class="pull-right" style="color:#acacac">
+                        @{
+                            EFClassLibrary.D8MallEntities db = new EFClassLibrary.D8MallEntities();
+                            var uname = TDESHelper.DecryptString(Request.Cookies["keys"].Value);
+                            var upwd = Request.Cookies["value"].Value;
+                            var user_basic = db.user_basic.Where(u => u.user_basic_login == uname & u.user_basic_pwd == upwd).SingleOrDefault();
+                            var user_basic_code = user_basic.user_basic_code.ToString();
+                            EFClassLibrary.com_img img = db.com_img.Where(i => i.com_img_fk == user_basic_code).SingleOrDefault();
+                            if (img != null)
+                            {
+                                var com_img_src = img.com_img_src;
+                                if (string.IsNullOrEmpty(com_img_src))
+                                {
+                                    <img src="http://www.cuckooshop.cn/img/userImg.png" class="img-circle img-responsive" style="width:22px;" />
+                                }
+                                else
+                                {
+                                    <img src="http://www.cuckooshop.cn/@com_img_src" class="img-circle img-responsive" style="width:22px;" />
+                                }
+                            }
+                            else
+                            {
+                                <img src="http://www.cuckooshop.cn/img/userImg.png" class="img-circle img-responsive" style="width:22px;" />
+                            }
+                        }
+                    </span>
+                </a>
+                <a class="list-group-item "><span>&nbsp;&nbsp;&nbsp;我的ID：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_basic_code</span></a>
+                <a class="list-group-item "><span>我的姓名：</span><span class="pull-right" style="color:#acacac">@ViewBag.username</span></a>
+                <a class="list-group-item "><span>我的性别：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_detail_gender</span></a>
+                <a class="list-group-item "><span>我的生日：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_detail_birthday</span></a>
+                <a class="list-group-item "><span>我的手机：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_basic_tel </span></a>
+                <a class="list-group-item "><span>我的邮箱：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_basic_email</span></a>
+                <a class="list-group-item "><span>联系地址：</span><span class="pull-right" style="color:#acacac">@ViewBag.address</span></a>
+                <a class="list-group-item "><span>我的邮编：</span><span class="pull-right" style="color:#acacac">@ViewBag.user_detail_zipcode</span></a>
+            </div>
+        </div>
+
+    </div>
+</div>

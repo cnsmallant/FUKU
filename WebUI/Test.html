@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>巨幕广告测试</title>
+    <script src="/js/jquery.min.js"></script>
+    <style>
+        .mask {
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            background-color: #000000;
+            width: 100%;
+            height: 1000px;
+            z-index: 99;
+            _position: absolute;
+            filter: alpha(opacity=60); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.60; /*Firefox私有，透明度50%*/
+            opacity: 0.60; /*其他，透明度50%*/
+        }
+
+        .imgdiv {
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            margin: 50px;
+            margin-top: 100px;
+          
+            text-align: center;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:greenyellow; width:100%;height:1000px;">
+
+        <h1>我是页面</h1>
+
+    </div>
+    <div class="mask" id="mask"></div>
+    <div class="imgdiv" id="imgdiv">
+        <a href="http://cuckooshop.cn/" target="_blank">
+            <div style=" width:1200px; margin: 0 auto; text-align:center;margin-left:300px; margin-right:300px;">
+                <img src="http://cuckooshop.cn/file/img/714ee3209b5346ac835d0f6508f16b02/%E9%A6%96%E9%A1%B5%E6%B4%BB%E5%8A%A8-web.jpg" style="width:1200px;height:500px" />
+            </div>
+        </a>
+    </div>
+</body>
+</html>
+<script>
+    var mask = $("#mask");
+    var imgdiv = $("#imgdiv");
+    mask.click(function () {
+        mask.fadeOut(2000);
+        imgdiv.fadeOut(2000);
+    });
+
+</script>

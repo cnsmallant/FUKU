@@ -1,0 +1,56 @@
+﻿@model PagedList<EFClassLibrary.shop_choose>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "退换货列表";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="pro_bq">首页><span>会员中心</span></div>
+    @Html.Partial("LfetPartial")
+    <div id="main-con">
+        <div id="page-tit">
+            <p class="font06">退换货</p>
+
+        </div>
+        <div id="con">
+            <a href="@Url.Action("ChooseOrder", "Personal")" class="resd"><img src="/img/ret_03.jpg" /></a>
+            <div class="clear_float"></div>
+            <div class="font_c02" style="display: block;width: 100%; ">
+                <div class="dingdan_hao" style="margin-left: 0px;"><strong>处理结果</strong> </div>
+                <table border="0" cellspacing="0" cellpadding="0" class="order" style="width: 885px; margin-top:0;">
+
+                    <tr id="tab_head">
+                        <td>类别</td>
+                        <td>服务编码</td>
+                        <td>状态</td>
+                        <td>时间</td>
+                        <td>操作</td>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.shop_choose_service</td>
+                            <td class="proNums" style="vertical-align: top;">@item.shop_choose_code</td>
+                            <td class="orderState" style="vertical-align: top;">@item.shop_choose_status</td>
+                            <td class="buyTime" style="vertical-align: top;"><span>@item.shop_choose_date</span></td>
+                            <td class="buycz" style="vertical-align: top;"><a href="@Url.Action("ChooseDetails", "Personal", new { shop_choose_code = item.shop_choose_code })" style="color: #e60012">查看</a></td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+            <div class="pageState" style="padding-bottom:10px;">
+                @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndx", NumericPagerItemCount = 10, ContainerTagName = "div", CssClass = "jogger", CurrentPagerItemTemplate = "<span class='current'>{0}</span>", DisabledPagerItemTemplate = "<span class=\"disabled\"><a>{0}</a></span>", PagerItemTemplate = "{0}", PageIndexBoxId = "pageIndexBox", AutoHide = false, PrevPageText = "◀ 上一页", NextPageText = "下一页 ▶" })
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="clear_float"></div>
+</div>
+

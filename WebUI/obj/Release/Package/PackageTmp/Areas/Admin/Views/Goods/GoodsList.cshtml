@@ -1,0 +1,188 @@
+﻿@model PagedList<WebUI.Areas.Admin.Controllers.GoodsController.pro_skus>
+@using Webdiyer.WebControls.Mvc;
+
+@{
+    ViewBag.Title = "商品列表";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">商品类别列表</div>
+        <div class="lsec">
+            <div class="lsec1">
+                <input type="text" placeholder="请输入商品名称" id="keys" />
+                <input type="button" class="btnsk" id="btnsk" />
+            </div>
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <li style="width:200px;">
+                    商品类别查询
+                    <select id="GoodsClass">
+                        <option>请选择</option>
+                    </select>
+                </li>
+                <li><a href="@Url.Action("GoodsCreate", "Goods")">生成商品</a></li>
+                <li><a href="javascript:;" id="setGoods">生成新品</a></li>
+                <li><a href="@Url.Action("GoodsNews", "Goods")">查看新品</a></li>
+                <li><a href="javascript:;" id="setSales">生成促销</a></li>
+                <li><a href="@Url.Action("GoodsSales", "Goods")">查看促销</a></li>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td><input type="checkbox" id="checkall" /></td>
+                <td>商品封面</td>
+                <td>商品编号</td>
+                <td>商品标码</td>
+                <td>商品标题</td>
+                <td>商品规格</td>
+                <td>所属类别</td>
+                <td>市场价格</td>
+                <td>商城价格</td>
+                <td>商品库存</td>
+                <td>商品状态</td>
+                <td>排序号码</td>
+                <td>录入人员</td>
+                <td>录入日期</td>
+                <td>编辑人员</td>
+                <td>编辑日期</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="17"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" name="checkname" value="@item.pro_sku_code" /></td>
+                    <td><a href="@Url.Action("GoodsImgCoverEdit", "Goods", new { pro_sku_id = item.pro_sku_id})" title="点击修改封面"><img src="@item.pro_sku_covimg" style="width:100px;height:100px" /></a></td>
+                    <td>@item.pro_sku_code</td>
+                    <td>@item.pro_brand_id</td>
+                    <td>@item.pro_sku_title</td>
+                    <td><a href="@Url.Action("GoodsSpeEdit", "Goods", new { pro_sku_id = item.pro_sku_id })" style="color:blue" title="点击进行修改">@item.pro_sku_arrspe</a></td>
+                    <td><a href="@Url.Action("GoodsClassSpeEdit", "Goods", new { pro_sku_id = item.pro_sku_id })" style="color:blue" title="点击进行修改">@item.pro_class_id</a></td>
+                    <td>@item.pro_skuitem_mprice</td>
+                    <td>@item.pro_skuitem_price</td>
+                    <td>@item.pro_skuitem_stock</td>
+                    <td>@item.pro_sku_status</td>
+                    <td>@item.pro_sku_order</td>
+                    <td>@item.pro_sku_adduser</td>
+                    <td>@item.pro_sku_adddate</td>
+                    <td>@item.pro_sku_edituser</td>
+                    <td>@item.pro_sku_editdate</td>
+                    <td>
+                        @{
+                if (item.pro_sku_status == "已上架")
+                {
+                    <a href="@Url.Action("GoodsShelf", "Goods", new { pro_sku_id = item.pro_sku_id,pro_sku_status=1 })" style="color:green">商品下架</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("GoodsShelf", "Goods", new { pro_sku_id = item.pro_sku_id,pro_sku_status=0 })" style="color:green">商品上架</a>
+
+                }
+                        }
+                        <a href="@Url.Action("GoodsEditDetails", "Goods", new { pro_sku_id = item.pro_sku_id })" style="color:green">修改详细</a>
+                        <a href="@Url.Action("GoodsImageList", "Goods", new { pro_sku_id = item.pro_sku_id })" style="color:green">图片管理</a>
+                    </td>
+                </tr>
+
+            }
+            <tr class="txf">
+                <td colspan="17">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/Admin/Goods/GetGoodsClass",
+            success: function (data) {
+                var GoodsClass = " <option value='value'>请选择</option>";
+                $.each(data, function (k, v) {
+                    GoodsClass += "<option value='" + v.pro_class_id + "'>" + v.pro_class_name + "</option>";
+                });
+                $("#GoodsClass").html(GoodsClass);
+            }
+        });
+    });
+    $("#GoodsClass").change(function () {
+
+        var pro_parent = $("#GoodsClass").val();
+        if (pro_parent != "请选择") {
+            window.location.href = "/Admin/Goods/GoodsListClass?pro_class_id=" + pro_parent;
+        }
+    });
+    var keys = $("#keys");
+    var btnsk = $("#btnsk");
+    btnsk.click(function () {
+        if (keys.val() == "" || keys.val() == null) {
+            alert("请输入类别名称");
+        } else {
+            window.location.href = "/Admin/Goods/GoodsListKeys?keywords=" + keys.val();
+        }
+    });
+
+    var setGoods = $("#setGoods");
+    var setSales = $("#setSales");
+    $("#checkall").click(
+     function () {
+         if (this.checked) {
+             $("input[name='checkname']").attr('checked', true)
+         } else {
+             $("input[name='checkname']").attr('checked', false)
+         }
+     }
+   );
+    setGoods.click(function () {
+        var text = "";
+        $("input[name=checkname]").each(function () {
+            if ($(this).attr("checked")) {
+                text += $(this).val() + ",";
+            }
+        });
+        if (text != "") {
+            var str = encodeURIComponent(text);
+
+            window.location.href = "/Admin/Goods/GoodsNewsAdd?str=" + str;
+        } else {
+            alert("请选择所要生成新品的商品");
+        }
+    });
+
+
+    setSales.click(function () {
+        var text = "";
+        $("input[name=checkname]").each(function () {
+            if ($(this).attr("checked")) {
+                text += $(this).val() + ",";
+            }
+        });
+        if (text != "") {
+            var str = encodeURIComponent(text);
+
+            window.location.href = "/Admin/Goods/GoodsSalesAdd?str=" + str;
+        } else {
+            alert("请选择所要生成促销的商品");
+        }
+    });
+
+</script>

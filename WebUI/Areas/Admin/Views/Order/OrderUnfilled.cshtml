@@ -1,0 +1,86 @@
+﻿@using EFClassLibrary
+@model PagedList<shop_order>
+@using Webdiyer.WebControls.Mvc;
+
+
+@{
+    ViewBag.Title = "未发货订单";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="div_left">
+    @Html.Partial("LfetPartial")
+
+</div>
+<div class="div_right">
+    <div class="list">
+        <div class="ltitle">未发货订单</div>
+        <div class="lsec">
+
+
+        </div>
+
+        <div class="lpaixu">
+            <ul>
+                <a href="javascript:;" style="color:red" id="ExportExcel">导出</a>
+            </ul>
+
+        </div>
+
+        <table class="tab">
+            <tr class="thead">
+                <td>订单编号</td>
+                <td>购买商品</td>
+                <td>联系信息</td>
+                <td>订单状态</td>
+                <td>商品总数</td>
+                <td>支付价格</td>
+                <td>购买时间</td>
+                <td>操作</td>
+            </tr>
+            <tr class="tsf">
+                <td colspan="11"></td>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.shop_order_code</td>
+                    <td>
+                        @{
+                D8MallEntities db = new D8MallEntities();
+                var list = db.shop_orderdetail.Where(so => so.shop_order_id == item.shop_order_id).ToList();
+                foreach (var items in list)
+                {
+                    pro_sku sku = db.pro_sku.Where(p => p.pro_sku_code == items.pro_skuitem_id).SingleOrDefault();
+                    <p><a href="@Url.Content("/Goods/GoodsDetails?id=" + sku.pro_sku_code)" target="_blank">@sku.pro_sku_title</a>(@items.shop_orderdetail_num 件) </p>
+                }
+                        }
+                    </td>
+                    <td>@item.user_address_id</td>
+                    <td>@item.shop_order_status</td>
+                    <td>@item.shop_order_waynum</td>
+                    <td>@item.shop_order_totalmoeny</td>
+                    <td>@item.shop_order_buydate</td>
+                    <td><a href="@Url.Action("ExecutiveShip", "Order", new { shop_order_id =item.shop_order_id})" style="color:red">执行发货</a>
+                        <a href="@Url.Action("OrderSta", "Order", new { shop_order_id = item.shop_order_id,sta=Server.UrlEncode("已删除")})" style="color:red" onclick="return confirm('确定取消?');">取消订单</a>
+                    </td>
+                </tr>
+            }
+            <tr class="txf">
+                <td colspan="11">
+                    <div class="fenye">
+                        @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageid", NumericPagerItemCount = 5, ContainerTagName = "ul", CssClass = "pagination-digg", CurrentPagerItemTemplate = "<li class='active'><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox", AutoHide = false })
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var ExportExcel = $("#ExportExcel");
+    ExportExcel.click(function () {
+        window.location.href = "/Admin/Order/ExportExcel02?shop_order_status=" + encodeURIComponent("已支付");
+    });
+
+</script>

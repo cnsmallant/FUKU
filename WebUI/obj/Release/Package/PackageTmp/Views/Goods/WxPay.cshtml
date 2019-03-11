@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "微信支付";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+
+<div style="width:950px; text-align:center;overflow:hidden;padding-top:50px;margin:0 auto;">
+
+    <div style="float:left;width:300px; margin-top:0px;margin-left:0px; background-color:#fff; padding:20px">
+        <p style="font-size:24px">请扫描支付二维码进行支付</p>
+        <p style="font-size:16px; margin-top:6px;">订单编号：@ViewBag.shop_order_code</p>
+        <div><img src="/img/wxpay_01.png" style="height:150px;" /></div>
+        <div id="QRCode" style="margin:0px auto;">
+        </div>
+       
+    </div>
+    <div style="float:left;width:525px;margin-right:0px; background-color:#fff; padding:20px; margin-left:20px;">
+        <div style="margin:0px auto;text-align:center;margin-top:12px;">
+            <p style="display:block;width:526px; font-size:24px; ">微信支付流程</p>
+            <div style="float:left;">
+                <p>
+                    <img src="/img/wxpay_03.png" style="height:300px;" />
+                </p><p>打开微信扫一扫</p>
+            </div>
+            <div style="float:left">
+                <p>
+                    <img src="/img/wxpay_04.png" style="height:300px;" />
+                </p><p>进行支付二维码扫描</p>
+            </div>
+            <div style="float:left">
+                <p>
+                    <img src="/img/wxpay_05.png" style="height:300px;" />
+                </p><p>进行微信支付</p>
+            </div>
+
+        </div>
+    </div>
+    @Html.Hidden("shop_order_code")
+</div>
+
+
+<script src="/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+    var str = $("#str");
+    var shop_order_code = $("#shop_order_code");
+    var QRCode = $("#QRCode");
+    $.ajax({
+        url: "/GetQRCode",
+        type: 'POST',
+        data: JSON.stringify(
+            {
+                time: new Date(),
+                productId: shop_order_code.val()
+            }),
+        dataType: "JSON",
+        success: function (data) {
+
+            if (data.result) {
+                str.text(data.str);
+                $('#QRCode').qrcode({
+                    render: "canvas",
+                    text: data.str,
+                    width: 150,
+                    height: 150
+                }); //生成二维码
+            }
+            else {
+                $('#QRCode').html("二维码生成失败");
+            }
+        }
+    }
+ );
+
+
+
+
+
+
+    //$(function () {
+    //    fGetQRCode();
+    //})
+    //function fGetQRCode() {
+    //    $.messager.progress({
+    //        title: "",
+    //        msg: "正在生成二维码:模式一,请稍后..."
+    //    });
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/GetQRCode",
+    //        data: {
+    //            time: new Date(),
+    //            productId: 7788
+    //        },
+    //        dataType: "JSON",
+    //        success: function (json) {
+    //            $.messager.progress('close');//记得关闭
+    //            if (json.result) {
+    //                $('#QRCode').qrcode(json.str); //生成二维码
+    //            }
+    //            else {
+    //                $('#QRCode').html("二维码生成失败");
+    //            }
+    //        }
+    //    })
+    //}
+</script>

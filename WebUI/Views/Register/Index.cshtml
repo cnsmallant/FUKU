@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "欢迎注册cuckoo福库商城";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="container wh_c" style="height: 520px;width:1030px ; background: #FFFFFF;margin-top: 11px;padding: 85px;">
+    <div id="slideBox" class="slideBox_login">
+        <div class="hd">
+            <ul>
+                @foreach (var item in ViewBag.bannerlist)
+                {
+                    <li></li>
+                }
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                @foreach (var item in ViewBag.bannerlist)
+                {
+
+                    <li>
+                        <a href="@item.com_banner_url" target="_blank">
+                            <div style="background: url(@item.com_img_src) no-repeat center;overflow:hidden">
+                            </div>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+        <a class="prev" href="javascript:void(0)"></a>
+        <a class="next" href="javascript:void(0)"></a>
+    </div>
+    <script id="jsID" type="text/javascript">
+        var ary = location.href.split("&");
+        jQuery(".slideBox_login").slide({
+            mainCell: ".bd ul",
+            effect: "left",
+            autoPlay: true,
+            mouseOverStop: false,
+            interTime: 4000,
+        });
+    </script>
+    <div class="box03" style="margin-top:-80px;height:auto">
+        <p class="title_02">欢迎注册cuckoo福库商城</p>
+        <div id="err" class="errhide"></div>
+        <input type="text" name="contaction" id="contaction" value="" class="input_box" title="会员名" placeholder="请输入会员名称">
+        <div class="radio_group">
+            <span>性别</span><label><input type="radio" name="sex" id="m" value="男" checked="checked" /> 男</label><label><input type="radio" name="sex" id="w" value="女" />女</label>
+        </div>
+
+        <div class="riqi_group">
+            <span style="line-height:34px; margin-top:15px; display:block; float:left;">出生日期： </span> <input type="text" name="dater" id="dater" value="" class="input_box" onfocus="WdatePicker({dateFmt:'yyyy年MM月dd日'})" style="width:155px" title="出生日期" placeholder="请选择出生日期">
+        </div>
+        <input type="password" name="psw" id="psw" value="" class="input_box  psw" title="用户密码" placeholder="请输入用户密码">
+        <div class="clear_float"></div>
+        <font style="color:GrayText; font-size:14px">6-18字符(数字、字母和下划线)，区分大小写</font>
+        <input type="password" name="rpsw" id="rpsw" value="" class="input_box  psw" title="确认密码" placeholder="请输入确认密码">
+        <input type="text" name="rpsw" id="eml" value="" class="input_box" title="电子邮箱" placeholder="请输入电子邮箱">
+        <font style="color:GrayText; font-size:14px"> 重要通知与活动信息将通过邮箱发送</font>
+        <input type="text" name="tel" id="tel" value="" class="input_box" title="手机号码" placeholder="请输入手机号码">
+        <div class="riqi_group">
+            <input type="text" name="regcode" id="regcode" class="input_box" style="width:125px;float:left;margin-left:-10px;" placeholder="请输入手机验证码">
+            <span style="line-height:34px; margin-top:15px; display:block; float:right;">
+                <a id="btn_regin" style="background-color:red; font-size:16px; display:block; height:35px;width:100px;margin-top:-5px; text-align:center; color:white" href="javascript:;">获取验证码</a>
+                <a id="btn_regout" style="background-color:red; font-size:14px; display:block; height:35px;width:100px;margin-top:-5px; text-align:center; color:white" href="javascript:;"><span id="sss">60</span>s后重新发送</a>
+            </span>
+        </div>
+        <div id="atc_yz" style="width:235px; text-align:center; margin-left:0px;">
+            <div id="captcha" style="width:100%"></div>
+        </div>
+
+        <div class="clear_float"></div>
+        <input id="Checkbox1" type="checkbox" checked="checked" disabled="disabled">
+        <a href="@Url.Action("Protocol", "Register")" style="font-size:12px;display:block;line-height:30px;">我已阅读并接收协议</a>
+        <input type="button" id="login_u" value="注册">
+
+
+    </div>
+    <div class="clear_float">
+    </div>
+</div>
+<script src="/js/gt.js"></script>
+<script src="/js/JavaScript_Register.js"></script>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "订单支付";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid" style="margin-top:60px;margin-bottom:60px; background-color:#ffffff">
+    <div class="row">
+        <div class="thumbnail content_thumbnail" style="padding:20px; background-color:transparent; margin-top:30px;">
+            <div class="col-xs-12" style="margin-top:0px; margin-bottom:10px; line-height:25px; ">
+
+                <p class="text-center" style="color: #ff6a00">订单已成功提交请尽量在<span style="color: #e60012;">2小时</span>内完成支付<br />福库将尽快为您送达</p>
+                <p style="font-size:14px; color:#e60012"><span class="fa fa-list-ul"></span>&nbsp;&nbsp;<span>@ViewBag.shop_order_code</span></p>
+                <p style="font-size:14px; color:#e60012"><span class="fa fa-money"></span>&nbsp;&nbsp;<span>@ViewBag.shop_order_totalmoeny </span></p>
+
+            </div>
+            <div class="col-xs-12" id="zfb">
+                <a href="@Url.Action("Pay", "Alipay", new { shop_order_code = @ViewBag.shop_order_code })" class="list-group-item">
+                    <img src="/img/zfbzf.png" class="img-responsive" />
+                </a>
+            </div>
+            <div class="col-xs-12" id="wx">
+                <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx945caf22ebed55bf&redirect_uri=http%3a%2f%2fm.cuckooshop.cn%2fWxPay%2fAuthorize&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" class="list-group-item">
+                    <img src="/img/wxsq.png" class="img-responsive" />
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+@Html.Hidden("shop_order_code")
+<script>
+    var zfb = $("#zfb");
+    var wx = $("#wx");
+    zfb.hide();
+    wx.hide();
+    $(function () {//判断是否为微信浏览器
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            zfb.hide();
+            wx.show();
+        } else {
+            zfb.show();
+            wx.hide();
+        }
+    });
+
+
+
+
+    
+</script>
