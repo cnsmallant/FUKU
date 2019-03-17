@@ -13,8 +13,8 @@ public class SendSMS
     public  string SendSms(string phone, string content, string code)
     {
         StringBuilder sms = new StringBuilder();
-        sms.AppendFormat("name={0}", "18562516441");
-        sms.AppendFormat("&pwd={0}", "55182B7F1DB7A0B2C0171383A86F");//登陆平台，管理中心--基本资料--接口密码（28位密文）；复制使用即可。
+        sms.AppendFormat("name={0}", "");
+        sms.AppendFormat("&pwd={0}", "");//登陆平台，管理中心--基本资料--接口密码（28位密文）；复制使用即可。
         sms.AppendFormat("&content={0}", content);
         sms.AppendFormat("&mobile={0}", phone);
         sms.AppendFormat("&sign={0}", "");// 公司的简称或产品的简称都可以
